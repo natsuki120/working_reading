@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 
 // Main Color
 
-const Color primary = Color(0xff607D8B);
+const Color primary = Color(0xff455a64);
+
+const Color primaryPale = Color(0xff78909c);
 
 const Color secondary = Color(0xff8b6e60);
 
