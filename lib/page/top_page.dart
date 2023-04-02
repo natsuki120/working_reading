@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:working_reading/color_config.dart';
 import 'package:working_reading/font_config.dart';
+import 'package:working_reading/page/training_page.dart';
 
 class TopPage extends StatelessWidget {
   const TopPage({Key? key}) : super(key: key);
@@ -44,7 +45,7 @@ class TopPage extends StatelessWidget {
                 Container(
                   height: 39,
                   width: 39,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: white,
                   ),
@@ -59,7 +60,8 @@ class TopPage extends StatelessWidget {
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(primary),
                 ),
-                onPressed: () {},
+                onPressed: () => Navigator.push(
+                    context, MaterialPageRoute(builder: (_) => TrainingPage())),
                 child: Text(
                   '始める',
                   style: bodyBold(white),
