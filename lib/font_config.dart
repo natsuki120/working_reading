@@ -5,9 +5,14 @@ const regular = 'regular';
 const medium = 'medium';
 const bold = 'bold';
 
-TextStyle header(Color color) => TextStyle(
+TextStyle headerBold(Color color) => TextStyle(
       color: color,
       fontWeight: FontWeight.w600,
+      fontSize: 26,
+    );
+TextStyle headerRegular(Color color) => TextStyle(
+      color: color,
+      fontWeight: FontWeight.w300,
       fontSize: 26,
     );
 TextStyle headerMedium(Color color) => TextStyle(
