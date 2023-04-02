@@ -15,18 +15,15 @@ class TopPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 16),
-            Center(
-              child: Text('ワーキングリーディング', style: header(white)),
-            ),
+            Text('ワーキングリーディング', style: header(white)),
             const SizedBox(height: 32),
             const SizedBox(height: 16),
             Container(
               height: 200,
               decoration: const BoxDecoration(
-                color: white,
+                color: primary,
                 shape: BoxShape.circle,
               ),
             ),
@@ -37,12 +34,21 @@ class TopPage extends StatelessWidget {
             ),
             const SizedBox(height: 48),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   'N = ',
                   style: bodyRegular(white),
                 ),
-                Container(),
+                const SizedBox(width: 16),
+                Container(
+                  height: 39,
+                  width: 39,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: white,
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 48),
@@ -56,7 +62,17 @@ class TopPage extends StatelessWidget {
                 onPressed: () {},
                 child: Text(
                   '始める',
-                  style: bodyRegular(white),
+                  style: bodyBold(white),
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            TextButton(
+              onPressed: () {},
+              child: Text(
+                '遊び方',
+                style: bodyRegular(
+                  white.withOpacity(0.6),
                 ),
               ),
             ),
