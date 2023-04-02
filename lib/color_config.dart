@@ -4,11 +4,9 @@ import 'package:flutter/cupertino.dart';
 
 const Color primary = Color(0xff455a64);
 
-const Color primaryPale = Color(0xff78909c);
-
 const Color secondary = Color(0xff8b6e60);
 
-const Color white = Color(0xffFFFFFF);
+const Color white = Color(0xffffffff);
 
 const Color black = Color(0xff000000);
 
@@ -17,6 +15,8 @@ const Color black = Color(0xff000000);
 const Color backgroundWhite = Color(0xffFF4F4);
 
 const Color backgroundBlack = Color(0xff111414);
+
+const Color backgroundColor = Color(0xfff2f2f2);
 
 // Surface Color
 
@@ -32,23 +32,21 @@ const Color onSurface = Color(0xff201A19);
 
 // Text&Icon
 
-const Color highEmphasis = Color(0xff111414);
+Color blackPrimary = black.withOpacity(0.87);
 
-Color midEmphasis = Color(0xff12181A).withOpacity(0.7);
+Color blackSecondary = black.withOpacity(0.54);
 
-Color lowEmphasis = Color(0xff12181A).withOpacity(0.5);
+Color blackIcon = black.withOpacity(0.38);
 
-const Color disabledOnlyText = Color(0xff12181A4D);
+Color blackDisabled = blackIcon;
 
-const Color accentPrimary = Color(0xff2B5B64);
+Color whitePrimary = white;
 
-const Color accentSecondary = Color(0xffC87149);
+Color whiteSecondary = white.withOpacity(0.7);
 
-const Color link = Color(0xff0071CC);
+Color whiteDisabled = white.withOpacity(0.5);
 
-const Color disabled = Color(0xff12181A66);
-
-const Color onPrimary = Color(0xffffffff);
+Color whiteIcon = whiteDisabled;
 
 // Border
 

@@ -8,7 +8,7 @@ class TrainingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: primaryPale,
+      backgroundColor: backgroundColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
@@ -21,7 +21,7 @@ class TrainingPage extends StatelessWidget {
                   'N: 2',
                   style: displaySmall(
                     FontWeight.w300,
-                    white.withOpacity(0.6),
+                    blackSecondary,
                   ),
                 ),
                 const SizedBox(width: 48),
@@ -29,7 +29,7 @@ class TrainingPage extends StatelessWidget {
                   '問: 5/6',
                   style: displaySmall(
                     FontWeight.w300,
-                    white.withOpacity(0.6),
+                    blackSecondary,
                   ),
                 ),
               ],
@@ -51,7 +51,7 @@ class TrainingPage extends StatelessWidget {
               'ここに文章を載せるここに文章を載せるここに文章を載せるここに文章を載せるここに文章を載せるここに文章を載せるここに文章を載せるここに文章を載せるここに文章を載せるここに文章を載せるここに文章を載せるここに文章を載せるここに文章を載せるここに文章を載せる',
               softWrap: true,
               style: bodyRegular(
-                white.withOpacity(0.6),
+                blackSecondary,
               ),
             ),
             const SizedBox(height: 320),
@@ -65,7 +65,7 @@ class TrainingPage extends StatelessWidget {
                 onPressed: () {},
                 child: Text(
                   '次へ',
-                  style: bodyBold(white),
+                  style: bodyBold(whitePrimary),
                 ),
               ),
             ),
