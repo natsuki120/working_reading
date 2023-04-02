@@ -9,16 +9,16 @@ class TopPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: primaryPale,
+      backgroundColor: backgroundColor,
       appBar: AppBar(
-        backgroundColor: primaryPale,
+        backgroundColor: backgroundColor,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
             const SizedBox(height: 16),
-            Text('ワーキングリーディング', style: header(white)),
+            Text('ワーキングリーディング', style: headerRegular(blackPrimary)),
             const SizedBox(height: 32),
             const SizedBox(height: 16),
             Container(
@@ -31,7 +31,7 @@ class TopPage extends StatelessWidget {
             const SizedBox(height: 48),
             Text(
               'ここに適当な名言的なの載せるここに適当な名言的なの載せるここに適当な名言的なの載せるここに適当な名言的なの載せるここに適当な名言的なの載せるイタリックにする',
-              style: bodyRegular(white),
+              style: bodyRegular(blackSecondary),
             ),
             const SizedBox(height: 48),
             Row(
@@ -39,7 +39,7 @@ class TopPage extends StatelessWidget {
               children: [
                 Text(
                   'N = ',
-                  style: bodyRegular(white),
+                  style: bodyRegular(blackSecondary),
                 ),
                 const SizedBox(width: 16),
                 Container(
@@ -60,11 +60,11 @@ class TopPage extends StatelessWidget {
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(primary),
                 ),
-                onPressed: () => Navigator.push(
-                    context, MaterialPageRoute(builder: (_) => TrainingPage())),
+                onPressed: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => const TrainingPage())),
                 child: Text(
                   '始める',
-                  style: bodyBold(white),
+                  style: bodyBold(whitePrimary),
                 ),
               ),
             ),
@@ -73,9 +73,7 @@ class TopPage extends StatelessWidget {
               onPressed: () {},
               child: Text(
                 '遊び方',
-                style: bodyRegular(
-                  white.withOpacity(0.6),
-                ),
+                style: bodyRegular(blackSecondary),
               ),
             ),
           ],
