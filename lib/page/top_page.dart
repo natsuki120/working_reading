@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:working_reading/color_config.dart';
+import 'package:working_reading/component/primary_color_button.dart';
 import 'package:working_reading/font_config.dart';
 import 'package:working_reading/page/training_page.dart';
 
@@ -53,19 +54,13 @@ class TopPage extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 48),
-            SizedBox(
+            PrimaryColorButton(
               width: double.infinity,
               height: 64,
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(primary),
-                ),
-                onPressed: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => const TrainingPage())),
-                child: Text(
-                  '始める',
-                  style: bodyBold(whitePrimary),
-                ),
+              text: '始める',
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const TrainingPage()),
               ),
             ),
             const SizedBox(height: 16),
