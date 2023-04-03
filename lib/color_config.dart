@@ -40,6 +40,8 @@ Color blackIcon = black.withOpacity(0.38);
 
 Color blackDisabled = blackIcon;
 
+Color blackHintText = blackDisabled;
+
 Color whitePrimary = white;
 
 Color whiteSecondary = white.withOpacity(0.7);
