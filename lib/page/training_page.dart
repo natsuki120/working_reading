@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:working_reading/component/primary_color_button.dart';
+import 'package:working_reading/page/answer_page.dart';
 import '../color_config.dart';
 import '../font_config.dart';
 
@@ -55,20 +57,17 @@ class TrainingPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 320),
-            SizedBox(
+            PrimaryColorButton(
               width: double.infinity,
               height: 64,
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(primary),
-                ),
-                onPressed: () {},
-                child: Text(
-                  '次へ',
-                  style: bodyBold(whitePrimary),
+              text: '次へ',
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const AnswerPage(),
                 ),
               ),
-            ),
+            )
           ],
         ),
       ),
