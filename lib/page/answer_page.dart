@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:working_reading/page/result_page.dart';
 import '../color_config.dart';
 import '../font_config.dart';
 
@@ -135,7 +136,8 @@ class AnswerPage extends StatelessWidget {
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(primary),
                     ),
-                    onPressed: () {},
+                    onPressed: () => Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => const ResultPage())),
                     child: Text(
                       '採点する',
                       style: bodyBold(whitePrimary),
