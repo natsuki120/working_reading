@@ -39,6 +39,7 @@ dependencies:
   json_serializable:
   build_runner:
   percent_indicator: ^4.2.3
+  supabase_flutter: ^1.6.2
 
 dev_dependencies:
   flutter_test:
