@@ -38,6 +38,7 @@ dependencies:
   freezed: ^2.3.2
   json_serializable:
   build_runner:
+  percent_indicator: ^4.2.3
 
 dev_dependencies:
   flutter_test:
