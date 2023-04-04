@@ -28,7 +28,7 @@ class PrimaryColorButton extends StatelessWidget {
         ),
         onPressed: onPressed,
         child: Text(
-          '始める',
+          text,
           style: bodyBold(whitePrimary),
         ),
       ),
