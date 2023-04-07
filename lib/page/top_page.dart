@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:working_reading/color_config.dart';
 import 'package:working_reading/component/primary_color_button.dart';
 import 'package:working_reading/font_config.dart';
 import 'package:working_reading/page/training_page.dart';
+import '../domain/sentence/sentence.dart';
+import '../provider.dart';
 
-class TopPage extends StatelessWidget {
+final sentenceListProvider = StateProvider((ref) => <Sentence>[]);
+
+class TopPage extends HookConsumerWidget {
   const TopPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
@@ -58,14 +63,44 @@ class TopPage extends StatelessWidget {
               width: double.infinity,
               height: 64,
               text: '始める',
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => const TrainingPage()),
-              ),
+              onPressed: () async {
+                // ローティング画面を実装する
+                try {
+                  final sentence = await ref
+                      .read(fetchRandomSentenceToUseQuestionProvider.future);
+                  ref.watch(sentenceListProvider.notifier).state = sentence;
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const TrainingPage(),
+                    ),
+                    (_) => false,
+                  );
+                } catch (error) {
+                  print(error);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Error fetching random sentence'),
+                    ),
+                  );
+                }
+              },
             ),
             const SizedBox(height: 16),
             TextButton(
-              onPressed: () {},
+              onPressed: () async {
+                // try {
+                //   for (Sentence sentence in testDataList) {
+                //     await supabase.from("sentence").insert({
+                //       "text": sentence.text,
+                //       'properNoun': sentence.properNoun
+                //     });
+                //   }
+                //   print('成功しました');
+                // } catch (e) {
+                //   print('Error: $e');
+                // }
+              },
               child: Text(
                 '遊び方',
                 style: bodyRegular(blackSecondary),
