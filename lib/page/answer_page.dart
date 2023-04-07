@@ -11,144 +11,77 @@ class AnswerPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(backgroundColor: backgroundColor),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      '問1. ',
-                      style: title1Regular(blackSecondary),
-                    ),
-                    Text(
-                      '？？？？',
-                      style: title1Regular(blackSecondary),
-                    ),
-                  ],
-                ),
-                const SizedBox(width: 32),
-                Row(
-                  children: [
-                    Text(
-                      '問1. ',
-                      style: title1Regular(blackSecondary),
-                    ),
-                    Text(
-                      '？？？？',
-                      style: title1Regular(blackSecondary),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(height: 64),
-            Row(
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      '問1. ',
-                      style: title1Regular(blackSecondary),
-                    ),
-                    Text(
-                      '？？？？',
-                      style: title1Regular(blackSecondary),
-                    ),
-                  ],
-                ),
-                const SizedBox(width: 32),
-                Row(
-                  children: [
-                    Text(
-                      '問1. ',
-                      style: title1Regular(blackSecondary),
-                    ),
-                    Text(
-                      '？？？？',
-                      style: title1Regular(blackSecondary),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(height: 64),
-            Row(
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      '問1. ',
-                      style: title1Regular(blackSecondary),
-                    ),
-                    Text(
-                      '？？？？',
-                      style: title1Regular(blackSecondary),
-                    ),
-                  ],
-                ),
-                const SizedBox(width: 32),
-                Row(
-                  children: [
-                    Text(
-                      '問1. ',
-                      style: title1Regular(blackSecondary),
-                    ),
-                    Text(
-                      '？？？？',
-                      style: title1Regular(blackSecondary),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(height: 64),
-            // ボタン
-            const Spacer(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: 150,
-                  height: 64,
-                  child: OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                      shape: const StadiumBorder(
-                        side: BorderSide(color: primary),
+      body: Column(
+        children: [
+          // TODO 左に偏ってるからなんとかする
+          Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [
+            for (int i = 1; i <= 5; i++)
+              Wrap(
+                children: [
+                  Column(
+                    children: [
+                      Wrap(
+                        children: [
+                          Text(
+                            '問1. ',
+                            style: title1Regular(blackSecondary),
+                          ),
+                          Text(
+                            '？？？？',
+                            style: title1Regular(blackSecondary),
+                          ),
+                        ],
                       ),
-                    ),
-                    onPressed: () {},
-                    child: Text(
-                      'ギブアップ',
-                      style: bodyBold(primary),
+                      const SizedBox(height: 64),
+                    ],
+                  ),
+                  const SizedBox(width: 16),
+                ],
+              ),
+          ]),
+          // ボタン
+          const Spacer(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 150,
+                height: 64,
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    shape: const StadiumBorder(
+                      side: BorderSide(color: primary),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  width: 16,
-                ),
-                SizedBox(
-                  width: 150,
-                  height: 64,
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(primary),
-                    ),
-                    onPressed: () => Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => const ResultPage())),
-                    child: Text(
-                      '採点する',
-                      style: bodyBold(whitePrimary),
-                    ),
+                  onPressed: () {},
+                  child: Text(
+                    'ギブアップ',
+                    style: bodyBold(primary),
                   ),
                 ),
-              ],
-            ),
-            const SizedBox(height: 80),
-          ],
-        ),
+              ),
+              const SizedBox(
+                width: 16,
+              ),
+              SizedBox(
+                width: 150,
+                height: 64,
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(primary),
+                  ),
+                  onPressed: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => const ResultPage())),
+                  child: Text(
+                    '採点する',
+                    style: bodyBold(whitePrimary),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 80),
+        ],
       ),
     );
   }
