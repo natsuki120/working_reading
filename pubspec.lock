@@ -222,6 +222,22 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_dotenv:
+    dependency: "direct main"
+    description:
+      name: flutter_dotenv
+      sha256: d9283d92059a22e9834bc0a31336658ffba77089fb6f3cc36751f1fc7c6661a3
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.0.2"
+  flutter_hooks:
+    dependency: transitive
+    description:
+      name: flutter_hooks
+      sha256: "6a126f703b89499818d73305e4ce1e3de33b4ae1c5512e3b8eab4b986f46774c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.18.6"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -230,6 +246,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
+  flutter_riverpod:
+    dependency: transitive
+    description:
+      name: flutter_riverpod
+      sha256: "7ccf1f98a906a91b1f4e95dea81b4b571d95049a59c54b79d57a2954b0285afe"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.3"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -312,6 +336,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
+  hooks_riverpod:
+    dependency: "direct main"
+    description:
+      name: hooks_riverpod
+      sha256: f7866f6b7f612fe8ec3681e21a445f6415bd5da077aace6dc7b57c0e3475bb80
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.3"
   http:
     dependency: transitive
     description:
@@ -568,6 +600,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.1"
+  riverpod:
+    dependency: transitive
+    description:
+      name: riverpod
+      sha256: fc63714de93a4660142d280e13f058137ba586510c825dce3b7c7d4c4714b585
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.3"
   rxdart:
     dependency: transitive
     description:
@@ -629,6 +669,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.0"
+  state_notifier:
+    dependency: transitive
+    description:
+      name: state_notifier
+      sha256: "8fe42610f179b843b12371e40db58c9444f8757f8b69d181c97e50787caed289"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.7.2+1"
   storage_client:
     dependency: transitive
     description:
@@ -661,6 +709,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  substring_highlight:
+    dependency: "direct main"
+    description:
+      name: substring_highlight
+      sha256: "96c61e8316098831f6bee87d2386617e4be6aaf87fbc89402dc049d371b67efb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.33"
   supabase:
     dependency: transitive
     description:
