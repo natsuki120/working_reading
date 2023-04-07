@@ -7,9 +7,13 @@ part 'sentence.g.dart';
 class Sentence with _$Sentence {
   const factory Sentence({
     required String text,
-    required List<String> properNounList,
+    required String properNoun,
   }) = _Sentence;
 
   factory Sentence.fromJson(Map<String, dynamic> json) =>
       _$SentenceFromJson(json);
+}
+
+abstract class ISentenceRepository {
+  Future<List<Sentence>> fetchRandomSentenceToUseQuestion();
 }
