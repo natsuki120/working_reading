@@ -8,13 +8,11 @@ part of 'sentence.dart';
 
 _$_Sentence _$$_SentenceFromJson(Map<String, dynamic> json) => _$_Sentence(
       text: json['text'] as String,
-      properNounList: (json['properNounList'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
+      properNoun: json['properNoun'] as String,
     );
 
 Map<String, dynamic> _$$_SentenceToJson(_$_Sentence instance) =>
     <String, dynamic>{
       'text': instance.text,
-      'properNounList': instance.properNounList,
+      'properNoun': instance.properNoun,
     };
