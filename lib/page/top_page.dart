@@ -64,17 +64,18 @@ class TopPage extends HookConsumerWidget {
               height: 64,
               text: '始める',
               onPressed: () async {
-                // ローティング画面を実装する
+                //TODO ローティング画面を実装する
                 try {
                   final sentence = await ref
                       .read(fetchRandomSentenceToUseQuestionProvider.future);
                   ref.watch(sentenceListProvider.notifier).state = sentence;
-                  Navigator.pushAndRemoveUntil(
+                  Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const TrainingPage(),
-                    ),
-                    (_) => false,
+                        builder: (BuildContext context) {
+                          return const TrainingPage();
+                        },
+                        fullscreenDialog: true),
                   );
                 } catch (error) {
                   print(error);
