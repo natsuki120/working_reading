@@ -21,72 +21,69 @@ class TrainingPage extends HookConsumerWidget {
     List<Sentence> sentenceList =
         ref.watch(sentenceListProvider.notifier).state;
     return Scaffold(
+      appBar: AppBar(backgroundColor: backgroundColor),
       backgroundColor: backgroundColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const SizedBox(height: 80),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Column(
               children: [
-                Text(
-                  'N: 2',
-                  style: displaySmall(
-                    FontWeight.w300,
-                    blackSecondary,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'N: 2',
+                      style: displaySmall(
+                        FontWeight.w300,
+                        blackSecondary,
+                      ),
+                    ),
+                    const SizedBox(width: 48),
+                    Text(
+                      '問: ${listIndex.value + 1}/5',
+                      style: displaySmall(
+                        FontWeight.w300,
+                        blackSecondary,
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(width: 48),
-                Text(
-                  '問: ${listIndex.value + 1}/5',
-                  style: displaySmall(
-                    FontWeight.w300,
+                const SizedBox(height: 32),
+                SubstringHighlight(
+                  text: sentenceList[listIndex.value].text,
+                  textStyle: bodyRegular(
                     blackSecondary,
                   ),
+                  term: sentenceList[listIndex.value].properNoun,
+                  textStyleHighlight: bodyBold(blackPrimary),
                 ),
               ],
             ),
-            const SizedBox(height: 16),
-            Align(
-              alignment: Alignment.centerRight,
-              child: IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.pause_circle,
-                  size: 50,
-                  color: primary,
+            Column(
+              children: [
+                PrimaryColorButton(
+                  width: double.infinity,
+                  height: 64,
+                  text: '次へ',
+                  onPressed: () async {
+                    // 全ての問題を出し切ったら回答ページに遷移する
+                    // リストの長さと比較したいため、インデックス番号に+1する。
+                    if (listIndex.value == sentenceList.length - 1) {
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const AnswerPage()),
+                          (_) => false);
+                    } else {
+                      listIndex.value++;
+                    }
+                  },
                 ),
-              ),
+                const SizedBox(height: 80),
+              ],
             ),
-            const SizedBox(height: 16),
-            SubstringHighlight(
-              text: sentenceList[listIndex.value].text,
-              textStyle: bodyRegular(
-                blackSecondary,
-              ),
-              term: sentenceList[listIndex.value].properNoun,
-              textStyleHighlight: bodyBold(blackPrimary),
-            ),
-            const SizedBox(height: 320),
-            PrimaryColorButton(
-              width: double.infinity,
-              height: 64,
-              text: '次へ',
-              onPressed: () async {
-                // 全ての問題を出し切ったら回答ページに遷移する
-                // リストの長さと比較したいため、インデックス番号に+1する。
-                if (listIndex.value == sentenceList.length - 1) {
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const AnswerPage()),
-                      (_) => false);
-                } else {
-                  listIndex.value++;
-                }
-              },
-            )
           ],
         ),
       ),
