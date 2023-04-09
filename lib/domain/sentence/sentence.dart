@@ -6,8 +6,9 @@ part 'sentence.g.dart';
 @freezed
 class Sentence with _$Sentence {
   const factory Sentence({
-    required String text,
-    required String properNoun,
+    @Default('') String text,
+    @Default('') String properNoun,
+    @Default(false) bool hasCollected,
   }) = _Sentence;
 
   factory Sentence.fromJson(Map<String, dynamic> json) =>

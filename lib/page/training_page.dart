@@ -4,8 +4,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 import 'package:working_reading/component/primary_color_button.dart';
 import 'package:working_reading/domain/sentence/sentence.dart';
+import 'package:working_reading/domain/sentence/sentence_notifier.dart';
 import 'package:working_reading/page/answer_page.dart';
-import 'package:working_reading/page/top_page.dart';
 import '../color_config.dart';
 import '../font_config.dart';
 
@@ -19,7 +19,7 @@ class TrainingPage extends HookConsumerWidget {
     final listIndex = useState(0);
     // 問題で表示する文章
     List<Sentence> sentenceList =
-        ref.watch(sentenceListProvider.notifier).state;
+        ref.watch(sentenceListNotifierProvider.notifier).state.sentenceList;
     return Scaffold(
       appBar: AppBar(backgroundColor: backgroundColor),
       backgroundColor: backgroundColor,

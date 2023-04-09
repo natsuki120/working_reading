@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:working_reading/color_config.dart';
 import 'package:working_reading/component/primary_color_button.dart';
+import 'package:working_reading/domain/sentence/sentence_notifier.dart';
 import 'package:working_reading/font_config.dart';
 import 'package:working_reading/page/training_page.dart';
-import '../domain/sentence/sentence.dart';
-import '../provider.dart';
-
-final sentenceListProvider = StateProvider((ref) => <Sentence>[]);
 
 class TopPage extends HookConsumerWidget {
   const TopPage({Key? key}) : super(key: key);
@@ -66,9 +63,9 @@ class TopPage extends HookConsumerWidget {
               onPressed: () async {
                 //TODO ローティング画面を実装する
                 try {
-                  final sentence = await ref
-                      .read(fetchRandomSentenceToUseQuestionProvider.future);
-                  ref.watch(sentenceListProvider.notifier).state = sentence;
+                  await ref
+                      .read(sentenceListNotifierProvider.notifier)
+                      .fetchRandomSentenceToUseQuestion();
                   Navigator.push(
                     context,
                     MaterialPageRoute(
