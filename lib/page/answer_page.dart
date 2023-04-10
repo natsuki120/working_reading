@@ -163,7 +163,7 @@ class AnswerPage extends HookConsumerWidget {
                                 .showSnackBar(snackBar);
                             controller.clear();
                           }
-                          await new Future.delayed(new Duration(seconds: 2));
+                          await Future.delayed(const Duration(seconds: 2));
                           ref
                               .watch(sentenceListNotifierProvider.notifier)
                               .fetchRandomSentenceToUseQuestion(num: nBackNum);
@@ -176,13 +176,14 @@ class AnswerPage extends HookConsumerWidget {
                             if (ref.watch(trainingNum) == 2) {
                               Navigator.of(context).pushAndRemoveUntil(
                                   MaterialPageRoute(
-                                      builder: (_) => ResultPage()),
+                                      builder: (_) => const ResultPage()),
                                   (route) => false);
+                              ref.read(trainingNum.notifier).state = 1;
                             } else {
                               ref.read(trainingNum.notifier).state++;
                               Navigator.of(context).pushAndRemoveUntil(
                                   MaterialPageRoute(
-                                      builder: (_) => TrainingPage()),
+                                      builder: (_) => const TrainingPage()),
                                   (route) => false);
                             }
                           }
