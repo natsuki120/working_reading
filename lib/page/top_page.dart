@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:working_reading/color_config.dart';
 import 'package:working_reading/component/primary_color_button.dart';
@@ -77,33 +78,26 @@ class TopPage extends HookConsumerWidget {
                         ),
                       ],
                     ),
-                    Spacer(),
+                    const Spacer(),
                     PrimaryColorButton(
                       width: double.infinity,
                       height: 64,
                       text: '始める',
                       onPressed: () async {
                         //TODO ローティング画面を実装する
-                        try {
-                          await ref
-                              .read(sentenceListNotifierProvider.notifier)
-                              .fetchRandomSentenceToUseQuestion(num: nBackNum);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) {
-                                  return const TrainingPage();
-                                },
-                                fullscreenDialog: true),
-                          );
-                        } catch (error) {
-                          print(error);
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Error fetching random sentence'),
-                            ),
-                          );
-                        }
+                        EasyLoading.show(status: '読み込み中');
+                        await ref
+                            .read(sentenceListNotifierProvider.notifier)
+                            .fetchRandomSentenceToUseQuestion(num: nBackNum);
+                        EasyLoading.dismiss();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) {
+                                return const TrainingPage();
+                              },
+                              fullscreenDialog: true),
+                        );
                       },
                     ),
                     const SizedBox(height: 16),
