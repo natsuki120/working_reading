@@ -6,6 +6,7 @@ import 'package:working_reading/component/primary_color_button.dart';
 import 'package:working_reading/domain/sentence/sentence.dart';
 import 'package:working_reading/domain/sentence/sentence_notifier.dart';
 import 'package:working_reading/page/answer_page.dart';
+import 'package:working_reading/page/top_page.dart';
 import '../color_config.dart';
 import '../font_config.dart';
 
@@ -14,6 +15,7 @@ class TrainingPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final nBackNum = ref.watch(nBackNumProvider);
     // 問題文のリストを検索するためのインデックス番号
     // 問題数を表示する時にも使う
     final listIndex = useState(0);
@@ -34,7 +36,7 @@ class TrainingPage extends HookConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'N: 2',
+                      'N: $nBackNum',
                       style: displaySmall(
                         FontWeight.w300,
                         blackSecondary,
@@ -42,7 +44,7 @@ class TrainingPage extends HookConsumerWidget {
                     ),
                     const SizedBox(width: 48),
                     Text(
-                      '問: ${listIndex.value + 1}/5',
+                      '問: ${listIndex.value + 1}/$nBackNum',
                       style: displaySmall(
                         FontWeight.w300,
                         blackSecondary,

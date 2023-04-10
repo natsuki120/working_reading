@@ -4,7 +4,8 @@ import 'package:working_reading/repository/sentence_repository/sentence_reposito
 final sentenceRepositoryProvider =
     Provider((ref) => SentenceRepositoryWithSupabase());
 
-final fetchRandomSentenceToUseQuestionProvider = FutureProvider((ref) async {
+final fetchRandomSentenceToUseQuestionProvider =
+    FutureProvider.family((ref, int num) async {
   return await SentenceRepositoryWithSupabase()
-      .fetchRandomSentenceToUseQuestion();
+      .fetchRandomSentenceToUseQuestion(num: num);
 });

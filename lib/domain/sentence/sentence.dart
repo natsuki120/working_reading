@@ -16,5 +16,5 @@ class Sentence with _$Sentence {
 }
 
 abstract class ISentenceRepository {
-  Future<List<Sentence>> fetchRandomSentenceToUseQuestion();
+  Future<List<Sentence>> fetchRandomSentenceToUseQuestion({required int num});
 }
