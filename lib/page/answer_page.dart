@@ -164,9 +164,6 @@ class AnswerPage extends HookConsumerWidget {
                             controller.clear();
                           }
                           await Future.delayed(const Duration(seconds: 2));
-                          ref
-                              .watch(sentenceListNotifierProvider.notifier)
-                              .fetchRandomSentenceToUseQuestion(num: nBackNum);
                           if (ref
                               .watch(sentenceListNotifierProvider.notifier)
                               .state
@@ -180,6 +177,10 @@ class AnswerPage extends HookConsumerWidget {
                                   (route) => false);
                               ref.read(trainingNum.notifier).state = 1;
                             } else {
+                              ref
+                                  .read(sentenceListNotifierProvider.notifier)
+                                  .fetchRandomSentenceToUseQuestion(
+                                      num: nBackNum);
                               ref.read(trainingNum.notifier).state++;
                               Navigator.of(context).pushAndRemoveUntil(
                                   MaterialPageRoute(
