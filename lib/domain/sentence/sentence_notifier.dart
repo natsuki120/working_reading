@@ -9,8 +9,9 @@ class SentenceListNotifier extends StateNotifier<SentenceList> {
 
   final ISentenceRepository sentenceRepository;
 
-  Future<void> fetchRandomSentenceToUseQuestion() async {
-    final result = await sentenceRepository.fetchRandomSentenceToUseQuestion();
+  Future<void> fetchRandomSentenceToUseQuestion({required int num}) async {
+    final result =
+        await sentenceRepository.fetchRandomSentenceToUseQuestion(num: num);
     state = state.copyWith(sentenceList: result);
   }
 

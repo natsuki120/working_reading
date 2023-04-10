@@ -6,10 +6,11 @@ class SentenceRepositoryWithSupabase extends ISentenceRepository {
   final supabase = Supabase.instance.client;
 
   @override
-  Future<List<Sentence>> fetchRandomSentenceToUseQuestion() async {
+  Future<List<Sentence>> fetchRandomSentenceToUseQuestion(
+      {required int num}) async {
     final Set textIds = {};
     final response = <List<dynamic>>[];
-    while (response.length < 5) {
+    while (response.length < num) {
       final random = math.Random().nextInt(9);
       final data =
           await supabase.from('sentence').select('*').eq('text_id', random);

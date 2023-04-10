@@ -5,6 +5,7 @@ import 'package:working_reading/component/disable_button.dart';
 import 'package:working_reading/component/primary_color_button.dart';
 import 'package:working_reading/domain/sentence/sentence_notifier.dart';
 import 'package:working_reading/domain/sentence_list/sentence_list.dart';
+import 'package:working_reading/page/top_page.dart';
 import '../color_config.dart';
 import '../domain/sentence/sentence.dart';
 import '../font_config.dart';
@@ -14,6 +15,8 @@ class AnswerPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final nBackNum = ref.watch(nBackNumProvider);
+
     final controller = useTextEditingController(text: '');
     SentenceList sentenceListNotifier = ref.watch(sentenceListNotifierProvider);
 
@@ -44,7 +47,7 @@ class AnswerPage extends HookConsumerWidget {
             // 文字数が違うから？？？？の時と答えが出ている時で改行が変わる
             Wrap(
               children: [
-                for (int i = 1; i <= 5; i++)
+                for (int i = 1; i <= nBackNum; i++)
                   Wrap(
                     children: [
                       Column(
