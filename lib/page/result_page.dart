@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:working_reading/color_config.dart';
 import 'package:working_reading/component/secondary_color_button.dart';
 import 'package:working_reading/font_config.dart';
+import 'package:working_reading/page/top_page.dart';
+import 'package:working_reading/page/training_page.dart';
 
-class ResultPage extends StatelessWidget {
+import '../domain/sentence/sentence_notifier.dart';
+
+class ResultPage extends ConsumerWidget {
   const ResultPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final nBackNum = ref.watch(nBackNumProvider);
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
@@ -69,18 +75,32 @@ class ResultPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () => Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const TopPage(),
+                      ),
+                      (route) => false),
                   child: Text(
                     'ホームに戻る',
                     style: bodyRegular(blackSecondary),
                   ),
                 ),
                 SecondaryColorButton(
-                  width: 200,
-                  height: 80,
-                  text: 'リトライ',
-                  onPressed: () {},
-                ),
+                    width: 200,
+                    height: 80,
+                    text: 'リトライ',
+                    onPressed: () async {
+                      await ref
+                          .read(sentenceListNotifierProvider.notifier)
+                          .fetchRandomSentenceToUseQuestion(num: nBackNum);
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const TrainingPage(),
+                          ),
+                          (route) => false);
+                    }),
               ],
             )
           ],
