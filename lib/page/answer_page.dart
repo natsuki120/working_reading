@@ -5,10 +5,16 @@ import 'package:working_reading/component/disable_button.dart';
 import 'package:working_reading/component/primary_color_button.dart';
 import 'package:working_reading/domain/sentence/sentence_notifier.dart';
 import 'package:working_reading/domain/sentence_list/sentence_list.dart';
+import 'package:working_reading/page/result_page.dart';
 import 'package:working_reading/page/top_page.dart';
+import 'package:working_reading/page/training_page.dart';
 import '../color_config.dart';
 import '../domain/sentence/sentence.dart';
 import '../font_config.dart';
+
+// トレーニングの回数を記録するprovider
+// 2回トレーニングしたら結果発表画面に遷移させる
+final trainingNum = StateProvider((ref) => 1);
 
 class AnswerPage extends HookConsumerWidget {
   const AnswerPage({Key? key}) : super(key: key);
@@ -35,7 +41,6 @@ class AnswerPage extends HookConsumerWidget {
     }, [controller]);
 
     String qText = '';
-
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(backgroundColor: backgroundColor),
@@ -157,6 +162,29 @@ class AnswerPage extends HookConsumerWidget {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar);
                             controller.clear();
+                          }
+                          await new Future.delayed(new Duration(seconds: 2));
+                          ref
+                              .watch(sentenceListNotifierProvider.notifier)
+                              .fetchRandomSentenceToUseQuestion(num: nBackNum);
+                          if (ref
+                              .watch(sentenceListNotifierProvider.notifier)
+                              .state
+                              .sentenceList
+                              .every((Sentence sentence) =>
+                                  sentence.hasCollected == true)) {
+                            if (ref.watch(trainingNum) == 2) {
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                      builder: (_) => ResultPage()),
+                                  (route) => false);
+                            } else {
+                              ref.read(trainingNum.notifier).state++;
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                      builder: (_) => TrainingPage()),
+                                  (route) => false);
+                            }
                           }
                         },
                       ),

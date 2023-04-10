@@ -43,6 +43,7 @@ dependencies:
   flutter_dotenv: ^5.0.2
   substring_highlight: ^1.0.33
   hooks_riverpod: ^2.3.3
+  flutter_easyloading: ^3.0.5
 
 dev_dependencies:
   flutter_test:

@@ -3,7 +3,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 import 'package:working_reading/component/primary_color_button.dart';
-import 'package:working_reading/domain/sentence/sentence.dart';
 import 'package:working_reading/domain/sentence/sentence_notifier.dart';
 import 'package:working_reading/page/answer_page.dart';
 import 'package:working_reading/page/top_page.dart';
@@ -20,8 +19,8 @@ class TrainingPage extends HookConsumerWidget {
     // 問題数を表示する時にも使う
     final listIndex = useState(0);
     // 問題で表示する文章
-    List<Sentence> sentenceList =
-        ref.watch(sentenceListNotifierProvider.notifier).state.sentenceList;
+    final sentenceList = ref.watch(sentenceListNotifierProvider).sentenceList;
+
     return Scaffold(
       appBar: AppBar(backgroundColor: backgroundColor),
       backgroundColor: backgroundColor,
@@ -78,6 +77,7 @@ class TrainingPage extends HookConsumerWidget {
                           MaterialPageRoute(
                               builder: (context) => const AnswerPage()),
                           (_) => false);
+                      listIndex.value = 0;
                     } else {
                       listIndex.value++;
                     }
