@@ -3,10 +3,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:working_reading/color_config.dart';
 import 'package:working_reading/component/secondary_color_button.dart';
+import 'package:working_reading/domain/result/result_notifier.dart';
 import 'package:working_reading/font_config.dart';
 import 'package:working_reading/page/top_page.dart';
 import 'package:working_reading/page/training_page.dart';
-
 import '../domain/sentence/sentence_notifier.dart';
 
 class ResultPage extends ConsumerWidget {
@@ -15,62 +15,85 @@ class ResultPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final nBackNum = ref.watch(nBackNumProvider);
+    final resultList = ref.watch(resultListNotifier);
+    final allResult = (resultList[0].percent + resultList[1].percent) / 2;
+    bool isPassed = resultList[0].isPassed && resultList[1].isPassed;
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
         backgroundColor: backgroundColor,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Column(
           children: [
             // 問題数ごと
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CircularPercentIndicator(
-                    radius: 60.0,
-                    lineWidth: 13.0,
-                    animation: true,
-                    percent: 0.7,
-                    center: Text(
-                      "70.0%",
-                      style: headerRegular(blackPrimary),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    Text('１問目', style: title1Regular(blackSecondary)),
+                    const SizedBox(height: 16),
+                    CircularPercentIndicator(
+                      radius: 60.0,
+                      lineWidth: 13.0,
+                      animation: true,
+                      percent: resultList[0].percent / 100,
+                      center: Text(
+                        '${resultList[0].percent}%',
+                        style: headerRegular(blackPrimary),
+                      ),
+                      circularStrokeCap: CircularStrokeCap.round,
+                      progressColor: primary,
                     ),
-                    circularStrokeCap: CircularStrokeCap.round,
-                    progressColor: primary,
-                  ),
-                  CircularPercentIndicator(
-                    radius: 60.0,
-                    lineWidth: 13.0,
-                    animation: true,
-                    percent: 0.7,
-                    center: Text(
-                      "70.0%",
-                      style: headerRegular(blackPrimary),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Text('２問目', style: title1Regular(blackSecondary)),
+                    const SizedBox(height: 16),
+                    CircularPercentIndicator(
+                      radius: 60.0,
+                      lineWidth: 13.0,
+                      animation: true,
+                      percent: resultList[0].percent / 100,
+                      center: Text(
+                        '${resultList[1].percent}%',
+                        style: headerRegular(blackPrimary),
+                      ),
+                      circularStrokeCap: CircularStrokeCap.round,
+                      progressColor: primary,
                     ),
-                    circularStrokeCap: CircularStrokeCap.round,
-                    progressColor: primary,
-                  ),
-                ],
-              ),
+                  ],
+                ),
+              ],
             ),
             // 全体
-            CircularPercentIndicator(
-              radius: 120.0,
-              lineWidth: 13.0,
-              animation: true,
-              percent: 0.7,
-              center: Text(
-                "70.0%",
-                style: headerRegular(blackPrimary),
-              ),
-              circularStrokeCap: CircularStrokeCap.round,
-              progressColor: primary,
+            Column(
+              children: [
+                Text('総合', style: title1Regular(blackSecondary)),
+                const SizedBox(height: 16),
+                CircularPercentIndicator(
+                  radius: 120.0,
+                  lineWidth: 13.0,
+                  animation: true,
+                  percent: allResult / 100,
+                  center: Text(
+                    "$allResult%",
+                    style: headerRegular(blackPrimary),
+                  ),
+                  circularStrokeCap: CircularStrokeCap.round,
+                  progressColor: primary,
+                ),
+              ],
             ),
-            const SizedBox(height: 160),
+            const SizedBox(height: 32),
+            if (isPassed)
+              Text('合格！', style: title1Regular(blackSecondary))
+            else
+              Text('不合格', style: title1Regular(blackSecondary)),
+            const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -83,7 +106,7 @@ class ResultPage extends ConsumerWidget {
                       (route) => false),
                   child: Text(
                     'ホームに戻る',
-                    style: bodyRegular(blackSecondary),
+                    style: bodyRegular(blackPrimary),
                   ),
                 ),
                 SecondaryColorButton(
@@ -102,7 +125,8 @@ class ResultPage extends ConsumerWidget {
                           (route) => false);
                     }),
               ],
-            )
+            ),
+            const SizedBox(height: 96),
           ],
         ),
       ),
