@@ -3,8 +3,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:working_reading/component/disable_button.dart';
 import 'package:working_reading/component/primary_color_button.dart';
+import 'package:working_reading/domain/result/result_notifier.dart';
 import 'package:working_reading/domain/sentence/sentence_notifier.dart';
-import 'package:working_reading/domain/sentence_list/sentence_list.dart';
 import 'package:working_reading/page/result_page.dart';
 import 'package:working_reading/page/top_page.dart';
 import 'package:working_reading/page/training_page.dart';
@@ -24,7 +24,7 @@ class AnswerPage extends HookConsumerWidget {
     final nBackNum = ref.watch(nBackNumProvider);
 
     final controller = useTextEditingController(text: '');
-    SentenceList sentenceListNotifier = ref.watch(sentenceListNotifierProvider);
+    final sentenceListNotifier = ref.watch(sentenceListNotifierProvider);
 
     final _areFieldsEmpty =
         useState<bool>(true); // controll the button based on Text.isEmpty
@@ -173,6 +173,17 @@ class AnswerPage extends HookConsumerWidget {
                               .sentenceList
                               .every((Sentence sentence) =>
                                   sentence.hasCollected == true)) {
+                            ref
+                                .read(resultNotifier.notifier)
+                                .aggregateResultFromEachSentence(ref
+                                    .watch(
+                                        sentenceListNotifierProvider.notifier)
+                                    .state
+                                    .sentenceList);
+                            ref
+                                .read(resultListNotifier.notifier)
+                                .state
+                                .add(ref.watch(resultNotifier));
                             if (ref.watch(trainingNum) == 2) {
                               Navigator.of(context).pushAndRemoveUntil(
                                   MaterialPageRoute(
