@@ -6,17 +6,23 @@ class ResultNotifier extends StateNotifier<Result> {
   ResultNotifier() : super(const Result());
 
   void aggregateResultFromEachSentence(List<Sentence> sentenceList) {
-    sentenceList.map((sentence) {
+    for (Sentence sentence in sentenceList) {
       if (sentence.hasCollected) {
-        state.correctList.add(true);
+        List<bool> newList = [];
+        newList.add(true);
+        state = state.copyWith(correctList: newList);
       }
-    });
+    }
+
     state = state.copyWith(
-        percent: state.correctList.length / sentenceList.length * 100);
+        percent: (state.correctList.length / sentenceList.length) * 100);
     if (state.percent >= 80) {
       state = state.copyWith(isPassed: true);
     }
   }
 }
 
-final resultNotifier = StateNotifierProvider((ref) => ResultNotifier());
+final resultNotifier =
+    StateNotifierProvider<ResultNotifier, Result>((ref) => ResultNotifier());
+
+final resultListNotifier = StateProvider<List<Result>>((ref) => <Result>[]);
