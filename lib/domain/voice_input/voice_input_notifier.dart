@@ -12,10 +12,11 @@ class VoiceInputNotifier extends StateNotifier<VoiceInput> {
 
   void initSpeech() async {
     state = state.copyWith(speechEnabled: await _speechToText.initialize());
+    startListening();
   }
 
   void startListening() async {
-    await _speechToText.listen(onResult: onSpeechResult);
+    await _speechToText.listen(onResult: onSpeechResult, localeId: 'ja-JP');
   }
 
   void stopListening() async {
@@ -26,11 +27,13 @@ class VoiceInputNotifier extends StateNotifier<VoiceInput> {
     state = state.copyWith(lastWord: result.recognizedWords);
   }
 
-  void isSpeechEnough(Sentence sentence) {
-    if (state.lastWord.length >= sentence.text.length) {
+  void makeTappableNextButtonIfSpeechEnoughThan(Sentence sentence) {
+    if (state.lastWord.length > sentence.text.length - 5) {
       state = state.copyWith(hasSpeechEnough: true);
     }
   }
 }
 
-final voiceInputNotifier = StateNotifierProvider((ref) => VoiceInputNotifier());
+final voiceInputNotifier =
+    StateNotifierProvider<VoiceInputNotifier, VoiceInput>(
+        (ref) => VoiceInputNotifier());
