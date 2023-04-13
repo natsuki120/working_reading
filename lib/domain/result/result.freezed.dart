@@ -116,7 +116,7 @@ class __$$_ResultCopyWithImpl<$Res>
 class _$_Result with DiagnosticableTreeMixin implements _Result {
   const _$_Result(
       {this.percent = 0,
-      final List<bool> correctList = const [],
+      final List<bool> correctList = const <bool>[],
       this.isPassed = false})
       : _correctList = correctList;
 

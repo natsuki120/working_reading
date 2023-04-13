@@ -11,7 +11,7 @@ _$_Result _$$_ResultFromJson(Map<String, dynamic> json) => _$_Result(
       correctList: (json['correctList'] as List<dynamic>?)
               ?.map((e) => e as bool)
               .toList() ??
-          const [],
+          const <bool>[],
       isPassed: json['isPassed'] as bool? ?? false,
     );
 
