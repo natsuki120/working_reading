@@ -25,6 +25,16 @@ class SentenceListNotifier extends StateNotifier<SentenceList> {
 
     state = state.copyWith(sentenceList: testList);
   }
+
+  void displayAllAnswer() {
+    List<Sentence> list = state.sentenceList.map<Sentence>((Sentence sentence) {
+      if (!sentence.hasCollected) {
+        sentence = sentence.copyWith(giveUp: true);
+      }
+      return sentence;
+    }).toList();
+    state = state.copyWith(sentenceList: list);
+  }
 }
 
 final sentenceListNotifierProvider =
