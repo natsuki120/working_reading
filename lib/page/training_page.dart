@@ -17,6 +17,8 @@ class TrainingPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final nBackNum = ref.watch(nBackNumProvider);
+    //努力価値追求
+
     // 問題文のリストを検索するためのインデックス番号
     // 問題数を表示する時にも使う
     final listIndex = useState(0);
@@ -30,7 +32,7 @@ class TrainingPage extends HookConsumerWidget {
         ref
             .watch(voiceInputNotifier.notifier)
             .makeTappableNextButtonIfSpeechEnoughThan(
-                sentenceList[listIndex.value]);
+                sentenceList: sentenceList, questionIndex: listIndex.value);
       });
       return;
     }, [voiceInput]);
@@ -89,8 +91,7 @@ class TrainingPage extends HookConsumerWidget {
                     height: 64,
                     text: '次へ',
                     onPressed: () async {
-                      ref.read(voiceInputNotifier.notifier).stopListening();
-                      // 全ての問題を出し切ったら回答ページに遷移する
+                      // 全ての問題を出し切ったら回答ページに遷移するå
                       // リストの長さと比較したいため、インデックス番号に+1する。
                       if (listIndex.value == sentenceList.length - 1) {
                         Navigator.pushAndRemoveUntil(
@@ -98,8 +99,12 @@ class TrainingPage extends HookConsumerWidget {
                             MaterialPageRoute(
                                 builder: (context) => const AnswerPage()),
                             (_) => false);
+                        ref.read(voiceInputNotifier.notifier).stopListening();
                         listIndex.value = 0;
                       } else {
+                        ref
+                            .read(voiceInputNotifier.notifier)
+                            .resetHasSpeechEnoughValue();
                         listIndex.value++;
                       }
                     },

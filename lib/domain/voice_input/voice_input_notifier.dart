@@ -27,10 +27,27 @@ class VoiceInputNotifier extends StateNotifier<VoiceInput> {
     state = state.copyWith(lastWord: result.recognizedWords);
   }
 
-  void makeTappableNextButtonIfSpeechEnoughThan(Sentence sentence) {
-    if (state.lastWord.length > sentence.text.length - 5) {
-      state = state.copyWith(hasSpeechEnough: true);
+  void makeTappableNextButtonIfSpeechEnoughThan(
+      {required List<Sentence> sentenceList, required int questionIndex}) {
+    int allSentenceLength = 0;
+
+    if (questionIndex == 0) {
+      if (state.lastWord.length > sentenceList[0].text.length - 10) {
+        state = state.copyWith(hasSpeechEnough: true);
+      }
+    } else {
+      for (int i = 0; i <= questionIndex; i++) {
+        allSentenceLength += sentenceList[i].text.length;
+      }
+      if (state.lastWord.length > allSentenceLength - 10) {
+        print(allSentenceLength);
+        state = state.copyWith(hasSpeechEnough: true);
+      }
     }
+  }
+
+  void resetHasSpeechEnoughValue() {
+    state = state.copyWith(hasSpeechEnough: false);
   }
 }
 
