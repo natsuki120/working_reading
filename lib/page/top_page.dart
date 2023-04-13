@@ -93,10 +93,10 @@ class TopPage extends HookConsumerWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (BuildContext context) {
-                                return const TrainingPage();
-                              },
-                              fullscreenDialog: true),
+                            builder: (BuildContext context) {
+                              return const TrainingPage();
+                            },
+                          ),
                         );
                       },
                     ),

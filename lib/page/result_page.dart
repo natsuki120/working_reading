@@ -22,8 +22,7 @@ class ResultPage extends ConsumerWidget {
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
-        backgroundColor: backgroundColor,
-      ),
+          backgroundColor: backgroundColor, automaticallyImplyLeading: false),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Column(
@@ -99,12 +98,8 @@ class ResultPage extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 TextButton(
-                  onPressed: () => Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const TopPage(),
-                      ),
-                      (route) => false),
+                  onPressed: () =>
+                      Navigator.popUntil(context, (route) => route.isFirst),
                   child: Text(
                     'ホームに戻る',
                     style: bodyRegular(blackPrimary),
@@ -119,12 +114,12 @@ class ResultPage extends ConsumerWidget {
                           .read(sentenceListNotifierProvider.notifier)
                           .fetchRandomSentenceToUseQuestion(num: nBackNum);
                       ref.read(voiceInputNotifier.notifier).initSpeech();
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => const TrainingPage(),
-                          ),
-                          (route) => false);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const TrainingPage(),
+                        ),
+                      );
                     }),
               ],
             ),
