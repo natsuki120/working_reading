@@ -27,6 +27,8 @@ class AnswerPage extends HookConsumerWidget {
     final controller = useTextEditingController(text: '');
     final sentenceListNotifier = ref.watch(sentenceListNotifierProvider);
 
+    FocusNode focusNode = useState(FocusNode()).value;
+
     final _areFieldsEmpty =
         useState<bool>(true); // controll the button based on Text.isEmpty
 
@@ -44,7 +46,10 @@ class AnswerPage extends HookConsumerWidget {
     String qText = '';
     return Scaffold(
       backgroundColor: backgroundColor,
-      appBar: AppBar(backgroundColor: backgroundColor),
+      appBar: AppBar(
+        backgroundColor: backgroundColor,
+        automaticallyImplyLeading: false,
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Column(
@@ -85,6 +90,7 @@ class AnswerPage extends HookConsumerWidget {
             const Spacer(),
             // 回答用のテキストフィールド
             TextField(
+              focusNode: focusNode,
               controller: controller,
               decoration: InputDecoration(
                 hintText: '回答を入力してください',
@@ -164,13 +170,15 @@ class AnswerPage extends HookConsumerWidget {
                                 .showSnackBar(snackBar);
                             controller.clear();
                           }
-                          await Future.delayed(const Duration(seconds: 2));
                           if (ref
                               .watch(sentenceListNotifierProvider.notifier)
                               .state
                               .sentenceList
                               .every((Sentence sentence) =>
                                   sentence.hasCollected == true)) {
+                            await Future.delayed(const Duration(seconds: 1));
+                            focusNode.unfocus();
+                            await Future.delayed(const Duration(seconds: 1));
                             ref
                                 .read(resultNotifier.notifier)
                                 .aggregateResultFromEachSentence(ref
@@ -183,10 +191,10 @@ class AnswerPage extends HookConsumerWidget {
                                 .state
                                 .add(ref.watch(resultNotifier));
                             if (ref.watch(trainingNum) == 2) {
-                              Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                      builder: (_) => const ResultPage()),
-                                  (route) => false);
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (_) => const ResultPage()),
+                              );
                               ref.read(trainingNum.notifier).state = 1;
                             } else {
                               ref
@@ -197,10 +205,10 @@ class AnswerPage extends HookConsumerWidget {
                               ref
                                   .read(voiceInputNotifier.notifier)
                                   .initSpeech();
-                              Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                      builder: (_) => const TrainingPage()),
-                                  (route) => false);
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (_) => const TrainingPage()),
+                              );
                             }
                           }
                         },

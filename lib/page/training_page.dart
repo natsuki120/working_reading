@@ -45,7 +45,8 @@ class TrainingPage extends HookConsumerWidget {
     return WillPopScope(
       onWillPop: () async {
         ref.read(voiceInputNotifier.notifier).stopListening();
-        return true;
+        Navigator.popUntil(context, (route) => route.isFirst);
+        return false;
       },
       child: Scaffold(
         appBar: AppBar(backgroundColor: backgroundColor),
@@ -104,11 +105,11 @@ class TrainingPage extends HookConsumerWidget {
                         // 全ての問題を出し切ったら回答ページに遷移するå
                         // リストの長さと比較したいため、インデックス番号に+1する。
                         if (listIndex.value == sentenceList.length - 1) {
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const AnswerPage()),
-                              (_) => false);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const AnswerPage()),
+                          );
                           ref.read(voiceInputNotifier.notifier).stopListening();
                           listIndex.value = 0;
                         } else {
