@@ -42,86 +42,92 @@ class TrainingPage extends HookConsumerWidget {
       return;
     }, [listIndex]);
 
-    return Scaffold(
-      appBar: AppBar(backgroundColor: backgroundColor),
-      backgroundColor: backgroundColor,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'N: $nBackNum',
-                      style: displaySmall(
-                        FontWeight.w300,
-                        blackSecondary,
+    return WillPopScope(
+      onWillPop: () async {
+        ref.read(voiceInputNotifier.notifier).stopListening();
+        return true;
+      },
+      child: Scaffold(
+        appBar: AppBar(backgroundColor: backgroundColor),
+        backgroundColor: backgroundColor,
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'N: $nBackNum',
+                        style: displaySmall(
+                          FontWeight.w300,
+                          blackSecondary,
+                        ),
                       ),
-                    ),
-                    const SizedBox(width: 48),
-                    Text(
-                      '問: ${listIndex.value + 1}/$nBackNum',
-                      style: displaySmall(
-                        FontWeight.w300,
-                        blackSecondary,
+                      const SizedBox(width: 48),
+                      Text(
+                        '問: ${listIndex.value + 1}/$nBackNum',
+                        style: displaySmall(
+                          FontWeight.w300,
+                          blackSecondary,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 32),
-                SubstringHighlight(
-                  text: sentenceList[listIndex.value].text,
-                  textStyle: bodyRegular(
-                    blackSecondary,
+                    ],
                   ),
-                  term: sentenceList[listIndex.value].properNoun,
-                  textStyleHighlight: bodyBold(blackPrimary),
-                ),
-                const SizedBox(height: 32),
-                Text(
-                  voiceInput.lastWord,
-                  style: bodyRegular(blackPrimary),
-                )
-              ],
-            ),
-            Column(
-              children: [
-                if (voiceInput.hasSpeechEnough)
-                  PrimaryColorButton(
-                    width: double.infinity,
-                    height: 64,
-                    text: '次へ',
-                    onPressed: () async {
-                      // 全ての問題を出し切ったら回答ページに遷移するå
-                      // リストの長さと比較したいため、インデックス番号に+1する。
-                      if (listIndex.value == sentenceList.length - 1) {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const AnswerPage()),
-                            (_) => false);
-                        ref.read(voiceInputNotifier.notifier).stopListening();
-                        listIndex.value = 0;
-                      } else {
-                        ref.read(voiceInputNotifier.notifier).initSpeech();
-                        listIndex.value++;
-                      }
-                    },
+                  const SizedBox(height: 32),
+                  SubstringHighlight(
+                    text: sentenceList[listIndex.value].text,
+                    textStyle: bodyRegular(
+                      blackSecondary,
+                    ),
+                    term: sentenceList[listIndex.value].properNoun,
+                    textStyleHighlight: bodyBold(blackPrimary),
+                  ),
+                  const SizedBox(height: 32),
+                  Text(
+                    voiceInput.lastWord,
+                    style: bodyRegular(blackPrimary),
                   )
-                else
-                  const DisableButton(
-                    text: '音読してください',
-                    width: double.infinity,
-                    height: 64,
-                  ),
-                const SizedBox(height: 80),
-              ],
-            ),
-          ],
+                ],
+              ),
+              Column(
+                children: [
+                  if (voiceInput.hasSpeechEnough)
+                    PrimaryColorButton(
+                      width: double.infinity,
+                      height: 64,
+                      text: '次へ',
+                      onPressed: () async {
+                        // 全ての問題を出し切ったら回答ページに遷移するå
+                        // リストの長さと比較したいため、インデックス番号に+1する。
+                        if (listIndex.value == sentenceList.length - 1) {
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const AnswerPage()),
+                              (_) => false);
+                          ref.read(voiceInputNotifier.notifier).stopListening();
+                          listIndex.value = 0;
+                        } else {
+                          ref.read(voiceInputNotifier.notifier).initSpeech();
+                          listIndex.value++;
+                        }
+                      },
+                    )
+                  else
+                    const DisableButton(
+                      text: '音読してください',
+                      width: double.infinity,
+                      height: 64,
+                    ),
+                  const SizedBox(height: 80),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
