@@ -9,6 +9,7 @@ class Sentence with _$Sentence {
     @Default('') String text,
     @Default('') String properNoun,
     @Default(false) bool hasCollected,
+    @Default(false) bool giveUp,
   }) = _Sentence;
 
   factory Sentence.fromJson(Map<String, dynamic> json) =>
