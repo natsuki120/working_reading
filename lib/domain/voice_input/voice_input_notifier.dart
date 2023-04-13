@@ -11,7 +11,9 @@ class VoiceInputNotifier extends StateNotifier<VoiceInput> {
   final SpeechToText _speechToText = SpeechToText();
 
   void initSpeech() async {
-    state = state.copyWith(speechEnabled: await _speechToText.initialize());
+    state = state.copyWith(
+        speechEnabled: await _speechToText.initialize(),
+        hasSpeechEnough: false);
     startListening();
   }
 
