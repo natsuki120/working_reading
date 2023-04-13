@@ -16,18 +16,6 @@ class SentenceListNotifier extends StateNotifier<SentenceList> {
   }
 
   void changeSentenceToCollected({required String noun}) {
-    // // 該当する問題を取得
-    // Sentence applicableSentence = sentenceList
-    //     .firstWhere((element) => element.properNoun == sentence.properNoun);
-    // // 新しいクラスを作って
-    // Sentence collectedSentence = Sentence(
-    //   text: applicableSentence.text,
-    //   properNoun: applicableSentence.properNoun,
-    //   hasCollected: true,
-    // );
-    // // 交換する
-    // sentenceList.insert(sentenceList.indexOf(sentence), collectedSentence);
-
     List<Sentence> testList = state.sentenceList.map<Sentence>((e) {
       if (e.properNoun == noun) {
         e = e.copyWith(hasCollected: true);

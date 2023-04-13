@@ -17,8 +17,6 @@ class TrainingPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final nBackNum = ref.watch(nBackNumProvider);
-    //努力価値追求
-
     // 問題文のリストを検索するためのインデックス番号
     // 問題数を表示する時にも使う
     final listIndex = useState(0);
@@ -35,7 +33,14 @@ class TrainingPage extends HookConsumerWidget {
                 sentenceList: sentenceList, questionIndex: listIndex.value);
       });
       return;
-    }, [voiceInput]);
+    }, [voiceInput, listIndex]);
+
+    useEffect(() {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ref.read(voiceInputNotifier.notifier).initSpeech();
+      });
+      return;
+    }, [listIndex]);
 
     return Scaffold(
       appBar: AppBar(backgroundColor: backgroundColor),
@@ -102,9 +107,7 @@ class TrainingPage extends HookConsumerWidget {
                         ref.read(voiceInputNotifier.notifier).stopListening();
                         listIndex.value = 0;
                       } else {
-                        ref
-                            .read(voiceInputNotifier.notifier)
-                            .resetHasSpeechEnoughValue();
+                        ref.read(voiceInputNotifier.notifier).initSpeech();
                         listIndex.value++;
                       }
                     },
