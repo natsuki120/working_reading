@@ -20,6 +20,7 @@ Sentence _$SentenceFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Sentence {
+  bool get giveUp => throw _privateConstructorUsedError;
   String get text => throw _privateConstructorUsedError;
   String get properNoun => throw _privateConstructorUsedError;
   bool get hasCollected => throw _privateConstructorUsedError;
@@ -35,7 +36,7 @@ abstract class $SentenceCopyWith<$Res> {
   factory $SentenceCopyWith(Sentence value, $Res Function(Sentence) then) =
       _$SentenceCopyWithImpl<$Res, Sentence>;
   @useResult
-  $Res call({String text, String properNoun, bool hasCollected});
+  $Res call({bool giveUp, String text, String properNoun, bool hasCollected});
 }
 
 /// @nodoc
@@ -51,11 +52,16 @@ class _$SentenceCopyWithImpl<$Res, $Val extends Sentence>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? giveUp = null,
     Object? text = null,
     Object? properNoun = null,
     Object? hasCollected = null,
   }) {
     return _then(_value.copyWith(
+      giveUp: null == giveUp
+          ? _value.giveUp
+          : giveUp // ignore: cast_nullable_to_non_nullable
+              as bool,
       text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
@@ -79,7 +85,7 @@ abstract class _$$_SentenceCopyWith<$Res> implements $SentenceCopyWith<$Res> {
       __$$_SentenceCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String text, String properNoun, bool hasCollected});
+  $Res call({bool giveUp, String text, String properNoun, bool hasCollected});
 }
 
 /// @nodoc
@@ -93,11 +99,16 @@ class __$$_SentenceCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? giveUp = null,
     Object? text = null,
     Object? properNoun = null,
     Object? hasCollected = null,
   }) {
     return _then(_$_Sentence(
+      giveUp: null == giveUp
+          ? _value.giveUp
+          : giveUp // ignore: cast_nullable_to_non_nullable
+              as bool,
       text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
@@ -118,11 +129,17 @@ class __$$_SentenceCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Sentence with DiagnosticableTreeMixin implements _Sentence {
   const _$_Sentence(
-      {this.text = '', this.properNoun = '', this.hasCollected = false});
+      {this.giveUp = false,
+      this.text = '',
+      this.properNoun = '',
+      this.hasCollected = false});
 
   factory _$_Sentence.fromJson(Map<String, dynamic> json) =>
       _$$_SentenceFromJson(json);
 
+  @override
+  @JsonKey()
+  final bool giveUp;
   @override
   @JsonKey()
   final String text;
@@ -135,7 +152,7 @@ class _$_Sentence with DiagnosticableTreeMixin implements _Sentence {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Sentence(text: $text, properNoun: $properNoun, hasCollected: $hasCollected)';
+    return 'Sentence(giveUp: $giveUp, text: $text, properNoun: $properNoun, hasCollected: $hasCollected)';
   }
 
   @override
@@ -143,6 +160,7 @@ class _$_Sentence with DiagnosticableTreeMixin implements _Sentence {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'Sentence'))
+      ..add(DiagnosticsProperty('giveUp', giveUp))
       ..add(DiagnosticsProperty('text', text))
       ..add(DiagnosticsProperty('properNoun', properNoun))
       ..add(DiagnosticsProperty('hasCollected', hasCollected));
@@ -153,6 +171,7 @@ class _$_Sentence with DiagnosticableTreeMixin implements _Sentence {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Sentence &&
+            (identical(other.giveUp, giveUp) || other.giveUp == giveUp) &&
             (identical(other.text, text) || other.text == text) &&
             (identical(other.properNoun, properNoun) ||
                 other.properNoun == properNoun) &&
@@ -162,7 +181,8 @@ class _$_Sentence with DiagnosticableTreeMixin implements _Sentence {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, text, properNoun, hasCollected);
+  int get hashCode =>
+      Object.hash(runtimeType, giveUp, text, properNoun, hasCollected);
 
   @JsonKey(ignore: true)
   @override
@@ -180,12 +200,15 @@ class _$_Sentence with DiagnosticableTreeMixin implements _Sentence {
 
 abstract class _Sentence implements Sentence {
   const factory _Sentence(
-      {final String text,
+      {final bool giveUp,
+      final String text,
       final String properNoun,
       final bool hasCollected}) = _$_Sentence;
 
   factory _Sentence.fromJson(Map<String, dynamic> json) = _$_Sentence.fromJson;
 
+  @override
+  bool get giveUp;
   @override
   String get text;
   @override

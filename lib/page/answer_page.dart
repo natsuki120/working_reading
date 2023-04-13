@@ -69,14 +69,25 @@ class AnswerPage extends HookConsumerWidget {
                                 '問$i. ',
                                 style: title1Regular(blackSecondary),
                               ),
-                              Text(
-                                sentenceListNotifier
-                                        .sentenceList[i - 1].hasCollected
-                                    ? sentenceListNotifier
-                                        .sentenceList[i - 1].properNoun
-                                    : '？？',
-                                style: title1Regular(blackSecondary),
-                              ),
+                              if (sentenceListNotifier
+                                  .sentenceList[i - 1].hasCollected)
+                                Text(
+                                  sentenceListNotifier
+                                      .sentenceList[i - 1].properNoun,
+                                  style: title1Regular(blackSecondary),
+                                ),
+                              if (sentenceListNotifier
+                                  .sentenceList[i - 1].giveUp)
+                                Text(
+                                  sentenceListNotifier
+                                      .sentenceList[i - 1].properNoun,
+                                  style: title1Regular(Colors.red),
+                                ),
+                              if (!sentenceListNotifier
+                                      .sentenceList[i - 1].hasCollected &&
+                                  !sentenceListNotifier
+                                      .sentenceList[i - 1].giveUp)
+                                Text('？？', style: title1Regular(blackSecondary))
                             ],
                           ),
                           const SizedBox(height: 64),
@@ -119,7 +130,41 @@ class AnswerPage extends HookConsumerWidget {
                         side: BorderSide(color: primary),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () async {
+                      ref
+                          .read(sentenceListNotifierProvider.notifier)
+                          .displayAllAnswer();
+                      //TODO この部分は関数化する
+                      await Future.delayed(const Duration(seconds: 1));
+                      focusNode.unfocus();
+                      await Future.delayed(const Duration(seconds: 1));
+                      ref
+                          .read(resultNotifier.notifier)
+                          .aggregateResultFromEachSentence(ref
+                              .watch(sentenceListNotifierProvider.notifier)
+                              .state
+                              .sentenceList);
+                      ref
+                          .read(resultListNotifier.notifier)
+                          .state
+                          .add(ref.watch(resultNotifier));
+                      if (ref.watch(trainingNum) == 2) {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (_) => const ResultPage()),
+                        );
+                        ref.read(trainingNum.notifier).state = 1;
+                      } else {
+                        ref
+                            .read(sentenceListNotifierProvider.notifier)
+                            .fetchRandomSentenceToUseQuestion(num: nBackNum);
+                        ref.read(trainingNum.notifier).state++;
+                        ref.read(voiceInputNotifier.notifier).initSpeech();
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (_) => const TrainingPage()),
+                        );
+                      }
+                    },
                     child: Text(
                       'ギブアップ',
                       style: bodyBold(primary),
