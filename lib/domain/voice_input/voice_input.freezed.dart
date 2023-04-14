@@ -23,6 +23,7 @@ mixin _$VoiceInput {
   String get lastWord => throw _privateConstructorUsedError;
   bool get speechEnabled => throw _privateConstructorUsedError;
   bool get hasSpeechEnough => throw _privateConstructorUsedError;
+  double get voiceIndicatorValue => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +37,11 @@ abstract class $VoiceInputCopyWith<$Res> {
           VoiceInput value, $Res Function(VoiceInput) then) =
       _$VoiceInputCopyWithImpl<$Res, VoiceInput>;
   @useResult
-  $Res call({String lastWord, bool speechEnabled, bool hasSpeechEnough});
+  $Res call(
+      {String lastWord,
+      bool speechEnabled,
+      bool hasSpeechEnough,
+      double voiceIndicatorValue});
 }
 
 /// @nodoc
@@ -55,6 +60,7 @@ class _$VoiceInputCopyWithImpl<$Res, $Val extends VoiceInput>
     Object? lastWord = null,
     Object? speechEnabled = null,
     Object? hasSpeechEnough = null,
+    Object? voiceIndicatorValue = null,
   }) {
     return _then(_value.copyWith(
       lastWord: null == lastWord
@@ -69,6 +75,10 @@ class _$VoiceInputCopyWithImpl<$Res, $Val extends VoiceInput>
           ? _value.hasSpeechEnough
           : hasSpeechEnough // ignore: cast_nullable_to_non_nullable
               as bool,
+      voiceIndicatorValue: null == voiceIndicatorValue
+          ? _value.voiceIndicatorValue
+          : voiceIndicatorValue // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -81,7 +91,11 @@ abstract class _$$_VoiceInputCopyWith<$Res>
       __$$_VoiceInputCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String lastWord, bool speechEnabled, bool hasSpeechEnough});
+  $Res call(
+      {String lastWord,
+      bool speechEnabled,
+      bool hasSpeechEnough,
+      double voiceIndicatorValue});
 }
 
 /// @nodoc
@@ -98,6 +112,7 @@ class __$$_VoiceInputCopyWithImpl<$Res>
     Object? lastWord = null,
     Object? speechEnabled = null,
     Object? hasSpeechEnough = null,
+    Object? voiceIndicatorValue = null,
   }) {
     return _then(_$_VoiceInput(
       lastWord: null == lastWord
@@ -112,6 +127,10 @@ class __$$_VoiceInputCopyWithImpl<$Res>
           ? _value.hasSpeechEnough
           : hasSpeechEnough // ignore: cast_nullable_to_non_nullable
               as bool,
+      voiceIndicatorValue: null == voiceIndicatorValue
+          ? _value.voiceIndicatorValue
+          : voiceIndicatorValue // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -122,7 +141,8 @@ class _$_VoiceInput with DiagnosticableTreeMixin implements _VoiceInput {
   const _$_VoiceInput(
       {this.lastWord = '',
       this.speechEnabled = false,
-      this.hasSpeechEnough = false});
+      this.hasSpeechEnough = false,
+      this.voiceIndicatorValue = 0.0});
 
   factory _$_VoiceInput.fromJson(Map<String, dynamic> json) =>
       _$$_VoiceInputFromJson(json);
@@ -136,10 +156,13 @@ class _$_VoiceInput with DiagnosticableTreeMixin implements _VoiceInput {
   @override
   @JsonKey()
   final bool hasSpeechEnough;
+  @override
+  @JsonKey()
+  final double voiceIndicatorValue;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'VoiceInput(lastWord: $lastWord, speechEnabled: $speechEnabled, hasSpeechEnough: $hasSpeechEnough)';
+    return 'VoiceInput(lastWord: $lastWord, speechEnabled: $speechEnabled, hasSpeechEnough: $hasSpeechEnough, voiceIndicatorValue: $voiceIndicatorValue)';
   }
 
   @override
@@ -149,7 +172,8 @@ class _$_VoiceInput with DiagnosticableTreeMixin implements _VoiceInput {
       ..add(DiagnosticsProperty('type', 'VoiceInput'))
       ..add(DiagnosticsProperty('lastWord', lastWord))
       ..add(DiagnosticsProperty('speechEnabled', speechEnabled))
-      ..add(DiagnosticsProperty('hasSpeechEnough', hasSpeechEnough));
+      ..add(DiagnosticsProperty('hasSpeechEnough', hasSpeechEnough))
+      ..add(DiagnosticsProperty('voiceIndicatorValue', voiceIndicatorValue));
   }
 
   @override
@@ -162,13 +186,15 @@ class _$_VoiceInput with DiagnosticableTreeMixin implements _VoiceInput {
             (identical(other.speechEnabled, speechEnabled) ||
                 other.speechEnabled == speechEnabled) &&
             (identical(other.hasSpeechEnough, hasSpeechEnough) ||
-                other.hasSpeechEnough == hasSpeechEnough));
+                other.hasSpeechEnough == hasSpeechEnough) &&
+            (identical(other.voiceIndicatorValue, voiceIndicatorValue) ||
+                other.voiceIndicatorValue == voiceIndicatorValue));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, lastWord, speechEnabled, hasSpeechEnough);
+  int get hashCode => Object.hash(runtimeType, lastWord, speechEnabled,
+      hasSpeechEnough, voiceIndicatorValue);
 
   @JsonKey(ignore: true)
   @override
@@ -188,7 +214,8 @@ abstract class _VoiceInput implements VoiceInput {
   const factory _VoiceInput(
       {final String lastWord,
       final bool speechEnabled,
-      final bool hasSpeechEnough}) = _$_VoiceInput;
+      final bool hasSpeechEnough,
+      final double voiceIndicatorValue}) = _$_VoiceInput;
 
   factory _VoiceInput.fromJson(Map<String, dynamic> json) =
       _$_VoiceInput.fromJson;
@@ -199,6 +226,8 @@ abstract class _VoiceInput implements VoiceInput {
   bool get speechEnabled;
   @override
   bool get hasSpeechEnough;
+  @override
+  double get voiceIndicatorValue;
   @override
   @JsonKey(ignore: true)
   _$$_VoiceInputCopyWith<_$_VoiceInput> get copyWith =>

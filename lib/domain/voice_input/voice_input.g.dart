@@ -11,6 +11,8 @@ _$_VoiceInput _$$_VoiceInputFromJson(Map<String, dynamic> json) =>
       lastWord: json['lastWord'] as String? ?? '',
       speechEnabled: json['speechEnabled'] as bool? ?? false,
       hasSpeechEnough: json['hasSpeechEnough'] as bool? ?? false,
+      voiceIndicatorValue:
+          (json['voiceIndicatorValue'] as num?)?.toDouble() ?? 0.0,
     );
 
 Map<String, dynamic> _$$_VoiceInputToJson(_$_VoiceInput instance) =>
@@ -18,4 +20,5 @@ Map<String, dynamic> _$$_VoiceInputToJson(_$_VoiceInput instance) =>
       'lastWord': instance.lastWord,
       'speechEnabled': instance.speechEnabled,
       'hasSpeechEnough': instance.hasSpeechEnough,
+      'voiceIndicatorValue': instance.voiceIndicatorValue,
     };
