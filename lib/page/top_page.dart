@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:working_reading/color_config.dart';
 import 'package:working_reading/component/primary_color_button.dart';
 import 'package:working_reading/domain/famous_saying/famous_saying.dart';
-import 'package:working_reading/domain/sentence/sentence_notifier.dart';
+import 'package:working_reading/domain/sentence_list/sentence_list_notifier.dart';
 import 'package:working_reading/font_config.dart';
 import 'package:working_reading/page/training_page.dart';
 
