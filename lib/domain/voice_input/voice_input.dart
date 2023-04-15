@@ -9,6 +9,7 @@ class VoiceInput with _$VoiceInput {
     @Default('') String lastWord,
     @Default(false) bool speechEnabled,
     @Default(false) bool hasSpeechEnough,
+    @Default(0.0) double voiceIndicatorValue,
   }) = _VoiceInput;
 
   factory VoiceInput.fromJson(Map<String, dynamic> json) =>

@@ -8,7 +8,7 @@ import 'package:working_reading/domain/voice_input/voice_input_notifier.dart';
 import 'package:working_reading/font_config.dart';
 import 'package:working_reading/page/top_page.dart';
 import 'package:working_reading/page/training_page.dart';
-import '../domain/sentence/sentence_notifier.dart';
+import '../domain/sentence_list/sentence_list_notifier.dart';
 
 class ResultPage extends ConsumerWidget {
   const ResultPage({Key? key}) : super(key: key);

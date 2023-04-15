@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 import 'package:working_reading/component/disable_button.dart';
 import 'package:working_reading/component/primary_color_button.dart';
-import 'package:working_reading/domain/sentence/sentence_notifier.dart';
+import 'package:working_reading/domain/sentence_list/sentence_list_notifier.dart';
 import 'package:working_reading/domain/voice_input/voice_input_notifier.dart';
 import 'package:working_reading/page/answer_page.dart';
 import 'package:working_reading/page/top_page.dart';
@@ -27,25 +27,34 @@ class TrainingPage extends HookConsumerWidget {
 
     useEffect(() {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        ref
-            .watch(voiceInputNotifier.notifier)
-            .makeTappableNextButtonIfSpeechEnoughThan(
-                sentenceList: sentenceList, questionIndex: listIndex.value);
+        ref.watch(voiceInputNotifier.notifier)
+          ..makeTappableNextButtonIfSpeechEnoughThan(
+              sentenceList: sentenceList, questionIndex: listIndex.value)
+          ..getVoiceIndicatorValue(
+              sentenceList: sentenceList, questionIndex: listIndex.value);
       });
       return;
-    }, [voiceInput, listIndex]);
+    }, [voiceInput, listIndex.value]);
 
     useEffect(() {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        ref.read(voiceInputNotifier.notifier).initSpeech();
+        ref.watch(voiceInputNotifier.notifier).initSpeech();
       });
       return;
-    }, [listIndex]);
+    }, []);
+
+    useEffect(() {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ref.watch(voiceInputNotifier.notifier).initSpeech();
+      });
+      return;
+    }, [listIndex.value]);
 
     return WillPopScope(
       onWillPop: () async {
         ref.read(voiceInputNotifier.notifier).stopListening();
         Navigator.popUntil(context, (route) => route.isFirst);
+        listIndex.value = 0;
         return false;
       },
       child: Scaffold(
@@ -94,6 +103,13 @@ class TrainingPage extends HookConsumerWidget {
                   )
                 ],
               ),
+              SizedBox(
+                width: double.infinity,
+                child: LinearProgressIndicator(
+                  color: secondary,
+                  value: voiceInput.voiceIndicatorValue,
+                ),
+              ),
               Column(
                 children: [
                   if (voiceInput.hasSpeechEnough)
@@ -113,7 +129,6 @@ class TrainingPage extends HookConsumerWidget {
                           ref.read(voiceInputNotifier.notifier).stopListening();
                           listIndex.value = 0;
                         } else {
-                          ref.read(voiceInputNotifier.notifier).initSpeech();
                           listIndex.value++;
                         }
                       },
