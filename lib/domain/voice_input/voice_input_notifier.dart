@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:noise_meter/noise_meter.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
@@ -13,8 +11,6 @@ class VoiceInputNotifier extends StateNotifier<VoiceInput> {
   }
 
   final SpeechToText _speechToText = SpeechToText();
-  StreamSubscription<NoiseReading>? noiseSubscription;
-  final NoiseMeter noiseMeter = NoiseMeter();
 
   void initSpeech() async {
     state = state.copyWith(speechEnabled: await _speechToText.initialize());
@@ -24,7 +20,6 @@ class VoiceInputNotifier extends StateNotifier<VoiceInput> {
   void startListening() async {
     try {
       await _speechToText.listen(onResult: onSpeechResult, localeId: 'ja-JP');
-      noiseSubscription = noiseMeter.noiseStream.listen(onData);
       state = state.copyWith(hasSpeechEnough: false);
     } catch (e) {
       print(e);
@@ -33,15 +28,7 @@ class VoiceInputNotifier extends StateNotifier<VoiceInput> {
 
   void stopListening() async {
     await _speechToText.stop();
-    try {
-      if (noiseSubscription != null) {
-        noiseSubscription!.cancel();
-        noiseSubscription = null;
-      }
-      state = state.copyWith(speechEnabled: false);
-    } catch (err) {
-      print('stopRecorder error: $err');
-    }
+    state = state.copyWith(speechEnabled: false);
   }
 
   void onSpeechResult(SpeechRecognitionResult result) {
@@ -77,10 +64,30 @@ class VoiceInputNotifier extends StateNotifier<VoiceInput> {
     state = state.copyWith(hasSpeechEnough: false);
   }
 
-  void getVoiceIndicatorValue() {
-    noiseMeter.noiseStream.listen((NoiseReading noiseReading) {
-      state = state.copyWith(voiceIndicatorValue: noiseReading.meanDecibel);
-    });
+  void getVoiceIndicatorValue(
+      {required List<Sentence> sentenceList, required int questionIndex}) {
+    int allSentenceLength = 0;
+    if (questionIndex == 0) {
+      state = state.copyWith(
+        voiceIndicatorValue:
+            state.lastWord.length / sentenceList[0].text.length,
+      );
+    }
+    if (questionIndex != 0) {
+      for (int i = 0; i <= questionIndex; i++) {
+        allSentenceLength += sentenceList[i].text.length;
+      }
+      state = state.copyWith(
+        voiceIndicatorValue: state.lastWord.length / allSentenceLength,
+      );
+    }
+    if (state.hasSpeechEnough) {
+      state = state.copyWith(voiceIndicatorValue: 1);
+    }
+  }
+
+  void resetVoiceIndicatorValue() {
+    state = state.copyWith(voiceIndicatorValue: 0.0);
   }
 }
 
