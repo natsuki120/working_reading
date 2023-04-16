@@ -11,6 +11,8 @@ import 'package:working_reading/page/top_page.dart';
 import '../color_config.dart';
 import '../font_config.dart';
 
+final listIndexProvider = StateProvider.autoDispose((ref) => 0);
+
 class TrainingPage extends HookConsumerWidget {
   const TrainingPage({Key? key}) : super(key: key);
 
@@ -19,7 +21,7 @@ class TrainingPage extends HookConsumerWidget {
     final nBackNum = ref.watch(nBackNumProvider);
     // 問題文のリストを検索するためのインデックス番号
     // 問題数を表示する時にも使う
-    final listIndex = useState(0);
+    final listIndex = ref.watch(listIndexProvider);
     // 問題で表示する文章
     final sentenceList = ref.watch(sentenceListNotifierProvider).sentenceList;
 
@@ -27,18 +29,16 @@ class TrainingPage extends HookConsumerWidget {
 
     useEffect(() {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        ref.watch(voiceInputNotifier.notifier)
-          ..makeTappableNextButtonIfSpeechEnoughThan(
-              sentenceList: sentenceList, questionIndex: listIndex.value)
-          ..getVoiceIndicatorValue(
-              sentenceList: sentenceList, questionIndex: listIndex.value);
+        ref.watch(voiceInputNotifier.notifier).getVoiceIndicatorValue(
+            sentenceList: sentenceList, questionIndex: listIndex);
       });
       return;
-    }, [voiceInput, listIndex.value]);
+    }, [voiceInput]);
 
     useEffect(() {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         ref.watch(voiceInputNotifier.notifier).initSpeech();
+        // ref.read(voiceInputNotifier.notifier).resetHasSpeechEnoughValue();
       });
       return;
     }, []);
@@ -48,13 +48,13 @@ class TrainingPage extends HookConsumerWidget {
         ref.watch(voiceInputNotifier.notifier).initSpeech();
       });
       return;
-    }, [listIndex.value]);
+    }, [listIndex]);
 
     return WillPopScope(
       onWillPop: () async {
         ref.read(voiceInputNotifier.notifier).stopListening();
         Navigator.popUntil(context, (route) => route.isFirst);
-        listIndex.value = 0;
+        ref.read(listIndexProvider.notifier).state = 0;
         return false;
       },
       child: Scaffold(
@@ -79,7 +79,7 @@ class TrainingPage extends HookConsumerWidget {
                       ),
                       const SizedBox(width: 48),
                       Text(
-                        '問: ${listIndex.value + 1}/$nBackNum',
+                        '問: ${listIndex + 1}/$nBackNum',
                         style: displaySmall(
                           FontWeight.w300,
                           blackSecondary,
@@ -89,11 +89,11 @@ class TrainingPage extends HookConsumerWidget {
                   ),
                   const SizedBox(height: 32),
                   SubstringHighlight(
-                    text: sentenceList[listIndex.value].text,
+                    text: sentenceList[listIndex].text,
                     textStyle: bodyRegular(
                       blackSecondary,
                     ),
-                    term: sentenceList[listIndex.value].properNoun,
+                    term: sentenceList[listIndex].properNoun,
                     textStyleHighlight: bodyBold(blackPrimary),
                   ),
                   const SizedBox(height: 32),
@@ -120,16 +120,16 @@ class TrainingPage extends HookConsumerWidget {
                       onPressed: () async {
                         // 全ての問題を出し切ったら回答ページに遷移するå
                         // リストの長さと比較したいため、インデックス番号に+1する。
-                        if (listIndex.value == sentenceList.length - 1) {
+                        if (listIndex == sentenceList.length - 1) {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const AnswerPage()),
                           );
                           ref.read(voiceInputNotifier.notifier).stopListening();
-                          listIndex.value = 0;
+                          ref.read(listIndexProvider.notifier).state = 0;
                         } else {
-                          listIndex.value++;
+                          ref.read(listIndexProvider.notifier).state = 1;
                         }
                       },
                     )
