@@ -44,25 +44,6 @@ class VoiceInputNotifier extends StateNotifier<VoiceInput> {
     }
   }
 
-  // void makeTappableNextButtonIfSpeechEnoughThan(
-  //     {required List<Sentence> sentenceList, required int questionIndex}) {
-  //   int allSentenceLength = 0;
-  //
-  //   if (questionIndex == 0) {
-  //     if (state.lastWord.length > sentenceList[0].text.length - 10) {
-  //       state = state.copyWith(hasSpeechEnough: true);
-  //     }
-  //   }
-  //   if (questionIndex != 0) {
-  //     for (int i = 0; i <= questionIndex; i++) {
-  //       allSentenceLength += sentenceList[i].text.length;
-  //     }
-  //     if (state.lastWord.length > allSentenceLength - 10) {
-  //       state = state.copyWith(hasSpeechEnough: true);
-  //     }
-  //   }
-  // }
-
   void resetHasSpeechEnoughValue() {
     state = state.copyWith(hasSpeechEnough: false);
     print('ビジネスロジック側: ${state.hasSpeechEnough}');
@@ -70,7 +51,6 @@ class VoiceInputNotifier extends StateNotifier<VoiceInput> {
 
   void getVoiceIndicatorValue(
       {required List<Sentence> sentenceList, required int questionIndex}) {
-    int allSentenceLength = 0;
     if (questionIndex == 0) {
       state = state.copyWith(
         voiceIndicatorValue:
@@ -78,11 +58,10 @@ class VoiceInputNotifier extends StateNotifier<VoiceInput> {
       );
     }
     if (questionIndex != 0) {
-      for (int i = 0; i <= questionIndex; i++) {
-        allSentenceLength += sentenceList[i].text.length;
-      }
       state = state.copyWith(
-        voiceIndicatorValue: state.lastWord.length / allSentenceLength,
+        voiceIndicatorValue: (state.lastWord.length -
+                sentenceList[questionIndex - 1].text.length) /
+            sentenceList[questionIndex].text.length,
       );
     }
     if (state.voiceIndicatorValue >= 0.8) {
