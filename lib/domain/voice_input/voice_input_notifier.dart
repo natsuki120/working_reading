@@ -13,7 +13,10 @@ class VoiceInputNotifier extends StateNotifier<VoiceInput> {
   final SpeechToText _speechToText = SpeechToText();
 
   void initSpeech() async {
-    state = state.copyWith(speechEnabled: await _speechToText.initialize());
+    state = state.copyWith(
+        speechEnabled: await _speechToText.initialize(),
+        hasSpeechEnough: false,
+        lastWord: '');
     startListening();
   }
 
@@ -41,27 +44,28 @@ class VoiceInputNotifier extends StateNotifier<VoiceInput> {
     }
   }
 
-  void makeTappableNextButtonIfSpeechEnoughThan(
-      {required List<Sentence> sentenceList, required int questionIndex}) {
-    int allSentenceLength = 0;
-
-    if (questionIndex == 0) {
-      if (state.lastWord.length > sentenceList[0].text.length - 10) {
-        state = state.copyWith(hasSpeechEnough: true);
-      }
-    } else {
-      for (int i = 0; i <= questionIndex; i++) {
-        allSentenceLength += sentenceList[i].text.length;
-      }
-      if (state.lastWord.length > allSentenceLength - 10) {
-        print(allSentenceLength);
-        state = state.copyWith(hasSpeechEnough: true);
-      }
-    }
-  }
+  // void makeTappableNextButtonIfSpeechEnoughThan(
+  //     {required List<Sentence> sentenceList, required int questionIndex}) {
+  //   int allSentenceLength = 0;
+  //
+  //   if (questionIndex == 0) {
+  //     if (state.lastWord.length > sentenceList[0].text.length - 10) {
+  //       state = state.copyWith(hasSpeechEnough: true);
+  //     }
+  //   }
+  //   if (questionIndex != 0) {
+  //     for (int i = 0; i <= questionIndex; i++) {
+  //       allSentenceLength += sentenceList[i].text.length;
+  //     }
+  //     if (state.lastWord.length > allSentenceLength - 10) {
+  //       state = state.copyWith(hasSpeechEnough: true);
+  //     }
+  //   }
+  // }
 
   void resetHasSpeechEnoughValue() {
     state = state.copyWith(hasSpeechEnough: false);
+    print('ビジネスロジック側: ${state.hasSpeechEnough}');
   }
 
   void getVoiceIndicatorValue(
@@ -81,8 +85,8 @@ class VoiceInputNotifier extends StateNotifier<VoiceInput> {
         voiceIndicatorValue: state.lastWord.length / allSentenceLength,
       );
     }
-    if (state.hasSpeechEnough) {
-      state = state.copyWith(voiceIndicatorValue: 1);
+    if (state.voiceIndicatorValue >= 0.8) {
+      state = state.copyWith(voiceIndicatorValue: 1, hasSpeechEnough: true);
     }
   }
 
