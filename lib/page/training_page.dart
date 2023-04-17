@@ -98,16 +98,16 @@ class TrainingPage extends HookConsumerWidget {
                     textStyleHighlight: bodyBold(blackPrimary),
                   ),
                   const SizedBox(height: 32),
-                  Text(
-                    voiceInput.lastWord,
-                    style: bodyRegular(blackPrimary),
-                  )
+                  // Text(
+                  //   voiceInput.lastWord,
+                  //   style: bodyRegular(blackPrimary),
+                  // )
                 ],
               ),
               SizedBox(
                 width: double.infinity,
                 child: LinearProgressIndicator(
-                  color: secondary,
+                  color: primaryAccent,
                   value: voiceInput.voiceIndicatorValue,
                 ),
               ),
