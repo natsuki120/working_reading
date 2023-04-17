@@ -55,6 +55,7 @@ class TrainingPage extends HookConsumerWidget {
         ref.read(voiceInputNotifier.notifier).stopListening();
         Navigator.popUntil(context, (route) => route.isFirst);
         ref.read(listIndexProvider.notifier).state = 0;
+        ref.read(trainingNum.notifier).state = 1;
         return false;
       },
       child: Scaffold(
