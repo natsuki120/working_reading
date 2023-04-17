@@ -108,7 +108,7 @@ class AnswerPage extends HookConsumerWidget {
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: const BorderSide(
-                    color: secondary,
+                    color: primaryAccent,
                   ),
                 ),
                 border: OutlineInputBorder(
