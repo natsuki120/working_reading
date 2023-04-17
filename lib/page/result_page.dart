@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:working_reading/color_config.dart';
-import 'package:working_reading/component/secondary_color_button.dart';
+import 'package:working_reading/component/primary_color_button.dart';
 import 'package:working_reading/domain/result/result_notifier.dart';
 import 'package:working_reading/domain/voice_input/voice_input_notifier.dart';
 import 'package:working_reading/font_config.dart';
@@ -45,7 +45,7 @@ class ResultPage extends ConsumerWidget {
                         style: headerRegular(blackPrimary),
                       ),
                       circularStrokeCap: CircularStrokeCap.round,
-                      progressColor: primary,
+                      progressColor: primaryAccent,
                     ),
                   ],
                 ),
@@ -63,7 +63,7 @@ class ResultPage extends ConsumerWidget {
                         style: headerRegular(blackPrimary),
                       ),
                       circularStrokeCap: CircularStrokeCap.round,
-                      progressColor: primary,
+                      progressColor: primaryAccent,
                     ),
                   ],
                 ),
@@ -84,7 +84,7 @@ class ResultPage extends ConsumerWidget {
                     style: headerRegular(blackPrimary),
                   ),
                   circularStrokeCap: CircularStrokeCap.round,
-                  progressColor: primary,
+                  progressColor: primaryAccent,
                 ),
               ],
             ),
@@ -105,7 +105,7 @@ class ResultPage extends ConsumerWidget {
                     style: bodyRegular(blackPrimary),
                   ),
                 ),
-                SecondaryColorButton(
+                PrimaryColorButton(
                     width: 200,
                     height: 80,
                     text: 'リトライ',
@@ -120,7 +120,7 @@ class ResultPage extends ConsumerWidget {
                           builder: (_) => const TrainingPage(),
                         ),
                       );
-                    }),
+                    })
               ],
             ),
             const SizedBox(height: 96),

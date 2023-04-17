@@ -6,6 +6,7 @@ import 'package:working_reading/component/primary_color_button.dart';
 import 'package:working_reading/domain/famous_saying/famous_saying.dart';
 import 'package:working_reading/domain/sentence_list/sentence_list_notifier.dart';
 import 'package:working_reading/font_config.dart';
+import 'package:working_reading/page/how_to_play_page.dart';
 import 'package:working_reading/page/training_page.dart';
 
 final nBackNumProvider = StateProvider((ref) => 1);
@@ -103,17 +104,14 @@ class TopPage extends HookConsumerWidget {
                     const SizedBox(height: 16),
                     TextButton(
                       onPressed: () async {
-                        // try {
-                        //   for (Sentence sentence in testDataList) {
-                        //     await supabase.from("sentence").insert({
-                        //       "text": sentence.text,
-                        //       'properNoun': sentence.properNoun
-                        //     });
-                        //   }
-                        //   print('成功しました');
-                        // } catch (e) {
-                        //   print('Error: $e');
-                        // }
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) {
+                                return const HowToPlayPage();
+                              },
+                              fullscreenDialog: true),
+                        );
                       },
                       child: Text(
                         '遊び方',
