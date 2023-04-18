@@ -38,7 +38,6 @@ class TrainingPage extends HookConsumerWidget {
     useEffect(() {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         ref.watch(voiceInputNotifier.notifier).initSpeech();
-        // ref.read(voiceInputNotifier.notifier).resetHasSpeechEnoughValue();
       });
       return;
     }, []);
@@ -130,7 +129,7 @@ class TrainingPage extends HookConsumerWidget {
                           ref.read(voiceInputNotifier.notifier).stopListening();
                           ref.read(listIndexProvider.notifier).state = 0;
                         } else {
-                          ref.read(listIndexProvider.notifier).state = 1;
+                          ref.read(listIndexProvider.notifier).state += 1;
                         }
                       },
                     )
