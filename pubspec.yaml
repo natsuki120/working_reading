@@ -51,6 +51,11 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.13.0
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "images/Working Reading Logo.png"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -73,6 +78,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - .env
+    - images/Working Reading Logo.png
+    - images/Working Reading Logo Only head.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
