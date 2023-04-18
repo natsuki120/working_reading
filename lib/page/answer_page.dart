@@ -147,7 +147,7 @@ class AnswerPage extends HookConsumerWidget {
                       ref
                           .read(resultListNotifier.notifier)
                           .state
-                          .add(ref.watch(resultNotifier));
+                          .add(ref.read(resultNotifier.notifier).state);
                       if (ref.watch(trainingNum) == 2) {
                         Navigator.of(context).push(
                           MaterialPageRoute(builder: (_) => const ResultPage()),
@@ -234,7 +234,7 @@ class AnswerPage extends HookConsumerWidget {
                             ref
                                 .read(resultListNotifier.notifier)
                                 .state
-                                .add(ref.watch(resultNotifier));
+                                .add(ref.read(resultNotifier.notifier).state);
                             if (ref.watch(trainingNum) == 2) {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
