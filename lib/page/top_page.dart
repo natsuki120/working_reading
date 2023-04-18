@@ -32,12 +32,10 @@ class TopPage extends HookConsumerWidget {
                     Text('ワーキングリーディング', style: headerRegular(blackPrimary)),
                     const SizedBox(height: 32),
                     const SizedBox(height: 16),
-                    Container(
+                    SizedBox(
                       height: 200,
-                      decoration: const BoxDecoration(
-                        color: primary,
-                        shape: BoxShape.circle,
-                      ),
+                      child: Image.asset(
+                          'images/Working Reading Logo Only head.png'),
                     ),
                     const SizedBox(height: 48),
                     Column(
