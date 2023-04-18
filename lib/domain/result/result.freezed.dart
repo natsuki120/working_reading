@@ -20,9 +20,8 @@ Result _$ResultFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Result {
-  double get percent => throw _privateConstructorUsedError;
+  int get percent => throw _privateConstructorUsedError;
   List<bool> get correctList => throw _privateConstructorUsedError;
-  bool get isPassed => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +33,7 @@ abstract class $ResultCopyWith<$Res> {
   factory $ResultCopyWith(Result value, $Res Function(Result) then) =
       _$ResultCopyWithImpl<$Res, Result>;
   @useResult
-  $Res call({double percent, List<bool> correctList, bool isPassed});
+  $Res call({int percent, List<bool> correctList});
 }
 
 /// @nodoc
@@ -52,21 +51,16 @@ class _$ResultCopyWithImpl<$Res, $Val extends Result>
   $Res call({
     Object? percent = null,
     Object? correctList = null,
-    Object? isPassed = null,
   }) {
     return _then(_value.copyWith(
       percent: null == percent
           ? _value.percent
           : percent // ignore: cast_nullable_to_non_nullable
-              as double,
+              as int,
       correctList: null == correctList
           ? _value.correctList
           : correctList // ignore: cast_nullable_to_non_nullable
               as List<bool>,
-      isPassed: null == isPassed
-          ? _value.isPassed
-          : isPassed // ignore: cast_nullable_to_non_nullable
-              as bool,
     ) as $Val);
   }
 }
@@ -77,7 +71,7 @@ abstract class _$$_ResultCopyWith<$Res> implements $ResultCopyWith<$Res> {
       __$$_ResultCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({double percent, List<bool> correctList, bool isPassed});
+  $Res call({int percent, List<bool> correctList});
 }
 
 /// @nodoc
@@ -92,21 +86,16 @@ class __$$_ResultCopyWithImpl<$Res>
   $Res call({
     Object? percent = null,
     Object? correctList = null,
-    Object? isPassed = null,
   }) {
     return _then(_$_Result(
       percent: null == percent
           ? _value.percent
           : percent // ignore: cast_nullable_to_non_nullable
-              as double,
+              as int,
       correctList: null == correctList
           ? _value._correctList
           : correctList // ignore: cast_nullable_to_non_nullable
               as List<bool>,
-      isPassed: null == isPassed
-          ? _value.isPassed
-          : isPassed // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -115,9 +104,7 @@ class __$$_ResultCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Result with DiagnosticableTreeMixin implements _Result {
   const _$_Result(
-      {this.percent = 0,
-      final List<bool> correctList = const <bool>[],
-      this.isPassed = false})
+      {this.percent = 0, final List<bool> correctList = const <bool>[]})
       : _correctList = correctList;
 
   factory _$_Result.fromJson(Map<String, dynamic> json) =>
@@ -125,7 +112,7 @@ class _$_Result with DiagnosticableTreeMixin implements _Result {
 
   @override
   @JsonKey()
-  final double percent;
+  final int percent;
   final List<bool> _correctList;
   @override
   @JsonKey()
@@ -136,12 +123,8 @@ class _$_Result with DiagnosticableTreeMixin implements _Result {
   }
 
   @override
-  @JsonKey()
-  final bool isPassed;
-
-  @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Result(percent: $percent, correctList: $correctList, isPassed: $isPassed)';
+    return 'Result(percent: $percent, correctList: $correctList)';
   }
 
   @override
@@ -150,8 +133,7 @@ class _$_Result with DiagnosticableTreeMixin implements _Result {
     properties
       ..add(DiagnosticsProperty('type', 'Result'))
       ..add(DiagnosticsProperty('percent', percent))
-      ..add(DiagnosticsProperty('correctList', correctList))
-      ..add(DiagnosticsProperty('isPassed', isPassed));
+      ..add(DiagnosticsProperty('correctList', correctList));
   }
 
   @override
@@ -161,15 +143,13 @@ class _$_Result with DiagnosticableTreeMixin implements _Result {
             other is _$_Result &&
             (identical(other.percent, percent) || other.percent == percent) &&
             const DeepCollectionEquality()
-                .equals(other._correctList, _correctList) &&
-            (identical(other.isPassed, isPassed) ||
-                other.isPassed == isPassed));
+                .equals(other._correctList, _correctList));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, percent,
-      const DeepCollectionEquality().hash(_correctList), isPassed);
+  int get hashCode => Object.hash(
+      runtimeType, percent, const DeepCollectionEquality().hash(_correctList));
 
   @JsonKey(ignore: true)
   @override
@@ -186,19 +166,15 @@ class _$_Result with DiagnosticableTreeMixin implements _Result {
 }
 
 abstract class _Result implements Result {
-  const factory _Result(
-      {final double percent,
-      final List<bool> correctList,
-      final bool isPassed}) = _$_Result;
+  const factory _Result({final int percent, final List<bool> correctList}) =
+      _$_Result;
 
   factory _Result.fromJson(Map<String, dynamic> json) = _$_Result.fromJson;
 
   @override
-  double get percent;
+  int get percent;
   @override
   List<bool> get correctList;
-  @override
-  bool get isPassed;
   @override
   @JsonKey(ignore: true)
   _$$_ResultCopyWith<_$_Result> get copyWith =>
