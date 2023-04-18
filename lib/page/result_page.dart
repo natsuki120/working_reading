@@ -18,7 +18,7 @@ class ResultPage extends ConsumerWidget {
     final nBackNum = ref.watch(nBackNumProvider);
     final resultList = ref.watch(resultListNotifier);
     final allResult = (resultList[0].percent + resultList[1].percent) / 2;
-    bool isPassed = resultList[0].isPassed && resultList[1].isPassed;
+    bool isPassed() => allResult >= 70;
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
@@ -57,7 +57,7 @@ class ResultPage extends ConsumerWidget {
                       radius: 60.0,
                       lineWidth: 13.0,
                       animation: true,
-                      percent: resultList[0].percent / 100,
+                      percent: resultList[1].percent / 100,
                       center: Text(
                         '${resultList[1].percent}%',
                         style: headerRegular(blackPrimary),
@@ -89,7 +89,7 @@ class ResultPage extends ConsumerWidget {
               ],
             ),
             const SizedBox(height: 32),
-            if (isPassed)
+            if (isPassed())
               Text('合格！', style: title1Regular(blackSecondary))
             else
               Text('不合格', style: title1Regular(blackSecondary)),
@@ -98,8 +98,10 @@ class ResultPage extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 TextButton(
-                  onPressed: () =>
-                      Navigator.popUntil(context, (route) => route.isFirst),
+                  onPressed: () {
+                    Navigator.popUntil(context, (route) => route.isFirst);
+                    resultList.clear();
+                  },
                   child: Text(
                     'ホームに戻る',
                     style: bodyRegular(blackPrimary),
@@ -120,6 +122,7 @@ class ResultPage extends ConsumerWidget {
                           builder: (_) => const TrainingPage(),
                         ),
                       );
+                      resultList.clear();
                     })
               ],
             ),
