@@ -19,3 +19,7 @@ class Training with _$Training {
   factory Training.fromJson(Map<String, dynamic> json) =>
       _$TrainingFromJson(json);
 }
+
+abstract class ITrainingRepository {
+  Future<List<String>> fetchRandomSentenceToUseQuestion({required int num});
+}
