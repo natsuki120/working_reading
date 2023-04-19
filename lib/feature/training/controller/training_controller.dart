@@ -3,9 +3,12 @@ import 'package:noise_meter/noise_meter.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:working_reading/feature/training/domain/training.dart';
+import 'package:working_reading/feature/training/repository/training_repository_with_supabase.dart';
 
 class TrainingController extends StateNotifier<Training> {
-  TrainingController() : super(Training());
+  TrainingController({required this.trainingRepository}) : super(Training());
+
+  final ITrainingRepository trainingRepository;
 
   final SpeechToText _speechToText = SpeechToText();
 
@@ -68,4 +71,16 @@ class TrainingController extends StateNotifier<Training> {
   void resetVoiceIndicatorValue() {
     state = state.copyWith(voiceIndicatorValue: 0.0);
   }
+
+  Future<void> fetchRandomSentenceToUseQuestion({required int num}) async {
+    final result =
+        await trainingRepository.fetchRandomSentenceToUseQuestion(num: num);
+    state = state.copyWith(sentenceList: result);
+  }
 }
+
+final trainingController = StateNotifierProvider(
+  (ref) => TrainingController(
+    trainingRepository: TrainingRepositoryWithSupabase(),
+  ),
+);
