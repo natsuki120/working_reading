@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:substring_highlight/substring_highlight.dart';
-import 'package:working_reading/component/disable_button.dart';
 import 'package:working_reading/component/primary_color_button.dart';
 import 'package:working_reading/domain/sentence_list/sentence_list_notifier.dart';
 import 'package:working_reading/domain/voice_input/voice_input_notifier.dart';
@@ -53,59 +53,60 @@ class TrainingPage extends HookConsumerWidget {
       child: Scaffold(
         appBar: AppBar(backgroundColor: backgroundColor),
         backgroundColor: backgroundColor,
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'N: $nBackNum',
-                        style: displaySmall(
-                          FontWeight.w300,
-                          blackSecondary,
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'N: $nBackNum',
+                          style: displaySmall(
+                            FontWeight.w300,
+                            blackSecondary,
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 48),
-                      Text(
-                        '問: ${listIndex + 1}/$nBackNum',
-                        style: displaySmall(
-                          FontWeight.w300,
-                          blackSecondary,
+                        SizedBox(width: 48.h),
+                        Text(
+                          '問: ${listIndex + 1}/$nBackNum',
+                          style: displaySmall(
+                            FontWeight.w300,
+                            blackSecondary,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 32),
-                  SubstringHighlight(
-                    text: sentenceList[listIndex].text,
-                    textStyle: bodyRegular(
-                      blackSecondary,
+                      ],
                     ),
-                    term: sentenceList[listIndex].properNoun,
-                    textStyleHighlight: bodyBold(blackPrimary),
-                  ),
-                  const SizedBox(height: 32),
-                  // Text(
-                  //   voiceInput.lastWord,
-                  //   style: bodyRegular(blackPrimary),
-                  // )
-                ],
-              ),
-              SizedBox(
-                width: double.infinity,
-                child: LinearProgressIndicator(
-                  color: primaryAccent,
-                  value: voiceInput.voiceIndicatorValue,
+                    SizedBox(height: 32.h),
+                    SubstringHighlight(
+                      text: sentenceList[listIndex].text,
+                      textStyle: bodyRegular(
+                        blackSecondary,
+                      ),
+                      term: sentenceList[listIndex].properNoun,
+                      textStyleHighlight: bodyBold(blackPrimary),
+                    ),
+                    SizedBox(height: 32.h),
+                    // Text(
+                    //   voiceInput.lastWord,
+                    //   style: bodyRegular(blackPrimary),
+                    // )
+                  ],
                 ),
-              ),
-              Column(
-                children: [
-                  if (voiceInput.hasSpeechEnough)
+                SizedBox(
+                  width: double.infinity,
+                  child: LinearProgressIndicator(
+                    color: primaryAccent,
+                    value: voiceInput.voiceIndicatorValue,
+                  ),
+                ),
+                Column(
+                  children: [
+                    // if (voiceInput.hasSpeechEnough)
                     PrimaryColorButton(
                       width: double.infinity,
                       height: 64,
@@ -125,17 +126,18 @@ class TrainingPage extends HookConsumerWidget {
                           ref.read(listIndexProvider.notifier).state += 1;
                         }
                       },
-                    )
-                  else
-                    const DisableButton(
-                      text: '音読してください',
-                      width: double.infinity,
-                      height: 64,
+                      //   )
+                      // else
+                      //   const DisableButton(
+                      //     text: '音読してください',
+                      //     width: double.infinity,
+                      //     height: 64,
                     ),
-                  const SizedBox(height: 80),
-                ],
-              ),
-            ],
+                    SizedBox(height: 68.h),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
