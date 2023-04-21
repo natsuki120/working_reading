@@ -1,126 +1,82 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:working_reading/color_config.dart';
 import 'package:working_reading/component/primary_color_button.dart';
-import 'package:working_reading/domain/famous_saying/famous_saying.dart';
-import 'package:working_reading/domain/sentence_list/sentence_list_notifier.dart';
 import 'package:working_reading/font_config.dart';
-import 'package:working_reading/page/error_page.dart';
 import 'package:working_reading/page/training_page.dart';
 
-import 'how_to_play_page.dart';
-
-final nBackNumProvider = StateProvider((ref) => 1);
-
-class TopPage extends HookConsumerWidget {
+class TopPage extends StatelessWidget {
   const TopPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final famousSaying = ref.watch(fetchRandomFamousSaying);
-    final nBackNum = ref.watch(nBackNumProvider);
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
         backgroundColor: backgroundColor,
       ),
-      body: famousSaying.when(
-          data: (data) => Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  children: [
-                    const SizedBox(height: 16),
-                    Text('ワーキングリーディング', style: headerRegular(blackPrimary)),
-                    const SizedBox(height: 32),
-                    const SizedBox(height: 16),
-                    SizedBox(
-                      height: 200,
-                      child: Image.asset(
-                          'images/Working Reading Logo Only head.png'),
-                    ),
-                    const SizedBox(height: 48),
-                    Column(
-                      children: [
-                        Text(
-                          '${data.content}\n',
-                          style: bodyRegular(blackSecondary),
-                        ),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: Text(
-                            data.author,
-                            style: bodyRegular(blackSecondary),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 48),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'N = ',
-                          style: bodyRegular(blackSecondary),
-                        ),
-                        const SizedBox(width: 16),
-                        DropdownButton(
-                          items: List.generate(
-                            6,
-                            (index) => DropdownMenuItem<int>(
-                              value: index + 1,
-                              child: Text('${index + 1}'),
-                            ),
-                          ),
-                          onChanged: (int? value) {
-                            ref.read(nBackNumProvider.notifier).state = value!;
-                          },
-                          value: nBackNum,
-                        ),
-                      ],
-                    ),
-                    const Spacer(),
-                    PrimaryColorButton(
-                      width: double.infinity,
-                      height: 64,
-                      text: '始める',
-                      onPressed: () async {
-                        await ref
-                            .read(sentenceListNotifierProvider.notifier)
-                            .fetchRandomSentenceToUseQuestion(num: nBackNum);
-                        EasyLoading.dismiss();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) {
-                              return const TrainingPage();
-                            },
-                          ),
-                        );
-                      },
-                    ),
-                    const SizedBox(height: 16),
-                    TextButton(
-                      onPressed: () async {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) {
-                                return const HowToPlayPage();
-                              },
-                              fullscreenDialog: true),
-                        );
-                      },
-                      child: Text(
-                        '遊び方',
-                        style: bodyRegular(blackSecondary),
-                      ),
-                    ),
-                  ],
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            children: [
+              SizedBox(height: 16.h),
+              Text('ワーキングリーディング', style: headerRegular(blackPrimary)),
+              SizedBox(height: 32.h),
+              SizedBox(height: 16.h),
+              Container(
+                height: 200,
+                decoration: const BoxDecoration(
+                  color: primary,
+                  shape: BoxShape.circle,
                 ),
               ),
-          error: (err, stack) => ErrorPage(errorMessage: err.toString()),
-          loading: () => const Center(child: CircularProgressIndicator())),
+              SizedBox(height: 48.h),
+              Text(
+                'ここに適当な名言的なの載せるここに適当な名言的なの載せるここにイタリックにする',
+                style: bodyRegular(blackSecondary),
+              ),
+              SizedBox(height: 48.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'N = ',
+                    style: bodyRegular(blackSecondary),
+                  ),
+                  const SizedBox(width: 16),
+                  Container(
+                    height: 39.h,
+                    width: 39.w,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: white,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 48.h),
+              PrimaryColorButton(
+                width: double.infinity,
+                height: 64,
+                text: '始める',
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const TrainingPage()),
+                ),
+              ),
+              SizedBox(height: 16.h),
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  '遊び方',
+                  style: bodyRegular(blackSecondary),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

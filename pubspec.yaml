@@ -47,11 +47,16 @@ dependencies:
   speech_to_text: ^6.1.1
   noise_meter: ^3.2.0
   webview_flutter: ^4.0.7
+  responsive_framework: ^1.0.0
+  firebase_core: ^2.10.0
+  flutter_screenutil: ^5.7.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: ^0.13.0
+  monarch: ^3.0.0
+  build_runner: ^2.1.11
 flutter_icons:
   android: true
   ios: true
