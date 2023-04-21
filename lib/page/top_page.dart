@@ -6,6 +6,7 @@ import 'package:working_reading/component/primary_color_button.dart';
 import 'package:working_reading/domain/famous_saying/famous_saying.dart';
 import 'package:working_reading/domain/sentence_list/sentence_list_notifier.dart';
 import 'package:working_reading/font_config.dart';
+import 'package:working_reading/page/error_page.dart';
 import 'package:working_reading/page/training_page.dart';
 
 import 'how_to_play_page.dart';
@@ -84,7 +85,6 @@ class TopPage extends HookConsumerWidget {
                       height: 64,
                       text: '始める',
                       onPressed: () async {
-                        EasyLoading.show(status: '読み込み中');
                         await ref
                             .read(sentenceListNotifierProvider.notifier)
                             .fetchRandomSentenceToUseQuestion(num: nBackNum);
@@ -119,7 +119,7 @@ class TopPage extends HookConsumerWidget {
                   ],
                 ),
               ),
-          error: (err, stack) => Text(err.toString()),
+          error: (err, stack) => ErrorPage(errorMessage: err.toString()),
           loading: () => const Center(child: CircularProgressIndicator())),
     );
   }
