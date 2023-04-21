@@ -40,13 +40,6 @@ class TrainingPage extends HookConsumerWidget {
         ref.watch(voiceInputNotifier.notifier).initSpeech();
       });
       return;
-    }, []);
-
-    useEffect(() {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        ref.watch(voiceInputNotifier.notifier).initSpeech();
-      });
-      return;
     }, [listIndex]);
 
     return WillPopScope(
