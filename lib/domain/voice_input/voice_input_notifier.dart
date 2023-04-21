@@ -46,11 +46,11 @@ class VoiceInputNotifier extends StateNotifier<VoiceInput> {
 
   void resetHasSpeechEnoughValue() {
     state = state.copyWith(hasSpeechEnough: false);
-    print('ビジネスロジック側: ${state.hasSpeechEnough}');
   }
 
   void getVoiceIndicatorValue(
       {required List<Sentence> sentenceList, required int questionIndex}) {
+    int sentenceTextLength = 0;
     if (questionIndex == 0) {
       state = state.copyWith(
         voiceIndicatorValue:
@@ -58,9 +58,11 @@ class VoiceInputNotifier extends StateNotifier<VoiceInput> {
       );
     }
     if (questionIndex != 0) {
+      for (int i = 0; i < questionIndex; i++) {
+        sentenceTextLength += sentenceList[i].text.length;
+      }
       state = state.copyWith(
-        voiceIndicatorValue: (state.lastWord.length -
-                sentenceList[questionIndex - 1].text.length) /
+        voiceIndicatorValue: (state.lastWord.length - sentenceTextLength) /
             sentenceList[questionIndex].text.length,
       );
     }
