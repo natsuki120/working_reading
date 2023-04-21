@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:working_reading/page/error_page.dart';
 import 'package:working_reading/page/top_page.dart';
 
 Future<void> main() async {
@@ -24,7 +24,12 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(useMaterial3: true),
-        home: const TopPage(),
-        builder: EasyLoading.init());
+        builder: (BuildContext context, Widget? widget) {
+          ErrorWidget.builder = (FlutterErrorDetails errorDetails) {
+            return const ErrorPage(errorMessage: 'errorDetails');
+          };
+          return widget!;
+        },
+        home: TopPage());
   }
 }
