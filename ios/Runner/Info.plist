@@ -48,8 +48,8 @@
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>NSSpeechRecognitionUsageDescription</key>
-    <string>”アプリが音声認識を使用する理由”</string>
+    <string>”音読した内容を処理するため”</string>
     <key>NSMicrophoneUsageDescription</key>
-    <string>”アプリがマイクにアクセスする理由”</string>
+    <string>”音読した内容を処理するため”</string>
 </dict>
 </plist>
