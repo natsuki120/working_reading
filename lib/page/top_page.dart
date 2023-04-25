@@ -7,7 +7,7 @@ import 'package:working_reading/domain/famous_saying/famous_saying.dart';
 import 'package:working_reading/domain/sentence_list/sentence_list_notifier.dart';
 import 'package:working_reading/font_config.dart';
 import 'package:working_reading/page/how_to_play_page.dart';
-import 'package:working_reading/page/training_page.dart';
+import 'package:working_reading/feature/training/training_page.dart';
 
 final nBackNumProvider = StateProvider((ref) => 1);
 
