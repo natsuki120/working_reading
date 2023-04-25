@@ -4,11 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 import 'package:working_reading/component/primary_color_button.dart';
+import 'package:working_reading/domain/result/result_notifier.dart';
 import 'package:working_reading/domain/sentence_list/sentence_list_notifier.dart';
 import 'package:working_reading/domain/voice_input/voice_input_notifier.dart';
 import 'package:working_reading/page/answer_page.dart';
 import 'package:working_reading/page/top_page.dart';
 import '../color_config.dart';
+import '../component/disable_button.dart';
 import '../font_config.dart';
 
 final listIndexProvider = StateProvider.autoDispose((ref) => 0);
@@ -41,6 +43,12 @@ class TrainingPage extends HookConsumerWidget {
       });
       return;
     }, [listIndex]);
+    useEffect(() {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ref.watch(voiceInputNotifier.notifier).startListening();
+      });
+      return;
+    }, [listIndex]);
 
     return WillPopScope(
       onWillPop: () async {
@@ -48,6 +56,7 @@ class TrainingPage extends HookConsumerWidget {
         Navigator.popUntil(context, (route) => route.isFirst);
         ref.read(listIndexProvider.notifier).state = 0;
         ref.read(trainingNum.notifier).state = 1;
+        ref.read(resultListNotifier.notifier).state.clear();
         return false;
       },
       child: Scaffold(
@@ -106,33 +115,35 @@ class TrainingPage extends HookConsumerWidget {
                 ),
                 Column(
                   children: [
-                    // if (voiceInput.hasSpeechEnough)
-                    PrimaryColorButton(
-                      width: double.infinity,
-                      height: 64,
-                      text: '次へ',
-                      onPressed: () async {
-                        // 全ての問題を出し切ったら回答ページに遷移するå
-                        // リストの長さと比較したいため、インデックス番号に+1する。
-                        if (listIndex == sentenceList.length - 1) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const AnswerPage()),
-                          );
-                          ref.read(voiceInputNotifier.notifier).stopListening();
-                          ref.read(listIndexProvider.notifier).state = 0;
-                        } else {
-                          ref.read(listIndexProvider.notifier).state += 1;
-                        }
-                      },
-                      //   )
-                      // else
-                      //   const DisableButton(
-                      //     text: '音読してください',
-                      //     width: double.infinity,
-                      //     height: 64,
-                    ),
+                    if (voiceInput.hasSpeechEnough)
+                      PrimaryColorButton(
+                        width: double.infinity,
+                        height: 64,
+                        text: '次へ',
+                        onPressed: () async {
+                          // 全ての問題を出し切ったら回答ページに遷移するå
+                          // リストの長さと比較したいため、インデックス番号に+1する。
+                          if (listIndex == sentenceList.length - 1) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const AnswerPage()),
+                            );
+                            ref
+                                .read(voiceInputNotifier.notifier)
+                                .stopListening();
+                            ref.read(listIndexProvider.notifier).state = 0;
+                          } else {
+                            ref.read(listIndexProvider.notifier).state += 1;
+                          }
+                        },
+                      )
+                    else
+                      const DisableButton(
+                        text: '音読してください',
+                        width: double.infinity,
+                        height: 64,
+                      ),
                     SizedBox(height: 68.h),
                   ],
                 ),
