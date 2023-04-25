@@ -52,14 +52,14 @@ class TrainingController extends StateNotifier<Training> {
     if (questionIndex == 0) {
       state = state.copyWith(
         voiceIndicatorValue:
-            state.lastWord.length / state.sentenceList[0].length,
+            state.lastWord.length / state.sentenceList[0].text.length,
       );
     }
     if (questionIndex != 0) {
       state = state.copyWith(
         voiceIndicatorValue: (state.lastWord.length -
-                state.sentenceList[questionIndex - 1].length) /
-            state.sentenceList[questionIndex].length,
+                state.sentenceList[questionIndex - 1].text.length) /
+            state.sentenceList[questionIndex].text.length,
       );
     }
 
@@ -77,9 +77,13 @@ class TrainingController extends StateNotifier<Training> {
         await trainingRepository.fetchRandomSentenceToUseQuestion(num: num);
     state = state.copyWith(sentenceList: result);
   }
+
+  void resetListIndex() {
+    state = state.copyWith(listIndex: 0);
+  }
 }
 
-final trainingController = StateNotifierProvider(
+final trainingController = StateNotifierProvider<TrainingController, Training>(
   (ref) => TrainingController(
     trainingRepository: TrainingRepositoryWithSupabase(),
   ),

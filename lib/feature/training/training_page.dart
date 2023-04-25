@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:working_reading/domain/voice_input/voice_input_notifier.dart';
 import 'package:working_reading/feature/training/component/reading_indicator.dart';
 import 'package:working_reading/feature/training/component/sentence_area.dart';
 import 'package:working_reading/feature/training/component/stateful_button.dart';
 import 'package:working_reading/feature/answer/answer_page.dart';
 import '../../color_config.dart';
+import 'controller/training_controller.dart';
 
 final listIndexProvider = StateProvider((ref) => 0);
 
@@ -16,9 +16,9 @@ class TrainingPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return WillPopScope(
       onWillPop: () async {
-        ref.read(voiceInputNotifier.notifier).stopListening();
+        ref.read(trainingController.notifier).stopListening();
         Navigator.popUntil(context, (route) => route.isFirst);
-        ref.read(listIndexProvider.notifier).state = 0;
+        ref.read(trainingController.notifier).resetListIndex();
         ref.read(trainingNum.notifier).state = 1;
         return false;
       },
