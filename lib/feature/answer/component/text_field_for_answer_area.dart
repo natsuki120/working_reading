@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:working_reading/feature/answer/controller/controller.dart';
 import 'package:working_reading/util/result/controller/controller.dart';
 import '../../../color_config.dart';
 import '../../../component/disable_button.dart';
@@ -10,19 +9,19 @@ import '../../../domain/sentence/sentence.dart';
 import '../../../domain/sentence_list/sentence_list_notifier.dart';
 import '../../../domain/voice_input/voice_input_notifier.dart';
 import '../../../font_config.dart';
-import '../answer_page.dart';
 import '../../../page/result_page.dart';
+import '../../top/controller/controller.dart';
 import '../../training/training_page.dart';
+import '../provider/provider.dart';
 
 class AnswerArea extends HookConsumerWidget {
   const AnswerArea({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final nBackNum = ref.watch(nBackNumProvider);
     final textEditingController = useTextEditingController(text: '');
-    // final sentenceListNotifier = ref.watch(sentenceListNotifierProvider);
-    final controller = ref.watch(answerController);
+    final sentenceList = ref.watch(sentenceListNotifierProvider).sentenceList;
+    final nBackNum = ref.watch(nBackNumProvider);
 
     FocusNode focusNode = useState(FocusNode()).value;
 
@@ -54,7 +53,7 @@ class AnswerArea extends HookConsumerWidget {
       } else {
         ref
             .read(sentenceListNotifierProvider.notifier)
-            .fetchRandomSentenceToUseQuestion(num: controller.nBackNum);
+            .fetchRandomSentenceToUseQuestion(num: nBackNum);
         ref.read(trainingNum.notifier).state++;
         ref.read(voiceInputNotifier.notifier).initSpeech();
         Navigator.of(context).push(
@@ -153,7 +152,7 @@ class AnswerArea extends HookConsumerWidget {
                     height: 64,
                     text: '採点する',
                     onPressed: () async {
-                      for (Sentence sentence in controller.sentenceList) {
+                      for (Sentence sentence in sentenceList) {
                         if (sentence.properNoun == textEditingController.text) {
                           qText = sentence.properNoun;
                         }
