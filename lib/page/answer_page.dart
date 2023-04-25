@@ -6,7 +6,6 @@ import 'package:working_reading/component/disable_button.dart';
 import 'package:working_reading/component/primary_color_button.dart';
 import 'package:working_reading/domain/result/result_notifier.dart';
 import 'package:working_reading/domain/sentence_list/sentence_list_notifier.dart';
-import 'package:working_reading/domain/voice_input/voice_input_notifier.dart';
 import 'package:working_reading/page/result_page.dart';
 import 'package:working_reading/page/top_page.dart';
 import 'package:working_reading/page/training_page.dart';
@@ -159,7 +158,6 @@ class AnswerPage extends HookConsumerWidget {
                               .read(sentenceListNotifierProvider.notifier)
                               .fetchRandomSentenceToUseQuestion(num: nBackNum);
                           ref.read(trainingNum.notifier).state++;
-                          ref.read(voiceInputNotifier.notifier).initSpeech();
                           Navigator.of(context).push(
                             MaterialPageRoute(
                                 builder: (_) => const TrainingPage()),

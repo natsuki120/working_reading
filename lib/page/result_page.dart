@@ -5,7 +5,7 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:working_reading/color_config.dart';
 import 'package:working_reading/component/primary_color_button.dart';
 import 'package:working_reading/domain/result/result_notifier.dart';
-import 'package:working_reading/domain/voice_input/voice_input_notifier.dart';
+
 import 'package:working_reading/font_config.dart';
 import 'package:working_reading/page/top_page.dart';
 import 'package:working_reading/page/training_page.dart';
@@ -113,7 +113,6 @@ class ResultPage extends ConsumerWidget {
                         await ref
                             .read(sentenceListNotifierProvider.notifier)
                             .fetchRandomSentenceToUseQuestion(num: nBackNum);
-                        ref.read(voiceInputNotifier.notifier).initSpeech();
                         Navigator.push(
                           context,
                           MaterialPageRoute(
