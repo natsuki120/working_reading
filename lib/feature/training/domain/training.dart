@@ -1,14 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:working_reading/domain/sentence/sentence.dart';
 part 'training.freezed.dart';
 part 'training.g.dart';
 
 @freezed
 class Training with _$Training {
   const factory Training({
-    @Default([]) List<String> sentenceList,
+    @Default([]) List<Sentence> sentenceList,
     @Default('') String lastWord,
-    @Default('') String properNoun,
     @Default(false) bool readingEnough,
     @Default(false) bool readingEnabled,
     @Default(0.0) double voiceIndicatorValue,
@@ -21,5 +21,5 @@ class Training with _$Training {
 }
 
 abstract class ITrainingRepository {
-  Future<List<String>> fetchRandomSentenceToUseQuestion({required int num});
+  Future<List<Sentence>> fetchRandomSentenceToUseQuestion({required int num});
 }

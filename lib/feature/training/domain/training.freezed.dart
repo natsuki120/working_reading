@@ -20,9 +20,8 @@ Training _$TrainingFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Training {
-  List<String> get sentenceList => throw _privateConstructorUsedError;
+  List<Sentence> get sentenceList => throw _privateConstructorUsedError;
   String get lastWord => throw _privateConstructorUsedError;
-  String get properNoun => throw _privateConstructorUsedError;
   bool get readingEnough => throw _privateConstructorUsedError;
   bool get readingEnabled => throw _privateConstructorUsedError;
   double get voiceIndicatorValue => throw _privateConstructorUsedError;
@@ -41,9 +40,8 @@ abstract class $TrainingCopyWith<$Res> {
       _$TrainingCopyWithImpl<$Res, Training>;
   @useResult
   $Res call(
-      {List<String> sentenceList,
+      {List<Sentence> sentenceList,
       String lastWord,
-      String properNoun,
       bool readingEnough,
       bool readingEnabled,
       double voiceIndicatorValue,
@@ -66,7 +64,6 @@ class _$TrainingCopyWithImpl<$Res, $Val extends Training>
   $Res call({
     Object? sentenceList = null,
     Object? lastWord = null,
-    Object? properNoun = null,
     Object? readingEnough = null,
     Object? readingEnabled = null,
     Object? voiceIndicatorValue = null,
@@ -77,14 +74,10 @@ class _$TrainingCopyWithImpl<$Res, $Val extends Training>
       sentenceList: null == sentenceList
           ? _value.sentenceList
           : sentenceList // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<Sentence>,
       lastWord: null == lastWord
           ? _value.lastWord
           : lastWord // ignore: cast_nullable_to_non_nullable
-              as String,
-      properNoun: null == properNoun
-          ? _value.properNoun
-          : properNoun // ignore: cast_nullable_to_non_nullable
               as String,
       readingEnough: null == readingEnough
           ? _value.readingEnough
@@ -118,9 +111,8 @@ abstract class _$$_TrainingCopyWith<$Res> implements $TrainingCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {List<String> sentenceList,
+      {List<Sentence> sentenceList,
       String lastWord,
-      String properNoun,
       bool readingEnough,
       bool readingEnabled,
       double voiceIndicatorValue,
@@ -141,7 +133,6 @@ class __$$_TrainingCopyWithImpl<$Res>
   $Res call({
     Object? sentenceList = null,
     Object? lastWord = null,
-    Object? properNoun = null,
     Object? readingEnough = null,
     Object? readingEnabled = null,
     Object? voiceIndicatorValue = null,
@@ -152,14 +143,10 @@ class __$$_TrainingCopyWithImpl<$Res>
       sentenceList: null == sentenceList
           ? _value._sentenceList
           : sentenceList // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<Sentence>,
       lastWord: null == lastWord
           ? _value.lastWord
           : lastWord // ignore: cast_nullable_to_non_nullable
-              as String,
-      properNoun: null == properNoun
-          ? _value.properNoun
-          : properNoun // ignore: cast_nullable_to_non_nullable
               as String,
       readingEnough: null == readingEnough
           ? _value.readingEnough
@@ -189,9 +176,8 @@ class __$$_TrainingCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Training with DiagnosticableTreeMixin implements _Training {
   const _$_Training(
-      {final List<String> sentenceList = const [],
+      {final List<Sentence> sentenceList = const [],
       this.lastWord = '',
-      this.properNoun = '',
       this.readingEnough = false,
       this.readingEnabled = false,
       this.voiceIndicatorValue = 0.0,
@@ -202,10 +188,10 @@ class _$_Training with DiagnosticableTreeMixin implements _Training {
   factory _$_Training.fromJson(Map<String, dynamic> json) =>
       _$$_TrainingFromJson(json);
 
-  final List<String> _sentenceList;
+  final List<Sentence> _sentenceList;
   @override
   @JsonKey()
-  List<String> get sentenceList {
+  List<Sentence> get sentenceList {
     if (_sentenceList is EqualUnmodifiableListView) return _sentenceList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_sentenceList);
@@ -214,9 +200,6 @@ class _$_Training with DiagnosticableTreeMixin implements _Training {
   @override
   @JsonKey()
   final String lastWord;
-  @override
-  @JsonKey()
-  final String properNoun;
   @override
   @JsonKey()
   final bool readingEnough;
@@ -235,7 +218,7 @@ class _$_Training with DiagnosticableTreeMixin implements _Training {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Training(sentenceList: $sentenceList, lastWord: $lastWord, properNoun: $properNoun, readingEnough: $readingEnough, readingEnabled: $readingEnabled, voiceIndicatorValue: $voiceIndicatorValue, listIndex: $listIndex, nBackNum: $nBackNum)';
+    return 'Training(sentenceList: $sentenceList, lastWord: $lastWord, readingEnough: $readingEnough, readingEnabled: $readingEnabled, voiceIndicatorValue: $voiceIndicatorValue, listIndex: $listIndex, nBackNum: $nBackNum)';
   }
 
   @override
@@ -245,7 +228,6 @@ class _$_Training with DiagnosticableTreeMixin implements _Training {
       ..add(DiagnosticsProperty('type', 'Training'))
       ..add(DiagnosticsProperty('sentenceList', sentenceList))
       ..add(DiagnosticsProperty('lastWord', lastWord))
-      ..add(DiagnosticsProperty('properNoun', properNoun))
       ..add(DiagnosticsProperty('readingEnough', readingEnough))
       ..add(DiagnosticsProperty('readingEnabled', readingEnabled))
       ..add(DiagnosticsProperty('voiceIndicatorValue', voiceIndicatorValue))
@@ -262,8 +244,6 @@ class _$_Training with DiagnosticableTreeMixin implements _Training {
                 .equals(other._sentenceList, _sentenceList) &&
             (identical(other.lastWord, lastWord) ||
                 other.lastWord == lastWord) &&
-            (identical(other.properNoun, properNoun) ||
-                other.properNoun == properNoun) &&
             (identical(other.readingEnough, readingEnough) ||
                 other.readingEnough == readingEnough) &&
             (identical(other.readingEnabled, readingEnabled) ||
@@ -282,7 +262,6 @@ class _$_Training with DiagnosticableTreeMixin implements _Training {
       runtimeType,
       const DeepCollectionEquality().hash(_sentenceList),
       lastWord,
-      properNoun,
       readingEnough,
       readingEnabled,
       voiceIndicatorValue,
@@ -305,9 +284,8 @@ class _$_Training with DiagnosticableTreeMixin implements _Training {
 
 abstract class _Training implements Training {
   const factory _Training(
-      {final List<String> sentenceList,
+      {final List<Sentence> sentenceList,
       final String lastWord,
-      final String properNoun,
       final bool readingEnough,
       final bool readingEnabled,
       final double voiceIndicatorValue,
@@ -317,11 +295,9 @@ abstract class _Training implements Training {
   factory _Training.fromJson(Map<String, dynamic> json) = _$_Training.fromJson;
 
   @override
-  List<String> get sentenceList;
+  List<Sentence> get sentenceList;
   @override
   String get lastWord;
-  @override
-  String get properNoun;
   @override
   bool get readingEnough;
   @override
