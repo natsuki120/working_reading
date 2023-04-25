@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:working_reading/color_config.dart';
+import 'package:working_reading/component/disable_button.dart';
 import 'package:working_reading/component/primary_color_button.dart';
 import 'package:working_reading/domain/famous_saying/famous_saying.dart';
 import 'package:working_reading/domain/sentence_list/sentence_list_notifier.dart';
@@ -13,11 +14,20 @@ import 'how_to_play_page.dart';
 
 final nBackNumProvider = StateProvider((ref) => 1);
 
+final hasTappedButton = StateProvider.autoDispose((ref) => false);
+
 class TopPage extends HookConsumerWidget {
   const TopPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    useEffect(() {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ref.watch(hasTappedButton.notifier).state = false;
+      });
+      return;
+    }, [ref.watch(sentenceListNotifierProvider)]);
+
     final famousSaying = ref.watch(fetchRandomFamousSaying);
     final nBackNum = ref.watch(nBackNumProvider);
     return Scaffold(
@@ -82,36 +92,43 @@ class TopPage extends HookConsumerWidget {
                         ],
                       ),
                       const Spacer(),
-                      PrimaryColorButton(
-                        width: double.infinity,
-                        height: 64,
-                        text: '始める',
-                        onPressed: () async {
-                          await ref
-                              .read(sentenceListNotifierProvider.notifier)
-                              .fetchRandomSentenceToUseQuestion(num: nBackNum);
-                          EasyLoading.dismiss();
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (BuildContext context) {
-                                return const TrainingPage();
+                      ref.watch(hasTappedButton)
+                          ? DisableButton(
+                              text: '読み込み中', width: double.infinity, height: 64)
+                          : PrimaryColorButton(
+                              width: double.infinity,
+                              height: 64,
+                              text: '始める',
+                              onPressed: () async {
+                                ref.watch(hasTappedButton.notifier).state =
+                                    true;
+                                await ref
+                                    .read(sentenceListNotifierProvider.notifier)
+                                    .fetchRandomSentenceToUseQuestion(
+                                        num: nBackNum);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) {
+                                      return const TrainingPage();
+                                    },
+                                  ),
+                                );
                               },
                             ),
-                          );
-                        },
-                      ),
                       SizedBox(height: 16.h),
                       TextButton(
                         onPressed: () async {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) {
-                                  return const HowToPlayPage();
-                                },
-                                fullscreenDialog: true),
-                          );
+                          if (!ref.watch(hasTappedButton)) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) {
+                                    return const HowToPlayPage();
+                                  },
+                                  fullscreenDialog: true),
+                            );
+                          }
                         },
                         child: Text(
                           '遊び方',
