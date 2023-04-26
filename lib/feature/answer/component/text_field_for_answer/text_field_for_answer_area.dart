@@ -69,6 +69,9 @@ class AnswerArea extends HookConsumerWidget {
                   ref
                       .read(utilSentenceListNotifier.notifier)
                       .displayAllAnswer();
+                  await Future.delayed(const Duration(seconds: 1));
+                  focusNode.unfocus();
+                  await Future.delayed(const Duration(seconds: 1));
                   callNextAction(ref: ref, context: context);
                 },
                 child: Text(
@@ -101,7 +104,10 @@ class AnswerArea extends HookConsumerWidget {
                         context: context,
                       );
                       if (allQuestionIsDisplayed(ref)) {
-                        callNextAction(ref: ref, context: context);
+                        await Future.delayed(const Duration(seconds: 1));
+                        focusNode.unfocus();
+                        await Future.delayed(const Duration(seconds: 1));
+                        await callNextAction(ref: ref, context: context);
                       }
                     },
                   ),
