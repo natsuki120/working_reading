@@ -1,7 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:working_reading/repository/famous_saying_repository/famous_saying_repository.dart';
 part 'famous_saying.freezed.dart';
 part 'famous_saying.g.dart';
 
@@ -16,6 +14,3 @@ class FamousSaying with _$FamousSaying {
   factory FamousSaying.fromJson(Map<String, dynamic> json) =>
       _$FamousSayingFromJson(json);
 }
-
-final fetchRandomFamousSaying = FutureProvider(
-    (ref) => FamousSayingRepositoryWithSupabase().fetchRandomFamousSaying());
