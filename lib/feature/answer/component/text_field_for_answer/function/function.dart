@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:working_reading/feature/training/controller/training_controller.dart';
 import 'package:working_reading/util/sentence/sentence.dart';
 import 'package:working_reading/util/sentence_list/controller/sentence_list_notifier.dart';
 import '../../../../../color_config.dart';
@@ -13,9 +12,13 @@ import '../../../provider/provider.dart';
 
 Future<void> callNextAction(
     {required WidgetRef ref, required BuildContext context}) async {
-  ref.read(utilResultListController.notifier).aggregateResult(
+  ref.read(utilResultController.notifier).aggregateResult(
         ref.read(utilSentenceListNotifier.notifier).state.sentenceList,
       );
+  ref
+      .read(utilResultListController.notifier)
+      .state
+      .add(ref.read(utilResultController.notifier).state);
   if (ref.read(trainingNum) == 2) {
     Navigator.of(context).push(
       MaterialPageRoute(builder: (_) => const ResultPage()),
@@ -26,7 +29,6 @@ Future<void> callNextAction(
         .read(utilSentenceListNotifier.notifier)
         .fetchRandomSentenceToUseQuestion(num: ref.watch(nBackNumProvider));
     ref.read(trainingNum.notifier).state++;
-    ref.read(trainingController.notifier).initSpeech();
     Navigator.of(context).push(
       MaterialPageRoute(builder: (_) => const TrainingPage()),
     );

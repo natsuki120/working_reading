@@ -2,8 +2,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:working_reading/util/sentence/sentence.dart';
 import '../domain/util_result.dart';
 
-class Controller extends StateNotifier<List<UtilResult>> {
-  Controller() : super(const []);
+class Controller extends StateNotifier<UtilResult> {
+  Controller() : super(const UtilResult());
 
   void aggregateResult(List<UtilSentence> sentenceList) {
     List<bool> newList = [];
@@ -24,13 +24,15 @@ class Controller extends StateNotifier<List<UtilResult>> {
     }
 
     correctPercent = (correctedList.length / sentenceList.length) * 100;
-    List<UtilResult> result = [
-      UtilResult(correctList: correctedList, percent: correctPercent.toInt())
-    ];
 
-    state = [...result];
+    state = state.copyWith(
+      correctList: correctedList,
+      percent: correctPercent.toInt(),
+    );
   }
 }
 
-final utilResultListController =
-    StateNotifierProvider<Controller, List<UtilResult>>((ref) => Controller());
+final utilResultController =
+    StateNotifierProvider<Controller, UtilResult>((ref) => Controller());
+
+final utilResultListController = StateProvider<List<UtilResult>>((ref) => []);
