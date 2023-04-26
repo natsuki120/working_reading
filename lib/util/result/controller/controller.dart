@@ -1,15 +1,15 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:working_reading/domain/sentence/sentence.dart';
+import 'package:working_reading/util/sentence/sentence.dart';
 import '../domain/util_result.dart';
 
 class Controller extends StateNotifier<List<UtilResult>> {
   Controller() : super(const []);
 
-  void aggregateResult(List<Sentence> sentenceList) {
+  void aggregateResult(List<UtilSentence> sentenceList) {
     List<bool> newList = [];
     List<bool> correctedList = [];
     double correctPercent = 0.0;
-    for (Sentence sentence in sentenceList) {
+    for (UtilSentence sentence in sentenceList) {
       if (sentence.hasCollected) {
         newList.add(true);
       } else {

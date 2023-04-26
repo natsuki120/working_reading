@@ -1,13 +1,13 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:working_reading/domain/sentence/sentence.dart';
 import 'dart:math' as math;
 import 'package:working_reading/feature/training/domain/training.dart';
+import 'package:working_reading/util/sentence/sentence.dart';
 
 class TrainingRepositoryWithSupabase extends ITrainingRepository {
   final supabase = Supabase.instance.client;
 
   @override
-  Future<List<Sentence>> fetchRandomSentenceToUseQuestion(
+  Future<List<UtilSentence>> fetchRandomSentenceToUseQuestion(
       {required int num}) async {
     final Set textIds = {};
     final response = <List<dynamic>>[];
@@ -22,7 +22,7 @@ class TrainingRepositoryWithSupabase extends ITrainingRepository {
       }
     }
     return response
-        .map((data) => Sentence.fromJson(data[0]))
+        .map((data) => UtilSentence.fromJson(data[0]))
         .toList(); // リストの要素を変換してから返す
   }
 }

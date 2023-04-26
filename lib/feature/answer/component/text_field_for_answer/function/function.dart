@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:working_reading/feature/training/controller/training_controller.dart';
+import 'package:working_reading/util/sentence/sentence.dart';
+import 'package:working_reading/util/sentence_list/controller/sentence_list_notifier.dart';
 import '../../../../../color_config.dart';
-import '../../../../../domain/sentence/sentence.dart';
-import '../../../../../domain/sentence_list/sentence_list_notifier.dart';
 import '../../../../../font_config.dart';
 import '../../../../../util/result/controller/controller.dart';
 import '../../../../result/result_page.dart';
@@ -14,7 +14,7 @@ import '../../../provider/provider.dart';
 Future<void> callNextAction(
     {required WidgetRef ref, required BuildContext context}) async {
   ref.read(utilResultListController.notifier).aggregateResult(
-        ref.read(sentenceListNotifierProvider.notifier).state.sentenceList,
+        ref.read(utilSentenceListNotifier.notifier).state.sentenceList,
       );
   if (ref.read(trainingNum) == 2) {
     Navigator.of(context).push(
@@ -23,7 +23,7 @@ Future<void> callNextAction(
     ref.read(trainingNum.notifier).state = 1;
   } else {
     ref
-        .read(sentenceListNotifierProvider.notifier)
+        .read(utilSentenceListNotifier.notifier)
         .fetchRandomSentenceToUseQuestion(num: ref.watch(nBackNumProvider));
     ref.read(trainingNum.notifier).state++;
     ref.read(trainingController.notifier).initSpeech();
@@ -34,8 +34,8 @@ Future<void> callNextAction(
 }
 
 bool allQuestionIsDisplayed(WidgetRef ref) =>
-    ref.watch(sentenceListNotifierProvider.notifier).state.sentenceList.every(
-          (Sentence sentence) => sentence.hasCollected == true,
+    ref.watch(utilSentenceListNotifier.notifier).state.sentenceList.every(
+          (UtilSentence sentence) => sentence.hasCollected == true,
         );
 
 void displaySnackBar(
@@ -52,7 +52,7 @@ void displaySnackBar(
     textEditingController.clear();
   } else {
     ref
-        .read(sentenceListNotifierProvider.notifier)
+        .read(utilSentenceListNotifier.notifier)
         .changeSentenceToCollected(noun: textEditingController.text);
     final snackBar = SnackBar(
       backgroundColor: Colors.green,

@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:working_reading/domain/sentence/sentence.dart';
+import 'package:working_reading/util/sentence/sentence.dart';
 part 'training.freezed.dart';
 part 'training.g.dart';
 
@@ -18,5 +18,6 @@ class Training with _$Training {
 }
 
 abstract class ITrainingRepository {
-  Future<List<Sentence>> fetchRandomSentenceToUseQuestion({required int num});
+  Future<List<UtilSentence>> fetchRandomSentenceToUseQuestion(
+      {required int num});
 }

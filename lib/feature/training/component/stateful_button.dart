@@ -4,7 +4,6 @@ import 'package:working_reading/feature/training/controller/training_controller.
 import 'package:working_reading/util/sentence_list/controller/sentence_list_notifier.dart';
 import '../../../component/disable_button.dart';
 import '../../../component/primary_color_button.dart';
-import '../../../domain/voice_input/voice_input_notifier.dart';
 import '../../answer/answer_page.dart';
 import '../provider/provider.dart';
 
@@ -30,7 +29,7 @@ class StatefulButton extends ConsumerWidget {
                   context,
                   MaterialPageRoute(builder: (context) => const AnswerPage()),
                 );
-                ref.read(voiceInputNotifier.notifier).stopListening();
+                ref.read(trainingController.notifier).stopListening();
                 ref.read(listIndexProvider.notifier).state = 0;
               } else {
                 ref.read(listIndexProvider.notifier).state += 1;

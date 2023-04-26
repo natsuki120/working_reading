@@ -5,7 +5,6 @@ import 'package:working_reading/feature/training/controller/training_controller.
 import 'package:working_reading/feature/training/provider/provider.dart';
 import 'package:working_reading/util/sentence_list/controller/sentence_list_notifier.dart';
 import '../../../color_config.dart';
-import '../../../domain/voice_input/voice_input_notifier.dart';
 
 class ReadingIndicator extends HookConsumerWidget {
   const ReadingIndicator({Key? key}) : super(key: key);
@@ -25,7 +24,7 @@ class ReadingIndicator extends HookConsumerWidget {
 
     useEffect(() {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        ref.watch(voiceInputNotifier.notifier).initSpeech();
+        ref.watch(trainingController.notifier).initSpeech();
       });
       return;
     }, [listIndex]);

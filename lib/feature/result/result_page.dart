@@ -3,11 +3,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:working_reading/color_config.dart';
 import 'package:working_reading/component/primary_color_button.dart';
-import 'package:working_reading/domain/result/result_notifier.dart';
-import 'package:working_reading/domain/voice_input/voice_input_notifier.dart';
 import 'package:working_reading/font_config.dart';
 import 'package:working_reading/feature/training/training_page.dart';
-import '../../domain/sentence_list/sentence_list_notifier.dart';
+import 'package:working_reading/util/result/controller/controller.dart';
+import 'package:working_reading/util/sentence_list/controller/sentence_list_notifier.dart';
 import '../top/provider/provider.dart';
 
 class ResultPage extends ConsumerWidget {
@@ -16,7 +15,7 @@ class ResultPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final nBackNum = ref.watch(nBackNumProvider);
-    final resultList = ref.watch(resultListNotifier);
+    final resultList = ref.watch(utilResultListController);
     final allResult = (resultList[0].percent + resultList[1].percent) / 2;
     bool isPassed() => allResult >= 70;
     return Scaffold(
@@ -113,9 +112,8 @@ class ResultPage extends ConsumerWidget {
                     text: 'リトライ',
                     onPressed: () async {
                       await ref
-                          .read(sentenceListNotifierProvider.notifier)
+                          .read(utilSentenceListNotifier.notifier)
                           .fetchRandomSentenceToUseQuestion(num: nBackNum);
-                      ref.read(voiceInputNotifier.notifier).initSpeech();
                       Navigator.push(
                         context,
                         MaterialPageRoute(
