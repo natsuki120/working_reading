@@ -1,20 +1,20 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'answer.dart';
+part of 'sentence_list.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Answer _$$_AnswerFromJson(Map<String, dynamic> json) => _$_Answer(
+_$_UtilSentenceList _$$_UtilSentenceListFromJson(Map<String, dynamic> json) =>
+    _$_UtilSentenceList(
       sentenceList: (json['sentenceList'] as List<dynamic>?)
-              ?.map((e) => Sentence.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => UtilSentence.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
-      nBackNum: json['nBackNum'] as int? ?? 1,
     );
 
-Map<String, dynamic> _$$_AnswerToJson(_$_Answer instance) => <String, dynamic>{
+Map<String, dynamic> _$$_UtilSentenceListToJson(_$_UtilSentenceList instance) =>
+    <String, dynamic>{
       'sentenceList': instance.sentenceList,
-      'nBackNum': instance.nBackNum,
     };
