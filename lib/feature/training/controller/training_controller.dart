@@ -4,6 +4,7 @@ import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:working_reading/feature/training/domain/training.dart';
 import 'package:working_reading/feature/training/repository/training_repository_with_supabase.dart';
+import 'package:working_reading/util/sentence/sentence.dart';
 
 class TrainingController extends StateNotifier<Training> {
   TrainingController({required this.trainingRepository}) : super(Training());
@@ -48,18 +49,19 @@ class TrainingController extends StateNotifier<Training> {
   //   state = state.copyWith(readingEnough: false);
   // }
 
-  void getVoiceIndicatorValue({required int questionIndex}) {
+  void getVoiceIndicatorValue(
+      {required List<UtilSentence> sentenceList, required int questionIndex}) {
     if (questionIndex == 0) {
       state = state.copyWith(
         voiceIndicatorValue:
-            state.lastWord.length / state.sentenceList[0].text.length,
+            state.lastWord.length / sentenceList[0].text.length,
       );
     }
     if (questionIndex != 0) {
       state = state.copyWith(
         voiceIndicatorValue: (state.lastWord.length -
-                state.sentenceList[questionIndex - 1].text.length) /
-            state.sentenceList[questionIndex].text.length,
+                sentenceList[questionIndex - 1].text.length) /
+            sentenceList[questionIndex].text.length,
       );
     }
 
@@ -70,16 +72,6 @@ class TrainingController extends StateNotifier<Training> {
 
   void resetVoiceIndicatorValue() {
     state = state.copyWith(voiceIndicatorValue: 0.0);
-  }
-
-  Future<void> fetchRandomSentenceToUseQuestion({required int num}) async {
-    final result =
-        await trainingRepository.fetchRandomSentenceToUseQuestion(num: num);
-    state = state.copyWith(sentenceList: result);
-  }
-
-  void resetListIndex() {
-    state = state.copyWith(listIndex: 0);
   }
 }
 
