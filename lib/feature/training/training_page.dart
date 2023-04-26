@@ -29,13 +29,8 @@ class TrainingPage extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                children: [
-                  SentenceArea(),
-                  const SizedBox(height: 32),
-                  ReadingIndicator(),
-                ],
-              ),
+              SentenceArea(),
+              ReadingIndicator(),
               Column(
                 children: [
                   StatefulButton(),
