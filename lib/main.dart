@@ -3,7 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:working_reading/page/top_page.dart';
+import 'feature/top/top_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
