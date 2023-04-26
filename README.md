@@ -1,16 +1,5 @@
-# working_reading
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Working Reading
+![IMG_2734](https://user-images.githubusercontent.com/85728613/234503515-9a704332-aa46-44f7-bee7-bd26687ab3a7.PNG)
+![トレーニング画面 (5)](https://user-images.githubusercontent.com/85728613/234503253-13a4a127-7a14-4441-8529-502311de9f52.png)
+![回答画面 (3)](https://user-images.githubusercontent.com/85728613/234503626-9e2da450-9d5f-499a-9bb3-32e7608728f4.png)
+![結果画面 (4)](https://user-images.githubusercontent.com/85728613/234503646-5944b2c5-6a63-44c3-b384-d028d3a0c924.png)
