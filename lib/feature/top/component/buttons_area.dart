@@ -5,10 +5,10 @@ import '../../../color_config.dart';
 import '../../../component/disable_button.dart';
 import '../../../component/primary_color_button.dart';
 import '../../../font_config.dart';
-import '../../../util/sentence_list/sentence_list_notifier.dart';
+import '../../../util/sentence_list/controller/sentence_list_notifier.dart';
 import '../../how_to_play/how_to_play_page.dart';
 import '../../training/training_page.dart';
-import '../controller/controller.dart';
+import '../provider/provider.dart';
 
 class ButtonsArea extends ConsumerWidget {
   const ButtonsArea({Key? key}) : super(key: key);
@@ -28,7 +28,7 @@ class ButtonsArea extends ConsumerWidget {
                 onPressed: () async {
                   ref.read(hasTappedButton.notifier).state = true;
                   await ref
-                      .read(sentenceListNotifierProvider.notifier)
+                      .read(utilSentenceListNotifier.notifier)
                       .fetchRandomSentenceToUseQuestion(num: nBackNum);
                   Navigator.push(
                     context,

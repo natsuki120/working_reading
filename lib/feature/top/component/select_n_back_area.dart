@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../color_config.dart';
 import '../../../font_config.dart';
-import '../controller/controller.dart';
+import '../provider/provider.dart';
 
 class SelectNBackArea extends ConsumerWidget {
   const SelectNBackArea({Key? key}) : super(key: key);

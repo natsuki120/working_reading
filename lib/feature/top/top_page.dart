@@ -5,7 +5,7 @@ import 'package:working_reading/feature/top/component/buttons_area.dart';
 import 'package:working_reading/feature/top/component/famous_saying_area.dart';
 import 'package:working_reading/feature/top/component/select_n_back_area.dart';
 import 'package:working_reading/feature/top/component/title_and_logo_area.dart';
-import 'controller/controller.dart';
+import 'package:working_reading/feature/top/provider/provider.dart';
 
 class TopPage extends HookConsumerWidget {
   const TopPage({Key? key}) : super(key: key);

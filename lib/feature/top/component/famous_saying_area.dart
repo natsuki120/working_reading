@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:working_reading/domain/famous_saying/famous_saying.dart';
-
 import '../../../color_config.dart';
 import '../../../font_config.dart';
+import '../domain/famous_saying/famous_saying.dart';
 
 class FamousSayingArea extends StatelessWidget {
   const FamousSayingArea({Key? key, required this.famousSaying})
