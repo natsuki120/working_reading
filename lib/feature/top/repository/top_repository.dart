@@ -1,7 +1,7 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:working_reading/domain/famous_saying/famous_saying.dart';
 import 'dart:math' as math;
 import '../../../domain/sentence/sentence.dart';
+import '../domain/famous_saying/famous_saying.dart';
 
 class TopRepositoryWithSupabase {
   final supabase = Supabase.instance.client;
