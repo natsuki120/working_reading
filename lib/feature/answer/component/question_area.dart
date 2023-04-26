@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:working_reading/domain/sentence_list/sentence_list_notifier.dart';
-import 'package:working_reading/feature/top/controller/controller.dart';
+import 'package:working_reading/util/sentence_list/controller/sentence_list_notifier.dart';
 import '../../../color_config.dart';
 import '../../../font_config.dart';
+import '../../top/provider/provider.dart';
 
 class QuestionArea extends ConsumerWidget {
   const QuestionArea({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final sentenceList = ref.watch(sentenceListNotifierProvider).sentenceList;
+    final sentenceList = ref.watch(utilSentenceListNotifier).sentenceList;
     final nBackNum = ref.watch(nBackNumProvider);
     return Wrap(
       children: [
