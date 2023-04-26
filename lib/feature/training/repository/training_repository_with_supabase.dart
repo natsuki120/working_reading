@@ -1,8 +1,9 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:working_reading/domain/sentence/sentence.dart';
 import 'dart:math' as math;
+import 'package:working_reading/feature/training/domain/training.dart';
 
-class SentenceRepositoryWithSupabase extends ISentenceRepository {
+class TrainingRepositoryWithSupabase extends ITrainingRepository {
   final supabase = Supabase.instance.client;
 
   @override
