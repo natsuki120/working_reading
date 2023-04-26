@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:working_reading/feature/answer/component/answer_area.dart';
-import 'package:working_reading/feature/answer/component/text_field_for_answer.dart';
+import 'package:working_reading/feature/answer/component/question_area.dart';
+import 'package:working_reading/feature/answer/component/text_field_for_answer/text_field_for_answer_area.dart';
 import '../../color_config.dart';
-
-// トレーニングの回数を記録するprovider
-// 2回トレーニングしたら結果発表画面に遷移させる
-final trainingNum = StateProvider((ref) => 1);
 
 class AnswerPage extends HookConsumerWidget {
   const AnswerPage({Key? key}) : super(key: key);
@@ -23,7 +19,7 @@ class AnswerPage extends HookConsumerWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Column(
           children: [
-            Question(),
+            QuestionArea(),
             const Spacer(),
             AnswerArea(),
             const SizedBox(height: 96),
