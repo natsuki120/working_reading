@@ -1,8 +1,11 @@
+import 'dart:io';
+import 'package:app_review/app_review.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:working_reading/color_config.dart';
 import 'package:working_reading/component/primary_color_button.dart';
+import 'package:working_reading/component/provider.dart';
 import 'package:working_reading/font_config.dart';
 import 'package:working_reading/feature/training/training_page.dart';
 import 'package:working_reading/util/result/controller/controller.dart';
@@ -18,6 +21,7 @@ class ResultPage extends ConsumerWidget {
     final resultList = ref.watch(utilResultListController);
     final allResult = (resultList[0].percent + resultList[1].percent) / 2;
     bool isPassed() => allResult >= 70;
+    final reviewTimingCount = ref.watch(reviewTimingCountProvider);
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
@@ -98,8 +102,18 @@ class ResultPage extends ConsumerWidget {
               children: [
                 TextButton(
                   onPressed: () {
+                    print(reviewTimingCount);
                     Navigator.popUntil(context, (route) => route.isFirst);
                     resultList.clear();
+                    ref.read(reviewTimingCountProvider.notifier).state++;
+                    if (reviewTimingCount >= 5) {
+                      if (Platform.isIOS) {
+                        AppReview.requestReview.then((onValue) {
+                          print(onValue);
+                        });
+                        ref.read(reviewTimingCountProvider.notifier).state = 1;
+                      }
+                    }
                   },
                   child: Text(
                     'ホームに戻る',
@@ -111,6 +125,7 @@ class ResultPage extends ConsumerWidget {
                     height: 80,
                     text: 'リトライ',
                     onPressed: () async {
+                      print(reviewTimingCount);
                       await ref
                           .read(utilSentenceListNotifier.notifier)
                           .fetchRandomSentenceToUseQuestion(num: nBackNum);
@@ -121,6 +136,7 @@ class ResultPage extends ConsumerWidget {
                         ),
                       );
                       resultList.clear();
+                      ref.read(reviewTimingCountProvider.notifier).state++;
                     })
               ],
             ),
