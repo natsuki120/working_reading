@@ -1,9 +1,13 @@
 PODS:
   - app_links (0.0.1):
     - Flutter
+  - app_review (1.0.1):
+    - Flutter
   - audio_streamer (0.0.1):
     - Flutter
   - Flutter (1.0.0)
+  - package_info_plus (0.4.5):
+    - Flutter
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -22,8 +26,10 @@ PODS:
 
 DEPENDENCIES:
   - app_links (from `.symlinks/plugins/app_links/ios`)
+  - app_review (from `.symlinks/plugins/app_review/ios`)
   - audio_streamer (from `.symlinks/plugins/audio_streamer/ios`)
   - Flutter (from `Flutter`)
+  - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/ios`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - sign_in_with_apple (from `.symlinks/plugins/sign_in_with_apple/ios`)
@@ -38,10 +44,14 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   app_links:
     :path: ".symlinks/plugins/app_links/ios"
+  app_review:
+    :path: ".symlinks/plugins/app_review/ios"
   audio_streamer:
     :path: ".symlinks/plugins/audio_streamer/ios"
   Flutter:
     :path: Flutter
+  package_info_plus:
+    :path: ".symlinks/plugins/package_info_plus/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/ios"
   permission_handler_apple:
@@ -57,8 +67,10 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   app_links: ab4ba54d10a13d45825336bc9707b5eadee81191
+  app_review: 6f51001269c59a2f4a5b5ae68b7d106401152764
   audio_streamer: af49e73eb66f71c4eeabb4bbcb05f122d03a6709
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e
   path_provider_foundation: c68054786f1b4f3343858c1e1d0caaded73f0be9
   permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce
   sign_in_with_apple: f3bf75217ea4c2c8b91823f225d70230119b8440
