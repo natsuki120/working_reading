@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "606426355260",
+    "project_id": "working-reading",
+    "storage_bucket": "working-reading.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:606426355260:android:361c579b66dea9c5cc1539",
+        "android_client_info": {
+          "package_name": "com.example.working_reading"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "606426355260-7dkq89rk2ckgdpv9hn6r180v1abua4q7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5ls59cWivw_4dJLbTD351RrxhF25oluI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "606426355260-7dkq89rk2ckgdpv9hn6r180v1abua4q7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "606426355260-78j7hbulmvfah7s8hsm4nhdbmkv1ormi.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.workingReading"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

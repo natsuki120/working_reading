@@ -23,6 +23,11 @@ class TopPage extends HookConsumerWidget {
       return;
     }, [ref.watch(utilSentenceListNotifier)]);
 
+    useEffect(() {
+      ref.watch(updateForceProvider(context));
+      return;
+    }, []);
+
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(backgroundColor: backgroundColor),
