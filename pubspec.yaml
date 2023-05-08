@@ -48,6 +48,10 @@ dependencies:
   noise_meter: ^3.2.0
   webview_flutter: ^4.0.7
   app_review: ^2.1.2+1
+  package_info: ^2.0.2
+  firebase_remote_config: ^4.1.0
+  firebase_core: ^2.11.0
+  url_launcher: ^6.1.10
 
 dev_dependencies:
   flutter_test:

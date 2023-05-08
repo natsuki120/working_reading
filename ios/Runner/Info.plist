@@ -51,5 +51,10 @@
     <string>”音読した内容を処理するため”</string>
     <key>NSMicrophoneUsageDescription</key>
     <string>”音読した内容を処理するため”</string>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+    <string>https</string>
+    <string>http</string>
+    </array>
 </dict>
 </plist>
