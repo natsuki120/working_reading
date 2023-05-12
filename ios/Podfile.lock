@@ -10,10 +10,10 @@ PODS:
   - Firebase/RemoteConfig (10.7.0):
     - Firebase/CoreOnly
     - FirebaseRemoteConfig (~> 10.7.0)
-  - firebase_core (2.11.0):
+  - firebase_core (2.12.0):
     - Firebase/CoreOnly (= 10.7.0)
     - Flutter
-  - firebase_remote_config (4.1.0):
+  - firebase_remote_config (4.2.0):
     - Firebase/RemoteConfig (= 10.7.0)
     - firebase_core
     - Flutter
@@ -54,6 +54,9 @@ PODS:
   - permission_handler_apple (9.0.4):
     - Flutter
   - PromisesObjC (2.2.0)
+  - shared_preferences_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
   - sign_in_with_apple (0.0.1):
     - Flutter
   - speech_to_text (0.0.1):
@@ -74,8 +77,9 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - package_info (from `.symlinks/plugins/package_info/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
-  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/ios`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
+  - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - sign_in_with_apple (from `.symlinks/plugins/sign_in_with_apple/ios`)
   - speech_to_text (from `.symlinks/plugins/speech_to_text/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
@@ -111,9 +115,11 @@ EXTERNAL SOURCES:
   package_info_plus:
     :path: ".symlinks/plugins/package_info_plus/ios"
   path_provider_foundation:
-    :path: ".symlinks/plugins/path_provider_foundation/ios"
+    :path: ".symlinks/plugins/path_provider_foundation/darwin"
   permission_handler_apple:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
+  shared_preferences_foundation:
+    :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
   sign_in_with_apple:
     :path: ".symlinks/plugins/sign_in_with_apple/ios"
   speech_to_text:
@@ -128,8 +134,8 @@ SPEC CHECKSUMS:
   app_review: 6f51001269c59a2f4a5b5ae68b7d106401152764
   audio_streamer: af49e73eb66f71c4eeabb4bbcb05f122d03a6709
   Firebase: 0219acf760880eeec8ce479895bd7767466d9f81
-  firebase_core: dee76ded6c693fdb38b8ea39aef7129e32e587a3
-  firebase_remote_config: 9bca00455ced3cebe8bb40691c7b0b81d1f1963a
+  firebase_core: 312d0d81b346ec20540822c8498e626d6918ef48
+  firebase_remote_config: e6b22eba96aba1a34d39c89fbc96917b8c2f680f
   FirebaseABTesting: 005b70969e2817e2a1e631e8dba29134a04c0622
   FirebaseCore: e317665b9d744727a97e623edbbed009320afdd7
   FirebaseCoreInternal: fa2899eb1f340054858d289e5a0fb935a0a74e52
@@ -139,9 +145,10 @@ SPEC CHECKSUMS:
   GoogleUtilities: 9aa0ad5a7bc171f8bae016300bfcfa3fb8425749
   package_info: 873975fc26034f0b863a300ad47e7f1ac6c7ec62
   package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e
-  path_provider_foundation: c68054786f1b4f3343858c1e1d0caaded73f0be9
+  path_provider_foundation: eaf5b3e458fc0e5fbb9940fb09980e853fe058b8
   permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
+  shared_preferences_foundation: e2dae3258e06f44cc55f49d42024fd8dd03c590c
   sign_in_with_apple: f3bf75217ea4c2c8b91823f225d70230119b8440
   speech_to_text: b43a7d99aef037bd758ed8e45d79bbac035d2dfe
   Try: 5ef669ae832617b3cee58cb2c6f99fb767a4ff96
