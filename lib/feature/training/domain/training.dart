@@ -6,12 +6,12 @@ part 'training.g.dart';
 
 @freezed
 class Training with _$Training {
-  const factory Training({
-    @Default('') String lastWord,
-    @Default(false) bool readingEnough,
-    @Default(false) bool readingEnabled,
-    @Default(0.0) double voiceIndicatorValue,
-  }) = _Training;
+  const factory Training(
+      {@Default('') String lastWord,
+      @Default(false) bool readingEnough,
+      @Default(false) bool readingEnabled,
+      @Default(0.0) double voiceIndicatorValue,
+      @Default(false) bool isListening}) = _Training;
 
   factory Training.fromJson(Map<String, dynamic> json) =>
       _$TrainingFromJson(json);

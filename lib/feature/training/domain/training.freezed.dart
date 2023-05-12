@@ -24,6 +24,7 @@ mixin _$Training {
   bool get readingEnough => throw _privateConstructorUsedError;
   bool get readingEnabled => throw _privateConstructorUsedError;
   double get voiceIndicatorValue => throw _privateConstructorUsedError;
+  bool get isListening => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -40,7 +41,8 @@ abstract class $TrainingCopyWith<$Res> {
       {String lastWord,
       bool readingEnough,
       bool readingEnabled,
-      double voiceIndicatorValue});
+      double voiceIndicatorValue,
+      bool isListening});
 }
 
 /// @nodoc
@@ -60,6 +62,7 @@ class _$TrainingCopyWithImpl<$Res, $Val extends Training>
     Object? readingEnough = null,
     Object? readingEnabled = null,
     Object? voiceIndicatorValue = null,
+    Object? isListening = null,
   }) {
     return _then(_value.copyWith(
       lastWord: null == lastWord
@@ -78,6 +81,10 @@ class _$TrainingCopyWithImpl<$Res, $Val extends Training>
           ? _value.voiceIndicatorValue
           : voiceIndicatorValue // ignore: cast_nullable_to_non_nullable
               as double,
+      isListening: null == isListening
+          ? _value.isListening
+          : isListening // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -93,7 +100,8 @@ abstract class _$$_TrainingCopyWith<$Res> implements $TrainingCopyWith<$Res> {
       {String lastWord,
       bool readingEnough,
       bool readingEnabled,
-      double voiceIndicatorValue});
+      double voiceIndicatorValue,
+      bool isListening});
 }
 
 /// @nodoc
@@ -111,6 +119,7 @@ class __$$_TrainingCopyWithImpl<$Res>
     Object? readingEnough = null,
     Object? readingEnabled = null,
     Object? voiceIndicatorValue = null,
+    Object? isListening = null,
   }) {
     return _then(_$_Training(
       lastWord: null == lastWord
@@ -129,6 +138,10 @@ class __$$_TrainingCopyWithImpl<$Res>
           ? _value.voiceIndicatorValue
           : voiceIndicatorValue // ignore: cast_nullable_to_non_nullable
               as double,
+      isListening: null == isListening
+          ? _value.isListening
+          : isListening // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -140,7 +153,8 @@ class _$_Training with DiagnosticableTreeMixin implements _Training {
       {this.lastWord = '',
       this.readingEnough = false,
       this.readingEnabled = false,
-      this.voiceIndicatorValue = 0.0});
+      this.voiceIndicatorValue = 0.0,
+      this.isListening = false});
 
   factory _$_Training.fromJson(Map<String, dynamic> json) =>
       _$$_TrainingFromJson(json);
@@ -157,10 +171,13 @@ class _$_Training with DiagnosticableTreeMixin implements _Training {
   @override
   @JsonKey()
   final double voiceIndicatorValue;
+  @override
+  @JsonKey()
+  final bool isListening;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Training(lastWord: $lastWord, readingEnough: $readingEnough, readingEnabled: $readingEnabled, voiceIndicatorValue: $voiceIndicatorValue)';
+    return 'Training(lastWord: $lastWord, readingEnough: $readingEnough, readingEnabled: $readingEnabled, voiceIndicatorValue: $voiceIndicatorValue, isListening: $isListening)';
   }
 
   @override
@@ -171,7 +188,8 @@ class _$_Training with DiagnosticableTreeMixin implements _Training {
       ..add(DiagnosticsProperty('lastWord', lastWord))
       ..add(DiagnosticsProperty('readingEnough', readingEnough))
       ..add(DiagnosticsProperty('readingEnabled', readingEnabled))
-      ..add(DiagnosticsProperty('voiceIndicatorValue', voiceIndicatorValue));
+      ..add(DiagnosticsProperty('voiceIndicatorValue', voiceIndicatorValue))
+      ..add(DiagnosticsProperty('isListening', isListening));
   }
 
   @override
@@ -186,13 +204,15 @@ class _$_Training with DiagnosticableTreeMixin implements _Training {
             (identical(other.readingEnabled, readingEnabled) ||
                 other.readingEnabled == readingEnabled) &&
             (identical(other.voiceIndicatorValue, voiceIndicatorValue) ||
-                other.voiceIndicatorValue == voiceIndicatorValue));
+                other.voiceIndicatorValue == voiceIndicatorValue) &&
+            (identical(other.isListening, isListening) ||
+                other.isListening == isListening));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, lastWord, readingEnough,
-      readingEnabled, voiceIndicatorValue);
+      readingEnabled, voiceIndicatorValue, isListening);
 
   @JsonKey(ignore: true)
   @override
@@ -213,7 +233,8 @@ abstract class _Training implements Training {
       {final String lastWord,
       final bool readingEnough,
       final bool readingEnabled,
-      final double voiceIndicatorValue}) = _$_Training;
+      final double voiceIndicatorValue,
+      final bool isListening}) = _$_Training;
 
   factory _Training.fromJson(Map<String, dynamic> json) = _$_Training.fromJson;
 
@@ -225,6 +246,8 @@ abstract class _Training implements Training {
   bool get readingEnabled;
   @override
   double get voiceIndicatorValue;
+  @override
+  bool get isListening;
   @override
   @JsonKey(ignore: true)
   _$$_TrainingCopyWith<_$_Training> get copyWith =>

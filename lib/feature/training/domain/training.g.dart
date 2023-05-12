@@ -12,6 +12,7 @@ _$_Training _$$_TrainingFromJson(Map<String, dynamic> json) => _$_Training(
       readingEnabled: json['readingEnabled'] as bool? ?? false,
       voiceIndicatorValue:
           (json['voiceIndicatorValue'] as num?)?.toDouble() ?? 0.0,
+      isListening: json['isListening'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_TrainingToJson(_$_Training instance) =>
@@ -20,4 +21,5 @@ Map<String, dynamic> _$$_TrainingToJson(_$_Training instance) =>
       'readingEnough': instance.readingEnough,
       'readingEnabled': instance.readingEnabled,
       'voiceIndicatorValue': instance.voiceIndicatorValue,
+      'isListening': instance.isListening,
     };

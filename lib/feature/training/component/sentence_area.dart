@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 import 'package:working_reading/feature/top/provider/provider.dart';
@@ -27,7 +28,7 @@ class SentenceArea extends ConsumerWidget {
                 blackSecondary,
               ),
             ),
-            const SizedBox(width: 48),
+            SizedBox(width: 48.w),
             Text(
               '問: ${listIndex + 1}/$nBackNum',
               style: displaySmall(
@@ -37,7 +38,7 @@ class SentenceArea extends ConsumerWidget {
             ),
           ],
         ),
-        const SizedBox(height: 32),
+        SizedBox(height: 32.h),
         SubstringHighlight(
           text: sentenceList[listIndex].text,
           textStyle: bodyRegular(
