@@ -17,7 +17,7 @@ class SelectNBackArea extends ConsumerWidget {
           'N = ',
           style: bodyRegular(blackSecondary),
         ),
-        const SizedBox(width: 16),
+        SizedBox(width: 16),
         DropdownButton(
           items: List.generate(
             6,

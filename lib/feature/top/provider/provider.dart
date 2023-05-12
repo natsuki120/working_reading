@@ -17,7 +17,7 @@ final nBackNumProvider = StateProvider((ref) => 1);
 final updateForceProvider = Provider.family((ref, BuildContext context) async {
   // 現在起動しているアプリのバージョンを取得
   final PackageInfo packageInfo = await PackageInfo.fromPlatform();
-  final int currentVersion = int.parse(packageInfo.buildNumber);
+  final String currentVersion = packageInfo.version.replaceAll('.', '');
 
   try {
     // FirebaseRemoteConfigで最新バージョンを取得する
@@ -28,9 +28,13 @@ final updateForceProvider = Provider.family((ref, BuildContext context) async {
       minimumFetchInterval: const Duration(minutes: 5),
     ));
     await remoteConfig.fetchAndActivate();
+
     final String newVersion =
         remoteConfig.getString('force_update_app_version');
-    if (double.parse(newVersion) > currentVersion) {
+    newVersion.replaceAll('.', '');
+    print(newVersion);
+    print(currentVersion);
+    if (int.parse(newVersion) > int.parse(currentVersion)) {
       displayUpdateDialog(context: context);
     }
   } catch (e) {

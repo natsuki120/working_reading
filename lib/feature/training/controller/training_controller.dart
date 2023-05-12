@@ -15,16 +15,20 @@ class TrainingController extends StateNotifier<Training> {
 
   void initSpeech() async {
     state = state.copyWith(
-        readingEnabled: await _speechToText.initialize(),
-        readingEnough: false,
-        lastWord: '');
+      readingEnabled: await _speechToText.initialize(),
+      readingEnough: false,
+      lastWord: '',
+    );
     startListening();
   }
 
   void startListening() async {
     try {
       await _speechToText.listen(onResult: onSpeechResult, localeId: 'ja-JP');
-      state = state.copyWith(readingEnough: false);
+      state = state.copyWith(
+        readingEnough: false,
+        isListening: false,
+      );
     } catch (e) {
       print(e);
     }
@@ -51,17 +55,28 @@ class TrainingController extends StateNotifier<Training> {
 
   void getVoiceIndicatorValue(
       {required List<UtilSentence> sentenceList, required int questionIndex}) {
+    int sentenceTextLength = 0;
     if (questionIndex == 0) {
       state = state.copyWith(
         voiceIndicatorValue:
             state.lastWord.length / sentenceList[0].text.length,
+        isListening: state.voiceIndicatorValue == 0 ? false : true,
       );
     }
+
+    // lastWordは今までの音読した文章を格納しているから
+    // 一個前だけでなく、以前の全ての問題の文章量を取得して
+    // lastWordから引く必要がある
+    // そうすれば問題一個分のvoiceIndicatorValueが取得できる
     if (questionIndex != 0) {
+      // 今までの問題の文章量を取得
+      for (int i = 0; i < questionIndex; i++) {
+        sentenceTextLength += sentenceList[i].text.length;
+      }
       state = state.copyWith(
-        voiceIndicatorValue: (state.lastWord.length -
-                sentenceList[questionIndex - 1].text.length) /
+        voiceIndicatorValue: (state.lastWord.length - sentenceTextLength) /
             sentenceList[questionIndex].text.length,
+        isListening: state.voiceIndicatorValue == 0 ? false : true,
       );
     }
 
@@ -73,6 +88,10 @@ class TrainingController extends StateNotifier<Training> {
   void resetVoiceIndicatorValue() {
     state = state.copyWith(voiceIndicatorValue: 0.0);
   }
+
+  // void isListening() {
+  //   state = state.copyWith(isListening: _speechToText.isListening);
+  // }
 }
 
 final trainingController = StateNotifierProvider<TrainingController, Training>(

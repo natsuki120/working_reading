@@ -33,6 +33,7 @@ class StatefulButton extends ConsumerWidget {
                 ref.read(listIndexProvider.notifier).state = 0;
               } else {
                 ref.read(listIndexProvider.notifier).state += 1;
+                !ref.read(trainingController.notifier).state.isListening;
               }
             },
           )

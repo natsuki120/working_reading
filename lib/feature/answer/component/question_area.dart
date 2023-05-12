@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:working_reading/util/sentence_list/controller/sentence_list_notifier.dart';
 import '../../../color_config.dart';
@@ -40,7 +41,7 @@ class QuestionArea extends ConsumerWidget {
                         Text('？？', style: title1Regular(blackSecondary))
                     ],
                   ),
-                  const SizedBox(height: 64),
+                  SizedBox(height: 64.h),
                 ],
               ),
               const SizedBox(width: 32),
