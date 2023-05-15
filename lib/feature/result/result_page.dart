@@ -8,7 +8,7 @@ import 'package:working_reading/color_config.dart';
 import 'package:working_reading/component/primary_color_button.dart';
 import 'package:working_reading/component/provider.dart';
 import 'package:working_reading/font_config.dart';
-import 'package:working_reading/feature/training/training_page.dart';
+import 'package:working_reading/feature/training/nomal_mode_page.dart';
 import 'package:working_reading/util/result/controller/controller.dart';
 import 'package:working_reading/util/sentence_list/controller/sentence_list_notifier.dart';
 import '../top/provider/provider.dart';
@@ -130,7 +130,7 @@ class ResultPage extends ConsumerWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => const TrainingPage(),
+                            builder: (_) => const NormalModePage(),
                           ),
                         );
                         ref.read(reviewTimingCountProvider.notifier).state++;

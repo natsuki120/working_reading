@@ -5,12 +5,13 @@ import 'package:working_reading/feature/training/component/reading_indicator.dar
 import 'package:working_reading/feature/training/component/sentence_area.dart';
 import 'package:working_reading/feature/training/component/stateful_button.dart';
 import 'package:working_reading/feature/training/provider/provider.dart';
+
 import '../../color_config.dart';
 import '../answer/provider/provider.dart';
 import 'controller/training_controller.dart';
 
-class TrainingPage extends HookConsumerWidget {
-  const TrainingPage({Key? key}) : super(key: key);
+class NormalModePage extends HookConsumerWidget {
+  const NormalModePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

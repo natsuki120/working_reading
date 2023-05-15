@@ -8,7 +8,7 @@ import '../../../component/primary_color_button.dart';
 import '../../../font_config.dart';
 import '../../../util/sentence_list/controller/sentence_list_notifier.dart';
 import '../../how_to_play/how_to_play_page.dart';
-import '../../training/training_page.dart';
+import '../../training/nomal_mode_page.dart';
 import '../provider/provider.dart';
 
 class ButtonsArea extends ConsumerWidget {
@@ -35,7 +35,7 @@ class ButtonsArea extends ConsumerWidget {
                     context,
                     MaterialPageRoute(
                       builder: (BuildContext context) {
-                        return const TrainingPage();
+                        return const NormalModePage();
                       },
                     ),
                   );

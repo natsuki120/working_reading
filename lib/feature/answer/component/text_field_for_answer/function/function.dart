@@ -7,7 +7,7 @@ import '../../../../../font_config.dart';
 import '../../../../../util/result/controller/controller.dart';
 import '../../../../result/result_page.dart';
 import '../../../../top/provider/provider.dart';
-import '../../../../training/training_page.dart';
+import '../../../../training/nomal_mode_page.dart';
 import '../../../provider/provider.dart';
 
 Future<void> callNextAction(
@@ -30,7 +30,7 @@ Future<void> callNextAction(
         .fetchRandomSentenceToUseQuestion(num: ref.watch(nBackNumProvider));
     ref.read(trainingNum.notifier).state++;
     Navigator.of(context).push(
-      MaterialPageRoute(builder: (_) => const TrainingPage()),
+      MaterialPageRoute(builder: (_) => const NormalModePage()),
     );
   }
 }
