@@ -11,7 +11,7 @@ class UtilSentenceListRepositoryWithSupabase extends IUtilSentenceRepository {
     final Set textIds = {};
     final response = <List<dynamic>>[];
     while (response.length < num) {
-      final random = math.Random().nextInt(9);
+      final random = math.Random().nextInt(47);
       final data =
           await supabase.from('sentence').select('*').eq('text_id', random);
       final textId = data[0]['text_id'];
