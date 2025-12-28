@@ -1,0 +1,91 @@
+name: バグ報告
+description: 不具合の報告を作成します
+labels: "bug"
+body:
+  - type: "textarea"
+    id: content
+    attributes:
+      label: 現象
+      description: 不具合を簡潔に記載してください
+    validations:
+      required: true
+
+  - type: "input"
+    id: frequency
+    attributes:
+      label: 再現頻度
+      description: 再現頻度、試行回数を記載してください。例）1/5、5回試行
+    validations:
+      required: true
+
+  - type: "textarea"
+    id: procedure
+    attributes:
+      label: 再現手順
+      description: どのような手順で不具合が発生したのかを記載してください。
+      value: |
+        1. 〇〇の画面に移動
+        2. 〇〇のボタンを押下
+        3. 〇〇の現象が発生する
+
+  - type: "textarea"
+    id: except
+    attributes:
+      label: 期待動作
+      description: どのような動作になって欲しいのかを記載してください
+    validations:
+      required: true
+
+  - type: "markdown"
+    attributes:
+      value: |
+        以下の項目は、確認バージョンについてです。
+
+        - 確認バージョン
+        - 確認日時 
+
+        それぞれの項目に記載をお願いします。
+
+  - type: "input"
+    id: date
+    attributes:
+      label: 確認日時
+      description: 確認日時を記載してください 例）2024/7/7 18:00
+      value: yy/mm/dd hh:mm
+
+  - type: "textarea"
+    id: ticket
+    attributes:
+      label: 関連チケット
+      description: 関連チケットがある場合はここにチケット番号を列記してください
+
+  - type: "textarea"
+    id: comment
+    attributes:
+      label: "コメント"
+      description: 補足説明などがあればここに記載してください
+
+  - type: "textarea"
+    id: analysis
+    attributes:
+      label: 原因解析
+      description: 修正後に記載してください
+      value: |
+        不具合原因の解析結果を記載 同件・同根問題の有無と、その内容も記載
+
+  - type: "textarea"
+    id: what_to_do
+    attributes:
+      label: 対処内容
+      description: 修正後に記載してください
+      value: |
+        追加・改善する機能の対処内容を記載
+        追加・改善する機能の影響範囲も記載
+
+  - type: "textarea"
+    id: confirm
+    attributes:
+      label: 修正確認
+      description: 修正後に記載してください
+      value: |
+        修正確認した機能項目、画面、etc..を記載

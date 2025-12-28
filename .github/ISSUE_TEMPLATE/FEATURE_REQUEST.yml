@@ -1,0 +1,39 @@
+name: 新規機能追加
+description: 新規機能追加のIssueを作成する
+labels: "enhancement"
+body:
+  - type: "textarea"
+    id: content
+    attributes:
+      label: 追加・改善する機能
+      description: 追加する内容、改善する内容の特定を行なってください
+  - type: "textarea"
+    id: how_to_add
+    attributes:
+      label: どのように
+      description: 何が問題でどのような改善をして欲しいのかを定義してください
+  - type: "textarea"
+    id: ticket
+    attributes:
+      label: 関連チケット
+      description: 関連チケットがある場合はここにチケット番号を列記してください
+  - type: "textarea"
+    id: comment
+    attributes:
+      label: "コメント"
+      description: 補足説明などがあればここに記載してください
+  - type: "textarea"
+    id: what_to_do
+    attributes:
+      label: 対処内容
+      description: 修正後に記載してください
+      value: |
+        追加・改善する機能の対処内容を記載
+        追加・改善する機能の影響範囲も記載
+  - type: "textarea"
+    id: comfirm
+    attributes:
+      label: 修正確認
+      description: 修正後に記載してください
+      value: |
+        修正確認した機能項目、画面、etc..を記載

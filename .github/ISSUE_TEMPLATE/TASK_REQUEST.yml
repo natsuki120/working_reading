@@ -1,0 +1,31 @@
+name: タスク依頼
+description: タスクの依頼を作成します
+labels: "task"
+body:
+  - type: "textarea"
+    id: goal
+    attributes:
+      label: ゴール
+      description: 作業の完了条件（何を、どこまで）を記載してください
+  - type: "textarea"
+    id: content
+    attributes:
+      label: 作業内容
+      description: ゴールを達成するために行う具体的な作業を記載してください
+  - type: "textarea"
+    id: ticket
+    attributes:
+      label: 関連チケット
+      description: 関連チケットがある場合はここにチケット番号を列記してください
+  - type: "textarea"
+    id: comment
+    attributes:
+      label: "コメント"
+      description: 補足説明などがあればここに記載してください
+  - type: "textarea"
+    id: comfirm
+    attributes:
+      label: 修正確認
+      description: 修正後に記載してください
+      value: |
+        修正確認した機能項目、画面、etc..を記載
