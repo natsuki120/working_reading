@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:working_reading/feature/training/controller/training_controller.dart';
+import 'package:working_reading/i18n/strings.dart';
 import 'package:working_reading/util/sentence_list/controller/sentence_list_notifier.dart';
+
 import '../../../component/disable_button.dart';
 import '../../../component/primary_color_button.dart';
 import '../../answer/answer_page.dart';
@@ -20,7 +22,7 @@ class StatefulButton extends ConsumerWidget {
         ? PrimaryColorButton(
             width: double.infinity,
             height: 64,
-            text: '次へ',
+            text: next,
             onPressed: () async {
               // 全ての問題を出し切ったら回答ページに遷移する
               // リストの長さと比較したいため、インデックス番号に+1する。
@@ -38,7 +40,7 @@ class StatefulButton extends ConsumerWidget {
             },
           )
         : const DisableButton(
-            text: '音読してください',
+            text: readAloud,
             width: double.infinity,
             height: 64,
           );

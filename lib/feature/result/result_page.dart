@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:app_review/app_review.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,10 +8,12 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:working_reading/color_config.dart';
 import 'package:working_reading/component/primary_color_button.dart';
 import 'package:working_reading/component/provider.dart';
-import 'package:working_reading/font_config.dart';
 import 'package:working_reading/feature/training/training_page.dart';
+import 'package:working_reading/font_config.dart';
+import 'package:working_reading/i18n/strings.dart';
 import 'package:working_reading/util/result/controller/controller.dart';
 import 'package:working_reading/util/sentence_list/controller/sentence_list_notifier.dart';
+
 import '../top/provider/provider.dart';
 
 class ResultPage extends ConsumerWidget {
@@ -37,7 +40,7 @@ class ResultPage extends ConsumerWidget {
                 children: [
                   Column(
                     children: [
-                      Text('１問目', style: title1Regular(blackSecondary)),
+                      Text(questionOne, style: title1Regular(blackSecondary)),
                       CircularPercentIndicator(
                         radius: 60.0.sp,
                         lineWidth: 13.0.sp,
@@ -54,7 +57,7 @@ class ResultPage extends ConsumerWidget {
                   ),
                   Column(
                     children: [
-                      Text('２問目', style: title1Regular(blackSecondary)),
+                      Text(questionTwo, style: title1Regular(blackSecondary)),
                       CircularPercentIndicator(
                         radius: 60.0.sp,
                         lineWidth: 13.0.sp,
@@ -74,7 +77,7 @@ class ResultPage extends ConsumerWidget {
               // 全体
               Column(
                 children: [
-                  Text('総合', style: title1Regular(blackSecondary)),
+                  Text(overall, style: title1Regular(blackSecondary)),
                   CircularPercentIndicator(
                     radius: 110.0.sp,
                     lineWidth: 13.0.sp,
@@ -91,9 +94,9 @@ class ResultPage extends ConsumerWidget {
               ),
               SizedBox(height: 32.h),
               if (isPassed())
-                Text('合格！', style: title1Regular(blackSecondary))
+                Text(passed, style: title1Regular(blackSecondary))
               else
-                Text('不合格', style: title1Regular(blackSecondary)),
+                Text(failed, style: title1Regular(blackSecondary)),
               const Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -114,14 +117,14 @@ class ResultPage extends ConsumerWidget {
                       }
                     },
                     child: Text(
-                      'ホームに戻る',
+                      home,
                       style: bodyRegular(blackPrimary),
                     ),
                   ),
                   PrimaryColorButton(
                       width: 200,
                       height: 80,
-                      text: 'リトライ',
+                      text: retry,
                       onPressed: () async {
                         print(reviewTimingCount);
                         await ref

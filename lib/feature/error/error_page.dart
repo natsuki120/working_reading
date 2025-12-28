@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:working_reading/color_config.dart';
 import 'package:working_reading/font_config.dart';
+import 'package:working_reading/i18n/strings.dart';
 
 class ErrorPage extends StatelessWidget {
   const ErrorPage({Key? key, required this.errorMessage}) : super(key: key);
@@ -18,20 +19,20 @@ class ErrorPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Column(
           children: [
-            Text('おっと！', style: displayMedium(FontWeight.w600, white)),
+            Text(oops, style: displayMedium(FontWeight.w600, white)),
             SizedBox(height: 16),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '予期せぬエラーが発生しました。\nこの画面をスクショし、開発者にいちゃもんをつけてやりましょう。',
+                  unexpectedError,
                   style: bodyRegular(white),
                 ),
                 SizedBox(height: 48),
-                Text('お手数ですが、アプリを再起動してください。', style: bodyRegular(white)),
+                Text(pleaseRestart, style: bodyRegular(white)),
                 SizedBox(height: 96),
                 Text(
-                  'エラーメッセージ: $errorMessage',
+                  '${errorMessagePrefix} $errorMessage',
                   style: bodyBold(white),
                 )
               ],

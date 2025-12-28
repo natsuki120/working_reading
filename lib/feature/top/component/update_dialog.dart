@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:working_reading/i18n/strings.dart';
 
 void displayUpdateDialog({required BuildContext context}) {
   showCupertinoDialog(
@@ -8,7 +9,7 @@ void displayUpdateDialog({required BuildContext context}) {
       builder: (context) {
         return CupertinoAlertDialog(
           title: Text(
-            "最新バージョンがリリースされました",
+            updateAvailableMessage,
           ),
           actions: [
             TextButton(
@@ -23,7 +24,7 @@ void displayUpdateDialog({required BuildContext context}) {
                   print("Can't launch $url");
                 }
               },
-              child: Text('OK'),
+              child: Text(okLabel),
             ),
           ],
         );

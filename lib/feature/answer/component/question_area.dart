@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:working_reading/i18n/strings.dart';
 import 'package:working_reading/util/sentence_list/controller/sentence_list_notifier.dart';
+
 import '../../../color_config.dart';
 import '../../../font_config.dart';
 import '../../top/provider/provider.dart';
@@ -23,7 +25,7 @@ class QuestionArea extends ConsumerWidget {
                   Wrap(
                     children: [
                       Text(
-                        '問$i. ',
+                        '${questionPrefix}$i. ',
                         style: title1Regular(blackSecondary),
                       ),
                       if (sentenceList[i - 1].hasCollected)
@@ -38,7 +40,7 @@ class QuestionArea extends ConsumerWidget {
                         ),
                       if (!sentenceList[i - 1].hasCollected &&
                           !sentenceList[i - 1].giveUp)
-                        Text('？？', style: title1Regular(blackSecondary))
+                        Text(unknownMarks, style: title1Regular(blackSecondary))
                     ],
                   ),
                   SizedBox(height: 64.h),

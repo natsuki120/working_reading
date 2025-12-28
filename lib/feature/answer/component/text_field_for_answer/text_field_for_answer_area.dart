@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:working_reading/i18n/strings.dart';
 import 'package:working_reading/util/sentence/sentence.dart';
 import 'package:working_reading/util/sentence_list/controller/sentence_list_notifier.dart';
+
 import '../../../../color_config.dart';
 import '../../../../component/disable_button.dart';
 import '../../../../component/primary_color_button.dart';
@@ -40,7 +42,7 @@ class AnswerArea extends HookConsumerWidget {
           focusNode: focusNode,
           controller: textEditingController,
           decoration: InputDecoration(
-            hintText: '回答を入力してください',
+            hintText: hintEnterAnswer,
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: const BorderSide(
@@ -76,7 +78,7 @@ class AnswerArea extends HookConsumerWidget {
                   callNextAction(ref: ref, context: context);
                 },
                 child: Text(
-                  'ギブアップ',
+                  giveUp,
                   style: bodyBold(primary),
                 ),
               ),
@@ -84,14 +86,14 @@ class AnswerArea extends HookConsumerWidget {
             const Spacer(),
             _areFieldsEmpty.value
                 ? const DisableButton(
-                    text: '採点する',
+                    text: grade,
                     width: 150,
                     height: 64,
                   )
                 : PrimaryColorButton(
                     width: 150,
                     height: 64,
-                    text: '採点する',
+                    text: grade,
                     onPressed: () async {
                       for (UtilSentence sentence in sentenceList) {
                         if (sentence.properNoun == textEditingController.text) {
