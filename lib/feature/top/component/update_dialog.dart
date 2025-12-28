@@ -14,9 +14,7 @@ void displayUpdateDialog({required BuildContext context}) {
           actions: [
             TextButton(
               onPressed: () async {
-                final url = Uri.parse(
-                  'https://apps.apple.com/app/working-reading/id6448203316 ',
-                );
+                final url = Uri.parse(appStoreUrl);
                 if (await canLaunchUrl(url)) {
                   launchUrl(url);
                 } else {

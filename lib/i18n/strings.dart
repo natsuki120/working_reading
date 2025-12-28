@@ -3,6 +3,8 @@
 
 // Error page
 const String oops = 'おっと！';
+// App title
+const String appTitle = 'ワーキングリーディング';
 const String unexpectedError =
     '予期せぬエラーが発生しました。\nこの画面をスクショし、開発者にいちゃもんをつけてやりましょう。';
 const String pleaseRestart = 'お手数ですが、アプリを再起動してください。';
@@ -38,3 +40,9 @@ const String readAloud = '音読してください';
 // Top-level strings for app update dialog
 const String updateAvailableMessage = '最新バージョンがリリースされました';
 const String okLabel = 'OK';
+
+// External links
+const String appStoreUrl =
+    'https://apps.apple.com/app/working-reading/id6448203316';
+const String howToPlayUrl =
+    'https://surf-cafe-b89.notion.site/Working-Reading-a2f30a34c6d14beb98fb1e543d511b9f';
