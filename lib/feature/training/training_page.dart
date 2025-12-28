@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:working_reading/feature/training/component/reading_indicator.dart';
 import 'package:working_reading/feature/training/component/sentence_area.dart';
 import 'package:working_reading/feature/training/component/stateful_button.dart';
+import 'package:working_reading/feature/training/function/function.dart';
 import 'package:working_reading/feature/training/provider/provider.dart';
+
 import '../../color_config.dart';
-import '../answer/provider/provider.dart';
 import 'controller/training_controller.dart';
 
 class TrainingPage extends HookConsumerWidget {
@@ -15,12 +17,14 @@ class TrainingPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(trainingController);
+    final sessionsToResult = useRef(1);
+
     return WillPopScope(
       onWillPop: () async {
         ref.read(trainingController.notifier).stopListening();
         Navigator.popUntil(context, (route) => route.isFirst);
         ref.read(listIndexProvider.notifier).state = 0;
-        ref.read(trainingNum.notifier).state = 1;
+        increaseNumber(sessionsToResult.value);
         return false;
       },
       child: Scaffold(

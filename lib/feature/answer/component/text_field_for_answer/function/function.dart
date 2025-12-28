@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:working_reading/feature/training/function/function.dart';
 import 'package:working_reading/i18n/strings.dart';
 import 'package:working_reading/util/sentence/sentence.dart';
 import 'package:working_reading/util/sentence_list/controller/sentence_list_notifier.dart';
@@ -10,10 +11,11 @@ import '../../../../../util/result/controller/controller.dart';
 import '../../../../result/result_page.dart';
 import '../../../../top/provider/provider.dart';
 import '../../../../training/training_page.dart';
-import '../../../provider/provider.dart';
 
 Future<void> callNextAction(
-    {required WidgetRef ref, required BuildContext context}) async {
+    {required WidgetRef ref,
+    required BuildContext context,
+    required int sessionsToResult}) async {
   ref.read(utilResultController.notifier).aggregateResult(
         ref.read(utilSentenceListNotifier.notifier).state.sentenceList,
       );
@@ -21,16 +23,16 @@ Future<void> callNextAction(
       .read(utilResultListController.notifier)
       .state
       .add(ref.read(utilResultController.notifier).state);
-  if (ref.read(trainingNum) == 2) {
+  if (sessionsToResult == 2) {
     Navigator.of(context).push(
       MaterialPageRoute(builder: (_) => const ResultPage()),
     );
-    ref.read(trainingNum.notifier).state = 1;
+    resetNumber(sessionsToResult);
   } else {
     ref
         .read(utilSentenceListNotifier.notifier)
         .fetchRandomSentenceToUseQuestion(num: ref.watch(nBackNumProvider));
-    ref.read(trainingNum.notifier).state++;
+    increaseNumber(sessionsToResult);
     Navigator.of(context).push(
       MaterialPageRoute(builder: (_) => const TrainingPage()),
     );
