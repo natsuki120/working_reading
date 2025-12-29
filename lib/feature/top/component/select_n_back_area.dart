@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../color_config.dart';
 import '../../../font_config.dart';
-import '../provider/provider.dart';
 
-class SelectNBackArea extends ConsumerWidget {
+class SelectNBackArea extends StatefulWidget {
   const SelectNBackArea({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final nBackNum = ref.watch(nBackNumProvider);
+  State<SelectNBackArea> createState() => _SelectNBackAreaState();
+}
+
+class _SelectNBackAreaState extends State<SelectNBackArea> {
+  int _nBackNum = 2;
+
+  @override
+  Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -17,8 +21,8 @@ class SelectNBackArea extends ConsumerWidget {
           'N = ',
           style: bodyRegular(blackSecondary),
         ),
-        SizedBox(width: 16),
-        DropdownButton(
+        const SizedBox(width: 16),
+        DropdownButton<int>(
           items: List.generate(
             6,
             (index) => DropdownMenuItem<int>(
@@ -27,9 +31,13 @@ class SelectNBackArea extends ConsumerWidget {
             ),
           ),
           onChanged: (int? value) {
-            ref.read(nBackNumProvider.notifier).state = value!;
+            if (value != null) {
+              setState(() {
+                _nBackNum = value;
+              });
+            }
           },
-          value: nBackNum,
+          value: _nBackNum,
         ),
       ],
     );

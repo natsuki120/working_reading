@@ -1,22 +1,11 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import 'feature/error/error_page.dart';
 import 'feature/top/top_page.dart';
-import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await dotenv.load(fileName: '.env');
-  await Supabase.initialize(
-    url: dotenv.get('SB_URL'),
-    anonKey: dotenv.get('SB_ANONKEY'),
-  );
-  runApp(const ProviderScope(child: MyApp()));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -37,7 +26,7 @@ class MyApp extends StatelessWidget {
               };
               return widget!;
             },
-            home: TopPage(),
+            home: const TopPage(),
           );
         });
   }

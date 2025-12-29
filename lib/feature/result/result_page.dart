@@ -1,31 +1,22 @@
-import 'dart:io';
-
-import 'package:app_review/app_review.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:working_reading/color_config.dart';
 import 'package:working_reading/component/primary_color_button.dart';
-import 'package:working_reading/component/provider.dart';
 import 'package:working_reading/feature/training/training_page.dart';
 import 'package:working_reading/font_config.dart';
 import 'package:working_reading/i18n/strings.dart';
-import 'package:working_reading/util/result/controller/controller.dart';
-import 'package:working_reading/util/sentence_list/controller/sentence_list_notifier.dart';
 
-import '../top/provider/provider.dart';
-
-class ResultPage extends ConsumerWidget {
+class ResultPage extends StatelessWidget {
   const ResultPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final nBackNum = ref.watch(nBackNumProvider);
-    final resultList = ref.watch(utilResultListController);
-    final allResult = (resultList[0].percent + resultList[1].percent) / 2;
+  Widget build(BuildContext context) {
+    const double result1 = 80.0;
+    const double result2 = 60.0;
+    const double allResult = (result1 + result2) / 2;
     bool isPassed() => allResult >= 70;
-    final reviewTimingCount = ref.watch(reviewTimingCountProvider);
+
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
@@ -45,9 +36,9 @@ class ResultPage extends ConsumerWidget {
                         radius: 60.0.sp,
                         lineWidth: 13.0.sp,
                         animation: true,
-                        percent: resultList[0].percent / 100,
+                        percent: result1 / 100,
                         center: Text(
-                          '${resultList[0].percent}%',
+                          '$result1%',
                           style: headerRegular(blackPrimary),
                         ),
                         circularStrokeCap: CircularStrokeCap.round,
@@ -62,9 +53,9 @@ class ResultPage extends ConsumerWidget {
                         radius: 60.0.sp,
                         lineWidth: 13.0.sp,
                         animation: true,
-                        percent: resultList[1].percent / 100,
+                        percent: result2 / 100,
                         center: Text(
-                          '${resultList[1].percent}%',
+                          '$result2%',
                           style: headerRegular(blackPrimary),
                         ),
                         circularStrokeCap: CircularStrokeCap.round,
@@ -74,7 +65,6 @@ class ResultPage extends ConsumerWidget {
                   ),
                 ],
               ),
-              // 全体
               Column(
                 children: [
                   Text(overall, style: title1Regular(blackSecondary)),
@@ -84,7 +74,7 @@ class ResultPage extends ConsumerWidget {
                     animation: true,
                     percent: allResult / 100,
                     center: Text(
-                      "$allResult%",
+                      '$allResult%',
                       style: headerRegular(blackPrimary),
                     ),
                     circularStrokeCap: CircularStrokeCap.round,
@@ -103,18 +93,7 @@ class ResultPage extends ConsumerWidget {
                 children: [
                   TextButton(
                     onPressed: () {
-                      print(reviewTimingCount);
                       Navigator.popUntil(context, (route) => route.isFirst);
-                      ref.read(reviewTimingCountProvider.notifier).state++;
-                      if (reviewTimingCount >= 5) {
-                        if (Platform.isIOS) {
-                          AppReview.requestReview.then((onValue) {
-                            print(onValue);
-                          });
-                          ref.read(reviewTimingCountProvider.notifier).state =
-                              1;
-                        }
-                      }
                     },
                     child: Text(
                       home,
@@ -125,18 +104,13 @@ class ResultPage extends ConsumerWidget {
                       width: 200,
                       height: 80,
                       text: retry,
-                      onPressed: () async {
-                        print(reviewTimingCount);
-                        await ref
-                            .read(utilSentenceListNotifier.notifier)
-                            .fetchRandomSentenceToUseQuestion(num: nBackNum);
+                      onPressed: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (_) => const TrainingPage(),
                           ),
                         );
-                        ref.read(reviewTimingCountProvider.notifier).state++;
                       })
                 ],
               ),

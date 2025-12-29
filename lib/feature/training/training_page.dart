@@ -1,30 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:working_reading/feature/training/component/reading_indicator.dart';
 import 'package:working_reading/feature/training/component/sentence_area.dart';
-import 'package:working_reading/feature/training/component/stateful_button.dart';
-import 'package:working_reading/feature/training/function/function.dart';
-import 'package:working_reading/feature/training/provider/provider.dart';
+import 'package:working_reading/feature/answer/answer_page.dart';
+import 'package:working_reading/component/primary_color_button.dart';
 
 import '../../color_config.dart';
-import 'controller/training_controller.dart';
 
-class TrainingPage extends HookConsumerWidget {
+class TrainingPage extends StatelessWidget {
   const TrainingPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final controller = ref.watch(trainingController);
-    final sessionsToResult = useRef(1);
-
+  Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        ref.read(trainingController.notifier).stopListening();
         Navigator.popUntil(context, (route) => route.isFirst);
-        ref.read(listIndexProvider.notifier).state = 0;
-        increaseNumber(sessionsToResult.value);
         return false;
       },
       child: Scaffold(
@@ -35,25 +25,31 @@ class TrainingPage extends HookConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               children: [
-                SentenceArea(),
+                const SentenceArea(),
                 SizedBox(height: 48.h),
-                controller.isListening
-                    ? Icon(
-                        Icons.radio_button_checked,
-                        color: Colors.red,
-                        size: 40,
-                      )
-                    : Icon(
-                        Icons.radio_button_unchecked,
-                        color: blackSecondary,
-                        size: 40,
-                      ),
+                Icon(
+                  Icons.radio_button_unchecked,
+                  color: blackSecondary,
+                  size: 40,
+                ),
                 SizedBox(height: 96.h),
-                ReadingIndicator(),
+                const ReadingIndicator(),
                 const Spacer(),
                 Column(
                   children: [
-                    StatefulButton(),
+                    PrimaryColorButton(
+                      width: double.infinity,
+                      height: 64,
+                      text: '次へ',
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const AnswerPage(),
+                          ),
+                        );
+                      },
+                    ),
                     SizedBox(height: 68.h),
                   ],
                 ),
