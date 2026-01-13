@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:working_reading/feature/answer/component/question_area.dart';
 import 'package:working_reading/feature/answer/component/text_field_for_answer/text_field_for_answer_area.dart';
 import '../../color_config.dart';
 
-class AnswerPage extends HookConsumerWidget {
+class AnswerPage extends StatelessWidget {
   const AnswerPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
@@ -21,9 +20,9 @@ class AnswerPage extends HookConsumerWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
             children: [
-              QuestionArea(),
+              const QuestionArea(),
               const Spacer(),
-              AnswerArea(),
+              const AnswerArea(),
               SizedBox(height: 68.h),
             ],
           ),

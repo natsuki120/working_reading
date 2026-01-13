@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:working_reading/color_config.dart';
+import 'package:working_reading/i18n/strings.dart';
 
 class HowToPlayPage extends StatelessWidget {
   const HowToPlayPage({Key? key}) : super(key: key);
@@ -26,8 +27,7 @@ class HowToPlayPage extends StatelessWidget {
               },
             ),
           )
-          ..loadRequest(Uri.parse(
-              'https://surf-cafe-b89.notion.site/Working-Reading-a2f30a34c6d14beb98fb1e543d511b9f')),
+          ..loadRequest(Uri.parse(howToPlayUrl)),
       ),
     );
   }

@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:working_reading/util/sentence_list/controller/sentence_list_notifier.dart';
+import 'package:working_reading/i18n/strings.dart';
+
 import '../../../color_config.dart';
 import '../../../font_config.dart';
-import '../../top/provider/provider.dart';
 
-class QuestionArea extends ConsumerWidget {
+class QuestionArea extends StatelessWidget {
   const QuestionArea({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final sentenceList = ref.watch(utilSentenceListNotifier).sentenceList;
-    final nBackNum = ref.watch(nBackNumProvider);
+  Widget build(BuildContext context) {
     return Wrap(
       children: [
-        for (int i = 1; i <= nBackNum; i++)
+        for (int i = 1; i <= 2; i++)
           Wrap(
             children: [
               Column(
@@ -23,22 +20,10 @@ class QuestionArea extends ConsumerWidget {
                   Wrap(
                     children: [
                       Text(
-                        '問$i. ',
+                        '$questionPrefix$i. ',
                         style: title1Regular(blackSecondary),
                       ),
-                      if (sentenceList[i - 1].hasCollected)
-                        Text(
-                          sentenceList[i - 1].properNoun,
-                          style: title1Regular(blackSecondary),
-                        ),
-                      if (sentenceList[i - 1].giveUp)
-                        Text(
-                          sentenceList[i - 1].properNoun,
-                          style: title1Regular(Colors.red),
-                        ),
-                      if (!sentenceList[i - 1].hasCollected &&
-                          !sentenceList[i - 1].giveUp)
-                        Text('？？', style: title1Regular(blackSecondary))
+                      Text(unknownMarks, style: title1Regular(blackSecondary))
                     ],
                   ),
                   SizedBox(height: 64.h),
